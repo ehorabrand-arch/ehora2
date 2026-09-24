@@ -1,0 +1,226 @@
+{%- liquid
+  assign image = section.settings.image
+  assign mobile_image = section.settings.image_mobile | default: image
+  assign layout = section.settings.layout
+  assign focal_style = ''
+  if image != blank and image.presentation.focal_point != blank
+    assign focal_style = 'object-position: ' | append: image.presentation.focal_point | append: ';'
+  endif
+  assign primary_link = section.settings.button_link_1
+  if primary_link == blank
+    assign primary_link = '#' | append: section.settings.fallback_anchor
+  endif
+-%}
+
+<section
+  class="ehora-hero ehora-hero--{{ layout }} ehora-hero--{{ section.settings.height }} ehora-hero--{{ section.settings.content_position }}{% if image == blank %} ehora-hero--no-image{% endif %} color-{{ section.settings.color_scheme }} gradient"
+  aria-labelledby="EhoraHeroHeading-{{ section.id }}"
+>
+  <div class="ehora-hero__media">
+    {%- if image != blank -%}
+      <picture>
+        {%- if section.settings.image_mobile != blank and layout == 'overlay' -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="
+              {{ mobile_image | image_url: width: 750 }} 750w,
+              {{ mobile_image | image_url: width: 1100 }} 1100w,
+              {{ mobile_image | image_url: width: 1500 }} 1500w
+            "
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {%- liquid
+          if layout == 'split'
+            assign sizes = '(min-width: 990px) 58vw, 100vw'
+          else
+            assign sizes = '100vw'
+          endif
+          if section.index == 1
+            assign loading = 'eager'
+            assign priority = 'high'
+          else
+            assign loading = 'lazy'
+            assign priority = 'auto'
+          endif
+        -%}
+        {{
+          image
+          | image_url: width: 3000
+          | image_tag:
+            widths: '750, 1100, 1500, 1800, 2200, 2800',
+            sizes: sizes,
+            loading: loading,
+            fetchpriority: priority,
+            alt: image.alt,
+            style: focal_style
+        }}
+      </picture>
+    {%- else -%}
+      {%- render 'ehora-placeholder', label: 'Imagen de campaña' -%}
+    {%- endif -%}
+    {%- if layout == 'overlay' and image != blank -%}
+      <div class="ehora-hero__scrim" style="--scrim: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="ehora-hero__content ehora-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+
+    <h2 id="EhoraHeroHeading-{{ section.id }}" class="ehora-hero__heading">
+      {{- section.settings.heading -}}
+    </h2>
+
+    {%- if section.settings.text != blank -%}
+      <p class="ehora-hero__text">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+      <div class="ehora-actions">
+        {%- if section.settings.button_label_1 != blank -%}
+          <a href="{{ primary_link }}" class="button">{{ section.settings.button_label_1 | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 }}" class="ehora-link">
+            {{- section.settings.button_label_2 | escape -}}
+            {%- render 'ehora-icon-arrow' -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Hero",
+  "tag": "div",
+  "class": "section ehora-hero-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Composición",
+      "options": [
+        { "value": "overlay", "label": "Imagen a sangre con texto encima" },
+        { "value": "split", "label": "Dividido: texto y producto" }
+      ],
+      "default": "overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen",
+      "info": "Fotografía de campaña o de producto. Recomendado: 2800 px de ancho. El encuadre se ajusta con el punto focal de la imagen en Shopify."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Imagen para móvil (opcional)",
+      "info": "Formato vertical. Solo se usa en la composición a sangre."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Oscurecido inferior",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Altura",
+      "options": [
+        { "value": "full", "label": "Pantalla completa" },
+        { "value": "large", "label": "Grande" },
+        { "value": "medium", "label": "Media" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Posición del texto",
+      "options": [
+        { "value": "bottom", "label": "Abajo" },
+        { "value": "center", "label": "Centro" }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "header",
+      "content": "Texto"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "EHORA"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titular",
+      "info": "Usa cursiva para destacar una palabra.",
+      "default": "El pádel, <em>cuidado</em> al detalle."
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto",
+      "default": "Accesorios para quienes cuidan el juego antes, durante y después del partido."
+    },
+    {
+      "type": "header",
+      "content": "Botones"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Botón principal",
+      "default": "Descubrir EHORA"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Enlace del botón principal",
+      "info": "Si lo dejas vacío, baja hasta la sección con el ancla indicada abajo."
+    },
+    {
+      "type": "text",
+      "id": "fallback_anchor",
+      "label": "Ancla de destino",
+      "default": "manifiesto"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Enlace secundario",
+      "default": "Ver colección"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Destino del enlace secundario",
+      "default": "/collections/all"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "info": "En la composición a sangre el texto siempre es claro sobre la imagen.",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Hero"
+    }
+  ]
+}
+{% endschema %}

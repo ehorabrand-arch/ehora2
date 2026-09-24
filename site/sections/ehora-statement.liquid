@@ -1,0 +1,104 @@
+{%- liquid
+  if settings.animations_reveal_on_scroll
+    assign reveal = ' scroll-trigger animate--slide-in'
+  endif
+-%}
+
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="ehora-statement ehora-statement--{{ section.settings.alignment }} ehora-section color-{{ section.settings.color_scheme }} gradient"
+  aria-labelledby="EhoraStatement-{{ section.id }}"
+>
+  <div class="ehora-container ehora-statement__grid">
+    <div class="ehora-statement__head{{ reveal }}" data-cascade>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="EhoraStatement-{{ section.id }}" class="ehora-display ehora-statement__quote">
+        {{- section.settings.heading -}}
+      </h2>
+    </div>
+
+    {%- if section.settings.text != blank or section.settings.link_label != blank -%}
+      <div class="ehora-statement__aside{{ reveal }}" data-cascade>
+        {%- if section.settings.text != blank -%}
+          <div class="ehora-statement__body">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+          <a href="{{ section.settings.link }}" class="ehora-link">
+            {{- section.settings.link_label | escape -}}
+            {%- render 'ehora-icon-arrow' -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Manifiesto",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Ancla",
+      "info": "Permite enlazar a esta sección, p. ej. #manifiesto.",
+      "default": "manifiesto"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Manifiesto"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Frase principal",
+      "default": "El pádel no termina cuando acaba el <em>partido</em>."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Sigue en el vestuario. En la bolsa que cierras sin prisa, en las pelotas que guardas para el próximo partido, en la pala que vuelve a su sitio.</p><p>EHORA nace para cuidar esa parte del juego que no sale en el marcador.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Enlace",
+      "default": "Nuestra filosofía"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Destino del enlace",
+      "info": "Crea la página «La filosofía» en Tienda online › Páginas y enlázala aquí. Sin destino, el enlace no se muestra."
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Composición",
+      "options": [
+        { "value": "offset", "label": "Editorial desplazada" },
+        { "value": "center", "label": "Centrada" }
+      ],
+      "default": "offset"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Manifiesto"
+    }
+  ]
+}
+{% endschema %}

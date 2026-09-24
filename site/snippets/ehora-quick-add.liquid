@@ -1,0 +1,48 @@
+{%- comment -%}
+  Añadir al carrito desde fuera de la ficha de producto.
+  Productos con una sola variante: formulario real conectado al cart drawer (product-form.js).
+  Productos con varias variantes: enlace a la ficha para elegir opción.
+
+  Accepts:
+  - product: {Object}
+  - section_id: {String}
+  - button_class: {String} opcional
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'EhoraQuickAdd-' | append: section_id | append: '-' | append: product.id
+-%}
+
+{%- if product.has_only_default_variant -%}
+  <product-form class="product-form" data-section-id="{{ section_id }}">
+    <div class="product-form__error-message-wrapper" role="alert" hidden>
+      <span class="product-form__error-message"></span>
+    </div>
+    {%- form 'product', product, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ variant.id }}" class="product-variant-id">
+      <button
+        type="submit"
+        name="add"
+        class="button button--full-width {{ button_class }}"
+        {% unless variant.available %}
+          disabled
+        {% endunless %}
+        aria-label="{% if variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}: {{ product.title | escape }}"
+      >
+        <span>
+          {%- if variant.available -%}
+            {{ 'products.product.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t }}
+          {%- endif -%}
+        </span>
+        <span class="sold-out-message hidden">{{ 'products.product.sold_out' | t }}</span>
+        <div class="loading__spinner hidden">{%- render 'loading-spinner' -%}</div>
+      </button>
+    {%- endform -%}
+  </product-form>
+{%- else -%}
+  <a href="{{ product.url }}" class="button button--full-width {{ button_class }}">
+    Elegir opciones<span class="visually-hidden">: {{ product.title | escape }}</span>
+  </a>
+{%- endif -%}

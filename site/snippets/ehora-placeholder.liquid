@@ -1,0 +1,14 @@
+{%- comment -%}
+  Placeholder de marca para imágenes pendientes de producir.
+  Accepts:
+  - label: {String} texto descriptivo de la imagen que falta
+  - class: {String} clases adicionales
+{%- endcomment -%}
+<div class="ehora-placeholder {{ class }}" role="img" aria-label="{{ label | default: 'Imagen pendiente' | escape }}">
+  <span class="ehora-placeholder__label">
+    <span class="ehora-placeholder__mark" aria-hidden="true">EHORA</span>
+    {%- if label != blank -%}
+      <span aria-hidden="true">{{ label | escape }}</span>
+    {%- endif -%}
+  </span>
+</div>

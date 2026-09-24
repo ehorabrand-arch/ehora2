@@ -1,0 +1,217 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ehora-hero",
+      "settings": {
+        "layout": "overlay",
+        "overlay_opacity": 45,
+        "height": "full",
+        "content_position": "bottom",
+        "eyebrow": "EHORA",
+        "heading": "El pádel, <em>cuidado</em> al detalle.",
+        "text": "Accesorios para quienes cuidan el juego antes, durante y después del partido.",
+        "button_label_1": "Descubrir EHORA",
+        "button_link_1": "",
+        "fallback_anchor": "manifiesto",
+        "button_label_2": "Ver colección",
+        "button_link_2": "/collections/all",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "manifiesto": {
+      "type": "ehora-statement",
+      "settings": {
+        "anchor": "manifiesto",
+        "eyebrow": "Manifiesto",
+        "heading": "El pádel no termina cuando acaba el <em>partido</em>.",
+        "text": "<p>Sigue en el vestuario. En la bolsa que cierras sin prisa, en las pelotas que guardas para el próximo partido, en la pala que vuelve a su sitio.</p><p>EHORA nace para cuidar esa parte del juego que no sale en el marcador.</p>",
+        "link_label": "Nuestra filosofía",
+        "link": "",
+        "alignment": "offset",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "universos": {
+      "type": "ehora-universes",
+      "blocks": {
+        "paleteros": {
+          "type": "universe",
+          "settings": {
+            "title": "Paleteros",
+            "tagline": "Todo en su sitio.",
+            "text": "Acolchado, líneas limpias y el azul EHORA en cada ribete. Para llegar al club con calma.",
+            "link_label": "Ver paleteros",
+            "link": "/collections/all"
+          }
+        },
+        "presurizadores": {
+          "type": "universe",
+          "settings": {
+            "title": "Presurizadores",
+            "tagline": "Que la próxima pelota se sienta como la primera.",
+            "text": "Guarda tus pelotas bajo presión entre partido y partido. Manual o automático.",
+            "link_label": "Ver presurizadores",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["paleteros", "presurizadores"],
+      "settings": {
+        "eyebrow": "La colección",
+        "heading": "Dos maneras de cuidar el juego.",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "paletero": {
+      "type": "ehora-story",
+      "blocks": {
+        "paso-1": {
+          "type": "step",
+          "settings": {
+            "title": "Diseñado para el club",
+            "text": "<p>Acolchado de trazo orgánico, blanco roto y ribetes en azul EHORA. Se reconoce antes de llegar a la pista.</p>"
+          }
+        },
+        "paso-2": {
+          "type": "step",
+          "settings": {
+            "title": "Todo en su sitio",
+            "text": "<p>Compartimento principal para las palas, bolsillos laterales y un hueco pensado para la botella.</p>"
+          }
+        },
+        "paso-3": {
+          "type": "step",
+          "settings": {
+            "title": "Hecho para acompañarte",
+            "text": "<p>Asas y correas para llevarlo del coche a la pista y de la pista a casa.</p>"
+          }
+        }
+      },
+      "block_order": ["paso-1", "paso-2", "paso-3"],
+      "settings": {
+        "anchor": "paletero",
+        "eyebrow": "El paletero",
+        "heading": "Pensado para todo lo que llevas al <em>club</em>.",
+        "placeholder_label": "Paletero EHORA",
+        "media_position": "left",
+        "show_numbers": true,
+        "link_label": "Ver el paletero",
+        "link": "",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "presion": {
+      "type": "ehora-story",
+      "blocks": {
+        "p1": {
+          "type": "step",
+          "settings": {
+            "title": "Pelotas nuevas",
+            "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>"
+          }
+        },
+        "p2": {
+          "type": "step",
+          "settings": {
+            "title": "El juego",
+            "text": "<p>Cada partido forma parte de su vida. Eso no se puede evitar, ni hace falta.</p>"
+          }
+        },
+        "p3": {
+          "type": "step",
+          "settings": {
+            "title": "La presión baja",
+            "text": "<p>Una vez abierto el bote, la pelota va perdiendo presión con el tiempo, también cuando no se usa.</p>"
+          }
+        },
+        "p4": {
+          "type": "step",
+          "settings": {
+            "title": "Se nota en la pista",
+            "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>"
+          }
+        },
+        "p5": {
+          "type": "step",
+          "settings": {
+            "title": "Guardarlas bajo presión",
+            "text": "<p>Un presurizador está pensado para guardar las pelotas en un entorno presurizado entre partidos.</p>"
+          }
+        },
+        "p6": {
+          "type": "step",
+          "settings": {
+            "title": "Listas para el siguiente partido",
+            "text": "<p>El objetivo es sencillo: conservarlas en mejores condiciones durante más tiempo.</p>"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "settings": {
+        "anchor": "presion",
+        "eyebrow": "La pelota",
+        "heading": "Por qué <em>presurizar</em> tus pelotas.",
+        "intro": "<p>Una pelota de pádel no se gasta solo jugando. También se gasta esperando al siguiente partido.</p>",
+        "placeholder_label": "Presurizador EHORA",
+        "media_position": "right",
+        "show_numbers": true,
+        "link_label": "",
+        "link": "",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "comparativa": {
+      "type": "ehora-comparison",
+      "blocks": {
+        "metodo": { "type": "row", "settings": { "label": "Método de uso", "metafield": "custom.usage_method", "value_a": "", "value_b": "" } },
+        "comodidad": { "type": "row", "settings": { "label": "Comodidad", "metafield": "custom.comfort", "value_a": "", "value_b": "" } },
+        "esfuerzo": { "type": "row", "settings": { "label": "Esfuerzo", "metafield": "custom.effort", "value_a": "", "value_b": "" } },
+        "velocidad": { "type": "row", "settings": { "label": "Velocidad", "metafield": "custom.speed", "value_a": "", "value_b": "" } },
+        "portabilidad": { "type": "row", "settings": { "label": "Portabilidad", "metafield": "custom.portability", "value_a": "", "value_b": "" } },
+        "capacidad": { "type": "row", "settings": { "label": "Capacidad", "metafield": "custom.capacity", "value_a": "", "value_b": "" } },
+        "ideal": { "type": "row", "settings": { "label": "Ideal para", "metafield": "custom.ideal_for", "value_a": "", "value_b": "" } }
+      },
+      "block_order": ["metodo", "comodidad", "esfuerzo", "velocidad", "portabilidad", "capacidad", "ideal"],
+      "settings": {
+        "anchor": "comparar",
+        "eyebrow": "Presurizadores",
+        "heading": "Manual o <em>automático</em>.",
+        "intro": "<p>Los dos cumplen la misma función. Cambia cómo lo haces tú.</p>",
+        "label_a": "Manual",
+        "label_b": "Automático",
+        "tagline_metafield": "custom.tagline",
+        "show_add_to_cart": true,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "coleccion": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "La colección",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "color_scheme": "scheme-2",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["hero", "manifiesto", "universos", "paletero", "presion", "comparativa", "coleccion"]
+}

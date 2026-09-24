@@ -1,0 +1,307 @@
+{%- liquid
+  assign product_a = section.settings.product_a
+  assign product_b = section.settings.product_b
+  assign has_both = false
+  if product_a != blank and product_b != blank
+    assign has_both = true
+  endif
+  if settings.animations_reveal_on_scroll
+    assign reveal = ' scroll-trigger animate--slide-in'
+  endif
+-%}
+
+{%- if has_both or request.design_mode -%}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+  <section
+    {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+    class="ehora-compare ehora-section color-{{ section.settings.color_scheme }} gradient"
+    aria-labelledby="EhoraCompare-{{ section.id }}"
+  >
+    <div class="ehora-container">
+      <header class="ehora-compare__header{{ reveal }}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 id="EhoraCompare-{{ section.id }}" class="ehora-display ehora-compare__heading">
+          {{- section.settings.heading -}}
+        </h2>
+        {%- if section.settings.intro != blank -%}
+          <div class="ehora-lede ehora-compare__intro">{{ section.settings.intro }}</div>
+        {%- endif -%}
+      </header>
+
+      <div class="ehora-compare__products{{ reveal }}">
+        {%- for i in (1..2) -%}
+          {%- liquid
+            if i == 1
+              assign compare_product = product_a
+              assign label = section.settings.label_a
+            else
+              assign compare_product = product_b
+              assign label = section.settings.label_b
+            endif
+            assign tagline = blank
+            if compare_product != blank and section.settings.tagline_metafield != blank
+              assign mf_parts = section.settings.tagline_metafield | split: '.'
+              assign tagline = compare_product.metafields[mf_parts[0]][mf_parts[1]] | metafield_text
+            endif
+          -%}
+          <div class="ehora-compare__product">
+            {%- if compare_product != blank -%}
+              <a href="{{ compare_product.url }}" class="ehora-card-link" tabindex="-1" aria-hidden="true">
+                <div class="ehora-media">
+                  {%- if compare_product.featured_image != blank -%}
+                    {{
+                      compare_product.featured_image
+                      | image_url: width: 1100
+                      | image_tag:
+                        widths: '360, 550, 750, 1100',
+                        sizes: '(min-width: 990px) 36vw, 50vw',
+                        loading: 'lazy',
+                        alt: ''
+                    }}
+                  {%- else -%}
+                    {%- render 'ehora-placeholder', label: compare_product.title -%}
+                  {%- endif -%}
+                </div>
+              </a>
+              <p class="ehora-compare__label">{{ label | escape }}</p>
+              <h3 class="ehora-compare__title">
+                <a href="{{ compare_product.url }}">{{ compare_product.title | escape }}</a>
+              </h3>
+              {%- if tagline != blank -%}
+                <p class="ehora-compare__tagline">{{ tagline | escape }}</p>
+              {%- endif -%}
+              <div class="ehora-compare__price">
+                {%- render 'price', product: compare_product, use_variant: true -%}
+              </div>
+              {%- if section.settings.show_add_to_cart -%}
+                <div class="ehora-compare__cta">
+                  {%- render 'ehora-quick-add', product: compare_product, section_id: section.id -%}
+                  <a href="{{ compare_product.url }}" class="ehora-link">
+                    Ver detalles<span class="visually-hidden">: {{ compare_product.title | escape }}</span>
+                    {%- render 'ehora-icon-arrow' -%}
+                  </a>
+                </div>
+              {%- else -%}
+                <div class="ehora-compare__cta">
+                  <a href="{{ compare_product.url }}" class="button">
+                    Ver {{ label | downcase | escape }}<span class="visually-hidden">: {{ compare_product.title | escape }}</span>
+                  </a>
+                </div>
+              {%- endif -%}
+            {%- else -%}
+              <div class="ehora-media">
+                {%- render 'ehora-placeholder', label: label -%}
+              </div>
+              <p class="ehora-compare__label">{{ label | escape }}</p>
+              <p class="ehora-compare__title">Selecciona un producto</p>
+              <p class="ehora-pending">Solo visible en el editor</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+        <span class="ehora-compare__vs" aria-hidden="true">vs</span>
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <table class="ehora-compare__table{{ reveal }}">
+          <caption class="visually-hidden">
+            Comparativa: {{ section.settings.label_a | escape }} y {{ section.settings.label_b | escape }}
+          </caption>
+          <colgroup>
+            <col class="ehora-col-label">
+            <col>
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col">{{ section.settings.label_a | escape }}</th>
+              <th scope="col">{{ section.settings.label_b | escape }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign value_a = blank
+                assign value_b = blank
+                if block.settings.metafield != blank
+                  assign parts = block.settings.metafield | split: '.'
+                  if product_a != blank
+                    assign value_a = product_a.metafields[parts[0]][parts[1]] | metafield_text
+                  endif
+                  if product_b != blank
+                    assign value_b = product_b.metafields[parts[0]][parts[1]] | metafield_text
+                  endif
+                endif
+                if value_a == blank
+                  assign value_a = block.settings.value_a
+                endif
+                if value_b == blank
+                  assign value_b = block.settings.value_b
+                endif
+                assign row_empty = false
+                if value_a == blank and value_b == blank
+                  assign row_empty = true
+                endif
+              -%}
+              {%- unless row_empty and request.design_mode == false -%}
+                <tr {{ block.shopify_attributes }}>
+                  <th scope="row">{{ block.settings.label | escape }}</th>
+                  <td>
+                    {%- if value_a != blank -%}
+                      {{ value_a | escape }}
+                    {%- elsif request.design_mode -%}
+                      <span class="ehora-pending">Pendiente · {{ block.settings.metafield }}</span>
+                    {%- else -%}
+                      <span aria-label="Sin datos">—</span>
+                    {%- endif -%}
+                  </td>
+                  <td>
+                    {%- if value_b != blank -%}
+                      {{ value_b | escape }}
+                    {%- elsif request.design_mode -%}
+                      <span class="ehora-pending">Pendiente · {{ block.settings.metafield }}</span>
+                    {%- else -%}
+                      <span aria-label="Sin datos">—</span>
+                    {%- endif -%}
+                  </td>
+                </tr>
+              {%- endunless -%}
+            {%- endfor -%}
+          </tbody>
+        </table>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EHORA · Comparativa",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Ancla",
+      "default": "comparar"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Presurizadores"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Manual o <em>automático</em>."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introducción",
+      "default": "<p>Los dos cumplen la misma función. Cambia cómo lo haces tú.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Productos"
+    },
+    {
+      "type": "product",
+      "id": "product_a",
+      "label": "Producto A"
+    },
+    {
+      "type": "text",
+      "id": "label_a",
+      "label": "Etiqueta A",
+      "default": "Manual"
+    },
+    {
+      "type": "product",
+      "id": "product_b",
+      "label": "Producto B"
+    },
+    {
+      "type": "text",
+      "id": "label_b",
+      "label": "Etiqueta B",
+      "default": "Automático"
+    },
+    {
+      "type": "text",
+      "id": "tagline_metafield",
+      "label": "Metafield de frase corta",
+      "info": "Formato espacio.clave. Se muestra bajo el nombre del producto.",
+      "default": "custom.tagline"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Permitir añadir al carrito desde aquí",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "paragraph",
+      "content": "Cada fila lee primero el metafield indicado en cada producto. Si está vacío usa el texto de la fila. Si ambos están vacíos, la fila no se muestra en la tienda."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Fila",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Concepto",
+          "default": "Método de uso"
+        },
+        {
+          "type": "text",
+          "id": "metafield",
+          "label": "Metafield (espacio.clave)",
+          "default": "custom.usage_method"
+        },
+        {
+          "type": "text",
+          "id": "value_a",
+          "label": "Valor A (alternativo)"
+        },
+        {
+          "type": "text",
+          "id": "value_b",
+          "label": "Valor B (alternativo)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Comparativa",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Método de uso", "metafield": "custom.usage_method" } },
+        { "type": "row", "settings": { "label": "Comodidad", "metafield": "custom.comfort" } },
+        { "type": "row", "settings": { "label": "Esfuerzo", "metafield": "custom.effort" } },
+        { "type": "row", "settings": { "label": "Velocidad", "metafield": "custom.speed" } },
+        { "type": "row", "settings": { "label": "Portabilidad", "metafield": "custom.portability" } },
+        { "type": "row", "settings": { "label": "Capacidad", "metafield": "custom.capacity" } },
+        { "type": "row", "settings": { "label": "Ideal para", "metafield": "custom.ideal_for" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

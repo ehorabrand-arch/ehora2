@@ -1,0 +1,936 @@
+/* ==========================================================================
+   EHORA — capa de marca sobre Dawn
+   Dawn usa 1rem = 10px (html font-size 62.5%).
+   ========================================================================== */
+
+:root {
+  /* Color — valores de marca fijos. Los colores editables viven en los
+     esquemas de color (Theme settings › Colores). */
+  --ehora-warm-white: #fcfbf7;
+  --ehora-off-white: #f7f5ef;
+  --ehora-sand: #e8e2d6;
+  --ehora-stone: #d8d3c8;
+  --ehora-charcoal: #202321;
+  --ehora-navy: #102a43;
+  --ehora-navy-dark: #071a2b;
+  --ehora-blue: #163d68;
+
+  /* Espaciado — escala de 4pt */
+  --space-2xs: 0.4rem;
+  --space-xs: 0.8rem;
+  --space-s: 1.2rem;
+  --space-m: 1.6rem;
+  --space-l: 2.4rem;
+  --space-xl: 3.2rem;
+  --space-2xl: 4.8rem;
+  --space-3xl: 6.4rem;
+  --space-4xl: 9.6rem;
+  --space-5xl: 12.8rem;
+  --section-space: clamp(6.4rem, 4rem + 8vw, 16rem);
+  --gutter: clamp(2rem, 1rem + 4vw, 6.4rem);
+
+  /* Tipografía fluida */
+  --step--1: clamp(1.1rem, 1.05rem + 0.15vw, 1.2rem);
+  --step-0: clamp(1.5rem, 1.45rem + 0.2vw, 1.7rem);
+  --step-1: clamp(1.8rem, 1.6rem + 0.6vw, 2.2rem);
+  --step-2: clamp(2.4rem, 1.9rem + 1.4vw, 3.4rem);
+  --step-3: clamp(3.2rem, 2.2rem + 3vw, 5.6rem);
+  --step-4: clamp(4rem, 2.4rem + 5vw, 8.4rem);
+  --step-5: clamp(4.4rem, 2.4rem + 7vw, 11.2rem);
+  --tracking-label: 0.18em;
+
+  /* Superficies */
+  --radius-s: 2px;
+  --radius-m: 4px;
+  --hairline: 1px solid rgba(var(--color-foreground), 0.14);
+  --shadow-soft: 0 1px 2px rgba(7, 26, 43, 0.04), 0 12px 32px rgba(7, 26, 43, 0.05);
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 140ms;
+  --dur-ui: 220ms;
+  --dur-reveal: 800ms;
+
+  /* Sobrescribe el sistema de reveal de Dawn con la curva y duración EHORA */
+  --ease-out-slow: var(--ease-out);
+  --duration-extra-long: var(--dur-reveal);
+}
+
+/* ---------- Tipografía base ---------- */
+
+body {
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4,
+.h0, .h1, .h2, .h3, .h4 {
+  letter-spacing: -0.012em;
+  font-optical-sizing: auto;
+  text-wrap: balance;
+}
+
+h1 em, h2 em, h3 em, .h0 em, .h1 em, .h2 em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+p { text-wrap: pretty; }
+
+::selection {
+  background: var(--ehora-navy);
+  color: var(--ehora-warm-white);
+}
+
+.ehora-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  margin: 0 0 var(--space-l);
+  font-family: var(--font-body-family);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgb(var(--color-link));
+}
+
+.ehora-eyebrow::before {
+  content: '';
+  width: 2.4rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.ehora-eyebrow--plain::before { display: none; }
+
+.ehora-display {
+  font-family: var(--font-heading-family);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: rgb(var(--color-foreground));
+  margin: 0;
+}
+
+.ehora-lede {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  max-width: 52ch;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.ehora-lede p { margin: 0 0 1em; }
+.ehora-lede p:last-child { margin-bottom: 0; }
+
+/* ---------- Botones ---------- */
+
+.button,
+.shopify-payment-button__button--unbranded {
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  min-height: 5.2rem;
+  padding: 0 3.2rem;
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+.button:not([disabled]):active,
+.shopify-payment-button__button--unbranded:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:not(.button--secondary):not(.button--tertiary):not([disabled]):hover {
+    background-color: rgba(var(--color-button), 0.9);
+  }
+}
+
+/* Enlace editorial con flecha */
+.ehora-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  padding-block: var(--space-xs);
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur-reveal) var(--ease-out), color var(--dur-ui) var(--ease-out);
+}
+
+.ehora-link__arrow {
+  width: 1.4rem;
+  height: 1.4rem;
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ehora-link:hover { background-size: 35% 1px; }
+  .ehora-link:hover .ehora-link__arrow { transform: translateX(0.4rem); }
+}
+
+.ehora-link:focus-visible,
+.ehora-card-link:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 0.4rem;
+}
+
+.ehora-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-l) var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+
+/* ---------- Media ---------- */
+
+.ehora-media {
+  position: relative;
+  overflow: hidden;
+  background: var(--ehora-off-white);
+  border-radius: var(--radius-s);
+}
+
+.ehora-media > img,
+.ehora-media > picture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ehora-image-hover .ehora-media > img,
+  .ehora-image-hover .ehora-media > picture > img {
+    transition: transform 1.2s var(--ease-out);
+  }
+
+  .ehora-image-hover .ehora-card-link:hover .ehora-media > img,
+  .ehora-image-hover .ehora-card-link:hover .ehora-media > picture > img {
+    transform: scale(1.03);
+  }
+}
+
+/* Placeholder elegante para imágenes aún no producidas */
+.ehora-placeholder {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 24rem;
+  background:
+    linear-gradient(var(--ehora-sand), var(--ehora-sand)) padding-box;
+  color: var(--ehora-navy);
+}
+
+.ehora-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: var(--space-m);
+  border: 1px solid rgba(16, 42, 67, 0.18);
+  pointer-events: none;
+}
+
+.ehora-placeholder__label {
+  display: grid;
+  gap: var(--space-xs);
+  justify-items: center;
+  text-align: center;
+  padding: var(--space-xl);
+  font-family: var(--font-body-family);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.ehora-placeholder__mark {
+  font-family: var(--font-heading-family);
+  font-size: 2.4rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* ---------- Cabecera ---------- */
+
+.header__heading-link .h2,
+.header__heading .h2 {
+  font-family: var(--font-heading-family);
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-right: -0.32em;
+}
+
+.header__menu-item {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header__menu-item span {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur-ui) var(--ease-out);
+  text-decoration: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header__menu-item:hover span { background-size: 100% 1px; }
+}
+
+.header__active-menu-item { background-size: 100% 1px !important; }
+
+.announcement-bar__message {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.menu-drawer__menu-item {
+  font-family: var(--font-heading-family);
+  font-size: 2.8rem;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Tarjetas de producto ---------- */
+
+.card__heading,
+.card-information .card__heading {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  font-size: 1.9rem;
+  letter-spacing: -0.005em;
+}
+
+.card .price {
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+.card__inner .card__media {
+  background: var(--ehora-off-white);
+}
+
+.badge {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+}
+
+/* ---------- Footer ---------- */
+
+.footer-block__heading {
+  font-family: var(--font-body-family);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.footer-block__newsletter .footer-block__heading {
+  font-family: var(--font-heading-family);
+  font-size: var(--step-2);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Secciones EHORA
+   ========================================================================== */
+
+.ehora-section {
+  padding-block: var(--section-space);
+}
+
+.ehora-container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Hero ---------- */
+
+.ehora-hero {
+  position: relative;
+  display: grid;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.ehora-hero--full { min-height: calc(100svh - var(--header-height, 6.4rem)); }
+.ehora-hero--large { min-height: min(88svh, 96rem); }
+.ehora-hero--medium { min-height: min(68svh, 72rem); }
+
+.ehora-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.ehora-hero__media img,
+.ehora-hero__media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ehora-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(7, 26, 43, calc(var(--scrim) * 1)) 0%,
+    rgba(7, 26, 43, calc(var(--scrim) * 0.35)) 45%,
+    rgba(7, 26, 43, 0) 75%
+  );
+}
+
+.ehora-hero__content {
+  align-self: end;
+  display: grid;
+  gap: var(--space-l);
+  padding-block: var(--space-4xl) var(--space-3xl);
+  color: var(--ehora-warm-white);
+}
+
+.ehora-hero--center .ehora-hero__content { align-self: center; }
+
+.ehora-hero__heading {
+  font-family: var(--font-heading-family);
+  font-size: var(--step-5);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  max-width: 14ch;
+  margin: 0;
+  color: inherit;
+}
+
+.ehora-hero__text {
+  max-width: 42ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.88;
+}
+
+.ehora-hero .ehora-eyebrow { color: inherit; margin: 0; }
+
+.ehora-hero--overlay .button {
+  --color-button: 247, 245, 239;
+  --color-button-text: 7, 26, 43;
+}
+
+.ehora-hero--overlay .ehora-link { color: var(--ehora-warm-white); }
+
+/* Variante partida: producto sobre fondo claro */
+.ehora-hero--split {
+  grid-template-columns: 1fr;
+}
+
+.ehora-hero--split .ehora-hero__media {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  aspect-ratio: 4 / 5;
+}
+
+.ehora-hero--split .ehora-hero__scrim { display: none; }
+
+.ehora-hero--split .ehora-hero__content {
+  color: rgb(var(--color-foreground));
+  padding-block: var(--space-3xl);
+}
+
+@media screen and (min-width: 990px) {
+  .ehora-hero--split {
+    grid-template-columns: 5fr 7fr;
+    align-items: stretch;
+  }
+
+  .ehora-hero--split .ehora-hero__media {
+    order: 2;
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .ehora-hero--split .ehora-hero__content {
+    align-self: center;
+    padding-inline: var(--gutter) var(--space-3xl);
+    max-width: 64rem;
+    justify-self: end;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .ehora-hero--overlay.ehora-hero--full,
+  .ehora-hero--overlay.ehora-hero--large { min-height: 86svh; }
+  .ehora-hero .ehora-actions { gap: var(--space-m) var(--space-xl); }
+  .ehora-hero .ehora-actions .button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ehora-hero__media img {
+    animation: ehoraHeroSettle 1.8s var(--ease-out) both;
+  }
+
+  .ehora-hero__content > * {
+    animation: ehoraRise 900ms var(--ease-out) both;
+  }
+
+  .ehora-hero__content > *:nth-child(2) { animation-delay: 80ms; }
+  .ehora-hero__content > *:nth-child(3) { animation-delay: 160ms; }
+  .ehora-hero__content > *:nth-child(4) { animation-delay: 240ms; }
+}
+
+@keyframes ehoraHeroSettle {
+  from { transform: scale(1.04); }
+  to { transform: scale(1); }
+}
+
+@keyframes ehoraRise {
+  from { opacity: 0; transform: translateY(1.6rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Manifiesto ---------- */
+
+.ehora-statement__grid {
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+.ehora-statement__quote {
+  font-size: var(--step-4);
+  max-width: 18ch;
+}
+
+.ehora-statement__body {
+  font-size: var(--step-1);
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.78);
+  max-width: 46ch;
+}
+
+.ehora-statement__body p { margin: 0 0 1em; }
+
+@media screen and (min-width: 990px) {
+  .ehora-statement__grid {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-l);
+    row-gap: var(--space-3xl);
+  }
+
+  .ehora-statement__head { grid-column: 1 / span 10; }
+  .ehora-statement__aside { grid-column: 7 / span 6; }
+  .ehora-statement--center .ehora-statement__head,
+  .ehora-statement--center .ehora-statement__aside { grid-column: 3 / span 8; text-align: center; }
+  .ehora-statement--center .ehora-statement__quote,
+  .ehora-statement--center .ehora-statement__body { margin-inline: auto; }
+  .ehora-statement--center .ehora-eyebrow::before { display: none; }
+}
+
+/* ---------- Universos ---------- */
+
+.ehora-universes__header {
+  display: grid;
+  gap: var(--space-l);
+  margin-bottom: var(--space-3xl);
+}
+
+.ehora-universes__heading {
+  font-size: var(--step-3);
+  max-width: 20ch;
+}
+
+.ehora-universes__grid {
+  display: grid;
+  gap: var(--space-3xl);
+}
+
+.ehora-universe {
+  display: grid;
+  gap: var(--space-l);
+}
+
+.ehora-card-link {
+  display: grid;
+  gap: var(--space-l);
+  color: inherit;
+  text-decoration: none;
+}
+
+.ehora-universe .ehora-media { aspect-ratio: 4 / 5; }
+
+.ehora-universe__meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-xs) var(--space-l);
+  align-items: baseline;
+}
+
+.ehora-universe__index {
+  font-family: var(--font-body-family);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: rgb(var(--color-link));
+}
+
+.ehora-universe__title {
+  font-family: var(--font-heading-family);
+  font-size: var(--step-3);
+  font-weight: 300;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.ehora-universe__tagline {
+  grid-column: 2;
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--step-1);
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.ehora-universe__text {
+  grid-column: 2;
+  margin: 0;
+  max-width: 40ch;
+  color: rgba(var(--color-foreground), 0.72);
+}
+
+.ehora-universe .ehora-link { justify-self: start; margin-left: calc(var(--space-l) + 2.2ch); }
+
+@media screen and (min-width: 990px) {
+  .ehora-universes__grid {
+    grid-template-columns: 7fr 5fr;
+    column-gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  .ehora-universe:nth-child(2) { margin-top: var(--space-5xl); }
+  .ehora-universe:nth-child(3) { grid-column: 1 / -1; width: 58%; justify-self: center; }
+}
+
+/* ---------- Historia numerada (sticky) ---------- */
+
+.ehora-story__grid {
+  display: grid;
+  gap: var(--space-3xl);
+}
+
+.ehora-story__media .ehora-media { aspect-ratio: 4 / 5; }
+
+.ehora-story__heading {
+  font-size: var(--step-3);
+  max-width: 16ch;
+  margin-bottom: var(--space-l);
+}
+
+.ehora-story__steps {
+  list-style: none;
+  margin: var(--space-3xl) 0 0;
+  padding: 0;
+  counter-reset: ehora-step;
+  display: grid;
+}
+
+.ehora-step {
+  counter-increment: ehora-step;
+  display: grid;
+  grid-template-columns: 4.8rem 1fr;
+  gap: var(--space-xs) var(--space-l);
+  padding-block: var(--space-xl);
+  border-top: var(--hairline);
+}
+
+.ehora-step:last-child { border-bottom: var(--hairline); }
+
+.ehora-step::before {
+  content: counter(ehora-step, decimal-leading-zero);
+  grid-row: span 2;
+  padding-top: 0.6rem;
+  font-family: var(--font-body-family);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: rgb(var(--color-link));
+}
+
+.ehora-story--no-numbers .ehora-step { grid-template-columns: 1fr; }
+.ehora-story--no-numbers .ehora-step::before { display: none; }
+
+.ehora-step__title {
+  font-family: var(--font-heading-family);
+  font-size: var(--step-2);
+  font-weight: 300;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.ehora-step__text {
+  margin: 0;
+  max-width: 48ch;
+  color: rgba(var(--color-foreground), 0.74);
+}
+
+.ehora-step__text p { margin: 0; }
+
+@media screen and (min-width: 990px) {
+  .ehora-story__grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  .ehora-story__media {
+    position: sticky;
+    top: calc(var(--header-height, 6.4rem) + var(--space-xl));
+  }
+
+  .ehora-story--media-right .ehora-story__media { order: 2; }
+  .ehora-story__content { padding-top: var(--space-3xl); }
+}
+
+/* ---------- Comparativa ---------- */
+
+.ehora-compare__header {
+  display: grid;
+  gap: var(--space-l);
+  justify-items: center;
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.ehora-compare__header .ehora-eyebrow::before { display: none; }
+
+.ehora-compare__heading {
+  font-size: var(--step-3);
+  max-width: 18ch;
+}
+
+.ehora-compare__intro { margin-inline: auto; text-align: center; }
+
+.ehora-compare__products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-m);
+  position: relative;
+}
+
+.ehora-compare__vs {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--vs-top, 40%));
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  background: rgb(var(--color-background));
+  border: var(--hairline);
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: rgb(var(--color-link));
+  z-index: 1;
+}
+
+.ehora-compare__product {
+  display: grid;
+  gap: var(--space-m);
+  align-content: start;
+  text-align: center;
+}
+
+.ehora-compare__product .ehora-media { aspect-ratio: 1 / 1; }
+
+.ehora-compare__label {
+  margin: var(--space-s) 0 0;
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgb(var(--color-link));
+}
+
+.ehora-compare__title {
+  font-family: var(--font-heading-family);
+  font-size: var(--step-2);
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.ehora-compare__title a { color: inherit; text-decoration: none; }
+
+.ehora-compare__price {
+  font-size: var(--step-0);
+  letter-spacing: 0.04em;
+}
+
+.ehora-compare__price .price { justify-content: center; }
+
+.ehora-compare__cta { display: grid; gap: var(--space-s); justify-items: center; }
+.ehora-compare__cta .button,
+.ehora-compare__cta product-form { width: 100%; max-width: 32rem; }
+
+.ehora-compare__table {
+  width: 100%;
+  margin-top: var(--space-3xl);
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.ehora-compare__table caption { text-align: left; }
+
+.ehora-compare__table thead th {
+  padding-bottom: var(--space-m);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+  text-align: center;
+}
+
+.ehora-compare__table tbody th,
+.ehora-compare__table td {
+  padding: var(--space-l) var(--space-s);
+  border-top: var(--hairline);
+  vertical-align: top;
+}
+
+.ehora-compare__table tbody tr:last-child th,
+.ehora-compare__table tbody tr:last-child td { border-bottom: var(--hairline); }
+
+.ehora-compare__table tbody th {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-align: left;
+  color: rgb(var(--color-link));
+}
+
+.ehora-compare__table td {
+  text-align: center;
+  font-family: var(--font-heading-family);
+  font-size: var(--step-1);
+  font-weight: 300;
+  line-height: 1.35;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-pending {
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.ehora-compare__table .ehora-col-label { width: 28%; }
+
+@media screen and (max-width: 749px) {
+  .ehora-compare__table .ehora-col-label { width: 34%; }
+  .ehora-compare__table tbody th { padding-left: 0; }
+  .ehora-compare__table td { font-size: 1.5rem; }
+  .ehora-compare__vs { width: 3.6rem; height: 3.6rem; font-size: 1.4rem; }
+}
+
+@media screen and (min-width: 990px) {
+  .ehora-compare__products {
+    grid-template-columns: 28% 1fr 1fr;
+    column-gap: 0;
+  }
+
+  .ehora-compare__products::before { content: ''; }
+  .ehora-compare__product { padding-inline: var(--space-2xl); }
+  .ehora-compare__vs { left: calc(28% + (100% - 28%) / 2); }
+}
+
+/* ---------- Estados reducidos de movimiento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .ehora-link,
+  .ehora-link__arrow,
+  .header__menu-item span {
+    transition-property: color, background-color, opacity;
+  }
+
+  .button:not([disabled]):active { transform: none; }
+}
+
+/* Hero sin imagen todavía: texto oscuro sobre el placeholder */
+.ehora-hero--overlay.ehora-hero--no-image .ehora-hero__content { color: var(--ehora-navy); }
+.ehora-hero--overlay.ehora-hero--no-image .ehora-link { color: var(--ehora-navy); }
+.ehora-hero--overlay.ehora-hero--no-image .button {
+  --color-button: 16, 42, 67;
+  --color-button-text: 252, 251, 247;
+}
+.ehora-hero--overlay.ehora-hero--no-image .ehora-placeholder { min-height: 100%; }
+
+@media (hover: hover) and (pointer: fine) {
+  .ehora-card-link:hover .ehora-link { background-size: 35% 1px; }
+  .ehora-card-link:hover .ehora-link__arrow { transform: translateX(0.4rem); }
+}
+
+.ehora-compare__tagline {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--step-0);
+  color: rgba(var(--color-foreground), 0.72);
+}
+
+.footer-block__newsletter-text {
+  margin: var(--space-s) 0 var(--space-l);
+  max-width: 40ch;
+  opacity: 0.75;
+}
+
+.footer { border-top: 0; }

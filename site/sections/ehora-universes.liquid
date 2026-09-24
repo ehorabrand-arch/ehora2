@@ -1,0 +1,174 @@
+{%- liquid
+  if settings.animations_reveal_on_scroll
+    assign reveal = ' scroll-trigger animate--slide-in'
+  endif
+-%}
+
+<section
+  class="ehora-universes ehora-section color-{{ section.settings.color_scheme }} gradient"
+  aria-labelledby="EhoraUniverses-{{ section.id }}"
+>
+  <div class="ehora-container">
+    <header class="ehora-universes__header{{ reveal }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="EhoraUniverses-{{ section.id }}" class="ehora-display ehora-universes__heading">
+        {{- section.settings.heading -}}
+      </h2>
+    </header>
+
+    <div class="ehora-universes__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign link = block.settings.link
+          if link == blank and block.settings.collection != blank
+            assign link = block.settings.collection.url
+          endif
+          assign image = block.settings.image
+          if image == blank and block.settings.collection != blank
+            assign image = block.settings.collection.featured_image
+          endif
+        -%}
+        <article class="ehora-universe{{ reveal }}" data-cascade {{ block.shopify_attributes }}>
+          {%- if link != blank -%}<a href="{{ link }}" class="ehora-card-link">{%- else -%}<div class="ehora-card-link">{%- endif -%}
+            <div class="ehora-media">
+              {%- if image != blank -%}
+                {{
+                  image
+                  | image_url: width: 1800
+                  | image_tag:
+                    widths: '550, 750, 1100, 1400, 1800',
+                    sizes: '(min-width: 990px) 55vw, 100vw',
+                    loading: 'lazy',
+                    alt: image.alt
+                }}
+              {%- else -%}
+                {%- render 'ehora-placeholder', label: block.settings.title -%}
+              {%- endif -%}
+            </div>
+            <div class="ehora-universe__meta">
+              <span class="ehora-universe__index" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <h3 class="ehora-universe__title">{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.tagline != blank -%}
+                <p class="ehora-universe__tagline">{{ block.settings.tagline | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="ehora-universe__text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </div>
+            {%- if link != blank and block.settings.link_label != blank -%}
+              <span class="ehora-link" aria-hidden="true">
+                {{- block.settings.link_label | escape -}}
+                {%- render 'ehora-icon-arrow' -%}
+              </span>
+            {%- endif -%}
+          {%- if link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Universos",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "La colección"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Dos maneras de cuidar el juego."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "universe",
+      "name": "Universo",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección",
+          "info": "Se usa como enlace e imagen si no defines otros."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen",
+          "info": "Formato vertical 4:5."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Paleteros"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Frase",
+          "default": "Todo en su sitio."
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Texto del enlace",
+          "default": "Descubrir"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace",
+          "info": "Opcional. Si lo dejas vacío se usa la colección."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Universos",
+      "blocks": [
+        {
+          "type": "universe",
+          "settings": {
+            "title": "Paleteros",
+            "tagline": "Todo en su sitio.",
+            "text": "Acolchado, líneas limpias y el azul EHORA en cada ribete. Para llegar al club con calma.",
+            "link_label": "Ver paleteros"
+          }
+        },
+        {
+          "type": "universe",
+          "settings": {
+            "title": "Presurizadores",
+            "tagline": "Que la próxima pelota se sienta como la primera.",
+            "text": "Guarda tus pelotas bajo presión entre partido y partido. Manual o automático.",
+            "link_label": "Ver presurizadores"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
