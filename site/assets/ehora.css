@@ -1747,3 +1747,113 @@ h1, h2, h3, .h0, .h1, .h2,
 @media screen and (min-width: 1200px) {
   .ehora-expand { --start-w: 40rem; --start-h: 52rem; }
 }
+
+/* ==========================================================================
+   Botones «liquid glass»
+   Píldora transparente con borde de cristal (sombras interiores) y el fondo
+   distorsionado por el filtro SVG #ehora-glass. Tono oscuro sobre fondos claros,
+   tono claro sobre fondos oscuros o fotografías.
+   ========================================================================== */
+
+.button,
+.shopify-challenge__button,
+.customer button {
+  --glass-rim: 0, 0, 0;
+  --glass-glow: 255, 255, 255;
+  --glass-tint: rgba(255, 255, 255, 0.18);
+  isolation: isolate;
+  min-height: 5.6rem;
+  padding: 0 4rem;
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  transition:
+    transform 300ms var(--ease-out),
+    color var(--dur-ui) var(--ease-out);
+}
+
+.button::before,
+.shopify-challenge__button::before,
+.customer button::before {
+  inset: 0;
+  z-index: -2;
+  border-radius: inherit;
+  overflow: hidden;
+  background: var(--glass-tint);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  backdrop-filter: url('#ehora-glass') blur(1px) saturate(160%);
+}
+
+.button::after,
+.shopify-challenge__button::after,
+.customer button::after,
+.button:not([disabled]):hover::after {
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.03),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 3px 3px 0.5px -3px rgba(var(--glass-rim), 0.9),
+    inset -3px -3px 0.5px -3px rgba(var(--glass-rim), 0.85),
+    inset 1px 1px 1px -0.5px rgba(var(--glass-rim), 0.6),
+    inset -1px -1px 1px -0.5px rgba(var(--glass-rim), 0.6),
+    inset 0 0 6px 6px rgba(var(--glass-rim), 0.12),
+    inset 0 0 2px 2px rgba(var(--glass-rim), 0.06),
+    0 0 12px rgba(var(--glass-glow), 0.15);
+  transition: box-shadow 300ms var(--ease-out);
+}
+
+/* Sobre fondos oscuros y fotografías: borde claro, como el modo oscuro del original */
+.color-scheme-4 .button,
+.color-scheme-5 .button,
+.ehora-expand .button,
+.ehora-hero--overlay:not(.ehora-hero--no-image) .button,
+.color-scheme-4.button,
+.color-scheme-5.button {
+  --glass-rim: 255, 255, 255;
+  --glass-glow: 0, 0, 0;
+  --glass-tint: rgba(255, 255, 255, 0.06);
+  color: var(--ehora-warm-white);
+}
+
+.ehora-expand .button,
+.ehora-hero--overlay:not(.ehora-hero--no-image) .button { --glass-tint: rgba(255, 255, 255, 0.1); }
+
+@media (hover: hover) and (pointer: fine) {
+  .button:not([disabled]):not([aria-disabled='true']):hover,
+  .shopify-challenge__button:hover,
+  .customer button:hover {
+    transform: scale(1.05);
+    background: transparent;
+  }
+}
+
+.button:not([disabled]):active { transform: scale(0.97); }
+
+.button:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 0.3rem;
+  box-shadow: none;
+}
+
+.button:disabled,
+.button[aria-disabled='true'],
+.button.disabled { opacity: 0.5; }
+
+.button--full-width { width: 100%; }
+
+@media screen and (max-width: 749px) {
+  .ehora-compare__product .button { min-height: 4.8rem; padding: 0 1.6rem; font-size: 1.3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:not([disabled]):hover,
+  .button:not([disabled]):active { transform: none; }
+}
