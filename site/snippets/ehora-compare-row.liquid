@@ -1,0 +1,25 @@
+{%- comment -%}
+  Fila de la comparativa EHORA: valor A · concepto · valor B.
+  Accepts: block, value_a, value_b
+{%- endcomment -%}
+<tr role="row" {{ block.shopify_attributes }}>
+  <td role="cell">
+    {%- if value_a != blank -%}
+      {{ value_a | escape }}
+    {%- elsif request.design_mode -%}
+      <span class="ehora-pending">Pendiente · {{ block.settings.metafield | escape }}</span>
+    {%- else -%}
+      <span aria-label="Sin datos">—</span>
+    {%- endif -%}
+  </td>
+  <th scope="row" role="rowheader">{{ block.settings.label | escape }}</th>
+  <td role="cell">
+    {%- if value_b != blank -%}
+      {{ value_b | escape }}
+    {%- elsif request.design_mode -%}
+      <span class="ehora-pending">Pendiente · {{ block.settings.metafield | escape }}</span>
+    {%- else -%}
+      <span aria-label="Sin datos">—</span>
+    {%- endif -%}
+  </td>
+</tr>

@@ -32,6 +32,7 @@
         {%- endif -%}
       </header>
 
+      <div class="ehora-compare__body">
       <div class="ehora-compare__products{{ reveal }}">
         {%- for i in (1..2) -%}
           {%- liquid
@@ -71,9 +72,7 @@
               <h3 class="ehora-compare__title">
                 <a href="{{ compare_product.url }}">{{ compare_product.title | escape }}</a>
               </h3>
-              {%- if tagline != blank -%}
-                <p class="ehora-compare__tagline">{{ tagline | escape }}</p>
-              {%- endif -%}
+              <p class="ehora-compare__tagline">{{ tagline | escape }}</p>
               <div class="ehora-compare__price">
                 {%- render 'price', product: compare_product, use_variant: true -%}
               </div>
@@ -105,75 +104,59 @@
         <span class="ehora-compare__vs" aria-hidden="true">vs</span>
       </div>
 
-      {%- if section.blocks.size > 0 -%}
-        <table class="ehora-compare__table{{ reveal }}">
+      {%- liquid
+        assign row_count = 0
+        capture rows_html
+          for block in section.blocks
+            assign value_a = blank
+            assign value_b = blank
+            if block.settings.metafield != blank
+              assign parts = block.settings.metafield | split: '.'
+              if product_a != blank
+                assign value_a = product_a.metafields[parts[0]][parts[1]] | metafield_text
+              endif
+              if product_b != blank
+                assign value_b = product_b.metafields[parts[0]][parts[1]] | metafield_text
+              endif
+            endif
+            if value_a == blank
+              assign value_a = block.settings.value_a
+            endif
+            if value_b == blank
+              assign value_b = block.settings.value_b
+            endif
+            if value_a == blank and value_b == blank and request.design_mode == false
+              continue
+            endif
+            assign row_count = row_count | plus: 1
+            render 'ehora-compare-row', block: block, value_a: value_a, value_b: value_b
+          endfor
+        endcapture
+      -%}
+
+      {%- if row_count > 0 -%}
+        <table class="ehora-compare__table{{ reveal }}" role="table">
           <caption class="visually-hidden">
             Comparativa: {{ section.settings.label_a | escape }} y {{ section.settings.label_b | escape }}
           </caption>
           <colgroup>
+            <col class="ehora-col-value">
             <col class="ehora-col-label">
-            <col>
-            <col>
+            <col class="ehora-col-value">
           </colgroup>
-          <thead>
-            <tr>
-              <td></td>
-              <th scope="col">{{ section.settings.label_a | escape }}</th>
-              <th scope="col">{{ section.settings.label_b | escape }}</th>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">{{ section.settings.label_a | escape }}</th>
+              <td role="cell"></td>
+              <th scope="col" role="columnheader">{{ section.settings.label_b | escape }}</th>
             </tr>
           </thead>
-          <tbody>
-            {%- for block in section.blocks -%}
-              {%- liquid
-                assign value_a = blank
-                assign value_b = blank
-                if block.settings.metafield != blank
-                  assign parts = block.settings.metafield | split: '.'
-                  if product_a != blank
-                    assign value_a = product_a.metafields[parts[0]][parts[1]] | metafield_text
-                  endif
-                  if product_b != blank
-                    assign value_b = product_b.metafields[parts[0]][parts[1]] | metafield_text
-                  endif
-                endif
-                if value_a == blank
-                  assign value_a = block.settings.value_a
-                endif
-                if value_b == blank
-                  assign value_b = block.settings.value_b
-                endif
-                assign row_empty = false
-                if value_a == blank and value_b == blank
-                  assign row_empty = true
-                endif
-              -%}
-              {%- unless row_empty and request.design_mode == false -%}
-                <tr {{ block.shopify_attributes }}>
-                  <th scope="row">{{ block.settings.label | escape }}</th>
-                  <td>
-                    {%- if value_a != blank -%}
-                      {{ value_a | escape }}
-                    {%- elsif request.design_mode -%}
-                      <span class="ehora-pending">Pendiente · {{ block.settings.metafield }}</span>
-                    {%- else -%}
-                      <span aria-label="Sin datos">—</span>
-                    {%- endif -%}
-                  </td>
-                  <td>
-                    {%- if value_b != blank -%}
-                      {{ value_b | escape }}
-                    {%- elsif request.design_mode -%}
-                      <span class="ehora-pending">Pendiente · {{ block.settings.metafield }}</span>
-                    {%- else -%}
-                      <span aria-label="Sin datos">—</span>
-                    {%- endif -%}
-                  </td>
-                </tr>
-              {%- endunless -%}
-            {%- endfor -%}
+          <tbody role="rowgroup">
+            {{ rows_html }}
           </tbody>
         </table>
       {%- endif -%}
+      </div>
     </div>
   </section>
 {%- endif -%}
