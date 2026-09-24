@@ -1,0 +1,58 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign product = section.settings.product
+  assign link = section.settings.link
+  if product != blank
+    assign link = product.url
+  endif
+  if link == blank
+    assign link = routes.all_products_collection_url
+  endif
+-%}
+
+<ehora-buy-bar class="ehora-buy-bar" data-offset="{{ section.settings.offset }}" hidden>
+  <div class="ehora-buy-bar__inner color-scheme-4">
+    <span class="ehora-buy-bar__thumb" aria-hidden="true">
+      {%- if product != blank and product.featured_image != blank -%}
+        {{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 48, height: 48 }}
+      {%- else -%}
+        {%- render 'ehora-image', image: section.settings.image, fallback: section.settings.default_image, alt: '' -%}
+      {%- endif -%}
+    </span>
+    <span class="ehora-buy-bar__info">
+      <span class="ehora-buy-bar__title">
+        {%- if product != blank -%}{{ product.title | escape }}{%- else -%}{{ section.settings.title | escape }}{%- endif -%}
+      </span>
+      <span class="ehora-buy-bar__meta">
+        {%- if product != blank -%}
+          {%- if product.price_varies -%}Desde {% endif -%}{{ product.price_min | money }}
+        {%- else -%}
+          {{ section.settings.subtitle | escape }}
+        {%- endif -%}
+      </span>
+    </span>
+    <a href="{{ link }}" class="button ehora-buy-bar__button">
+      {{- section.settings.button_label | escape -}}
+    </a>
+  </div>
+</ehora-buy-bar>
+
+{% schema %}
+{
+  "name": "EHORA · Barra de compra",
+  "tag": "div",
+  "class": "section ehora-buy-bar-section",
+  "settings": [
+    { "type": "paragraph", "content": "Píldora flotante con acceso directo a comprar. Aparece al empezar a bajar y se oculta al llegar al pie de página." },
+    { "type": "product", "id": "product", "label": "Producto", "info": "Muestra su foto, nombre y precio reales." },
+    { "type": "text", "id": "title", "label": "Título si no hay producto", "default": "La colección EHORA" },
+    { "type": "text", "id": "subtitle", "label": "Subtítulo si no hay producto", "default": "Paleteros y presurizadores" },
+    { "type": "image_picker", "id": "image", "label": "Miniatura si no hay producto" },
+    { "type": "text", "id": "default_image", "label": "Miniatura por defecto (archivo del theme)", "default": "ehora-foto-01.webp" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Comprar" },
+    { "type": "url", "id": "link", "label": "Enlace si no hay producto", "info": "Por defecto, toda la colección." },
+    { "type": "range", "id": "offset", "label": "Aparece tras desplazar", "min": 10, "max": 150, "step": 10, "unit": "%", "default": 40, "info": "Porcentaje de la altura de la pantalla." }
+  ],
+  "presets": [{ "name": "EHORA · Barra de compra" }]
+}
+{% endschema %}

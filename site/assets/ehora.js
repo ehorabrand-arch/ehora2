@@ -68,3 +68,40 @@ if (!customElements.get('ehora-scroll-expand')) {
     }
   );
 }
+
+if (!customElements.get('ehora-buy-bar')) {
+  customElements.define(
+    'ehora-buy-bar',
+    class EhoraBuyBar extends HTMLElement {
+      connectedCallback() {
+        this.hidden = false;
+        this.offset = (parseFloat(this.dataset.offset) || 40) / 100;
+        this.footerVisible = false;
+
+        const footer = document.querySelector('footer, .footer');
+        if (footer && 'IntersectionObserver' in window) {
+          this.observer = new IntersectionObserver(([entry]) => {
+            this.footerVisible = entry.isIntersecting;
+            this.update();
+          });
+          this.observer.observe(footer);
+        }
+
+        this.onScroll = () => requestAnimationFrame(() => this.update());
+        window.addEventListener('scroll', this.onScroll, { passive: true });
+        this.update();
+      }
+
+      disconnectedCallback() {
+        window.removeEventListener('scroll', this.onScroll);
+        this.observer?.disconnect();
+      }
+
+      update() {
+        const show = window.scrollY > window.innerHeight * this.offset && !this.footerVisible;
+        this.classList.toggle('is-visible', show);
+        this.querySelector('a')?.setAttribute('tabindex', show ? '0' : '-1');
+      }
+    }
+  );
+}

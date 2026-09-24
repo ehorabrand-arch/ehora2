@@ -11,11 +11,11 @@
         "hint": "Desliza para descubrir",
         "eyebrow": "EHORA",
         "text": "Accesorios para quienes cuidan el juego antes, durante y después del partido.",
-        "button_label_1": "Descubrir EHORA",
-        "button_link_1": "",
+        "button_label_1": "Comprar el paletero",
+        "button_link_1": "/collections/all",
         "fallback_anchor": "manifiesto",
-        "button_label_2": "Ver colección",
-        "button_link_2": "/collections/all",
+        "button_label_2": "Descubrir EHORA",
+        "button_link_2": "/#manifiesto",
         "color_scheme": "scheme-4"
       }
     },
@@ -338,6 +338,17 @@
       },
       "blocks": {},
       "block_order": []
+    },
+    "comprar": {
+      "type": "ehora-buy-bar",
+      "settings": {
+        "title": "La colección EHORA",
+        "subtitle": "Paleteros y presurizadores",
+        "default_image": "ehora-foto-01.webp",
+        "button_label": "Comprar",
+        "link": "",
+        "offset": 40
+      }
     }
   },
   "order": [
@@ -350,6 +361,7 @@
     "presion",
     "comparativa",
     "testimonios",
-    "coleccion"
+    "coleccion",
+    "comprar"
   ]
 }
