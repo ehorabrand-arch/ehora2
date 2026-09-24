@@ -1956,3 +1956,136 @@ h1, h2, h3, .h0, .h1, .h2,
     --border-base: rgba(16, 42, 67, 0.35);
   }
 }
+
+/* ==========================================================================
+   Pantalla de carga: pelota que bota + presión que sube
+   ========================================================================== */
+
+.ehora-loader { display: none; }
+
+html.ehora-loading,
+html.ehora-loading body { overflow: hidden; }
+
+html.ehora-loading .ehora-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  place-items: center;
+  background: var(--ehora-navy-dark);
+  color: var(--ehora-warm-white);
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 800ms var(--ease-in-out);
+}
+
+.ehora-loader.is-leaving { clip-path: inset(0 0 100% 0); }
+
+.ehora-loader__stage {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-l);
+  transition: opacity 400ms var(--ease-out), transform 800ms var(--ease-in-out);
+}
+
+.ehora-loader.is-leaving .ehora-loader__stage { opacity: 0; transform: translateY(-4rem); }
+
+.ehora-loader__court { position: relative; width: 18rem; height: 13rem; }
+
+.ehora-loader__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(252, 251, 247, 0.55) 20%, rgba(252, 251, 247, 0.55) 80%, transparent);
+}
+
+.ehora-loader__ball {
+  position: absolute;
+  left: calc(50% - 2rem);
+  bottom: 1.3rem;
+  width: 4rem;
+  height: 4rem;
+  transform-origin: 50% 100%;
+  animation: ehoraBounce 0.95s infinite;
+}
+
+.ehora-loader__ball svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: ehoraSpin 1.9s linear infinite;
+}
+
+.ehora-loader__ball circle { fill: var(--ehora-warm-white); }
+.ehora-loader__ball path { fill: none; stroke: var(--ehora-navy); stroke-width: 1.6; stroke-linecap: round; }
+
+.ehora-loader__shadow {
+  position: absolute;
+  left: calc(50% - 2.2rem);
+  bottom: 0.9rem;
+  width: 4.4rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  filter: blur(3px);
+  animation: ehoraShadow 0.95s infinite;
+}
+
+@keyframes ehoraBounce {
+  0% { transform: translateY(-8.5rem); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  46% { transform: translateY(0) scale(1.12, 0.84); animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  54% { transform: translateY(-0.6rem) scale(0.96, 1.04); animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  100% { transform: translateY(-8.5rem); }
+}
+
+@keyframes ehoraShadow {
+  0%, 100% { transform: scale(0.35); opacity: 0.25; animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  46% { transform: scale(1); opacity: 0.8; animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+}
+
+@keyframes ehoraSpin { to { transform: rotate(360deg); } }
+
+.ehora-loader__gauge {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  margin: 0;
+}
+
+.ehora-loader__value {
+  font-family: var(--font-heading-family);
+  font-size: 5.6rem;
+  font-weight: 300;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.ehora-loader__unit {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.ehora-loader__mark {
+  display: flex;
+  margin: 0;
+  padding-left: 0.4em;
+  font-family: var(--font-heading-family);
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  min-height: 1.2em;
+}
+
+.ehora-loader__mark span {
+  opacity: 0;
+  transform: translateY(0.6em);
+  transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out);
+  transition-delay: calc(var(--i) * 60ms);
+}
+
+.ehora-loader.is-ready .ehora-loader__mark span { opacity: 1; transform: translateY(0); }

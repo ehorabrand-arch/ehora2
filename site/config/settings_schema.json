@@ -53,6 +53,35 @@
         "type": "url",
         "id": "ehora_shipping_page",
         "label": "Página de envíos y devoluciones"
+      },
+      {
+        "type": "header",
+        "content": "Pantalla de carga"
+      },
+      {
+        "type": "checkbox",
+        "id": "ehora_loader",
+        "label": "Mostrar pantalla de carga",
+        "info": "Pelota que bota y presión que sube hasta la cifra indicada. Nunca se muestra con «reducir movimiento» activado.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "ehora_loader_once",
+        "label": "Solo una vez por sesión",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "ehora_loader_pressure",
+        "label": "Presión final (bar)",
+        "default": "1.92"
+      },
+      {
+        "type": "text",
+        "id": "ehora_loader_word",
+        "label": "Palabra final",
+        "default": "EHORA"
       }
     ]
   },

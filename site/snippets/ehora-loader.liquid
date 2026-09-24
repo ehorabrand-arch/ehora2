@@ -1,0 +1,86 @@
+{%- comment -%}
+  Pantalla de carga EHORA: pelota que bota sobre la línea de pista y presión que sube hasta la cifra objetivo.
+  Se muestra una vez por sesión (configurable) y nunca con «reducir movimiento».
+{%- endcomment -%}
+<script>
+  (function () {
+    try {
+      var once = {{ settings.ehora_loader_once | json }};
+      var seen = once && sessionStorage.getItem('ehora-loader-seen');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!seen && !reduce) document.documentElement.classList.add('ehora-loading');
+    } catch (e) {}
+  })();
+</script>
+
+<div class="ehora-loader" aria-hidden="true">
+  <div class="ehora-loader__stage">
+    <div class="ehora-loader__court">
+      <span class="ehora-loader__ball">
+        <svg viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="19" />
+          <path d="M6.5 8.5c6 5 6 18 0 23M33.5 8.5c-6 5-6 18 0 23" />
+        </svg>
+      </span>
+      <span class="ehora-loader__shadow"></span>
+      <span class="ehora-loader__line"></span>
+    </div>
+
+    <p class="ehora-loader__gauge">
+      <span class="ehora-loader__value" data-target="{{ settings.ehora_loader_pressure | default: '1.92' }}">0.00</span>
+      <span class="ehora-loader__unit">bar</span>
+    </p>
+
+    <p class="ehora-loader__mark">
+      {%- assign letters = settings.ehora_loader_word | default: 'EHORA' | split: '' -%}
+      {%- for letter in letters -%}
+        <span style="--i: {{ forloop.index0 }};">{{ letter }}</span>
+      {%- endfor -%}
+    </p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('ehora-loading')) return;
+
+    var loader = document.querySelector('.ehora-loader');
+    var value = loader.querySelector('.ehora-loader__value');
+    var target = parseFloat(value.dataset.target) || 1.92;
+    var start = performance.now();
+    var countTime = 1300;
+    var minTime = 1900;
+    var maxTime = 2600;
+    var finished = false;
+
+    function tick(now) {
+      var t = Math.min((now - start) / countTime, 1);
+      var eased = 1 - Math.pow(1 - t, 3);
+      value.textContent = (target * eased).toFixed(2);
+      if (t < 1) requestAnimationFrame(tick);
+      else loader.classList.add('is-ready');
+    }
+    requestAnimationFrame(tick);
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      loader.classList.add('is-leaving');
+      try { sessionStorage.setItem('ehora-loader-seen', '1'); } catch (e) {}
+      setTimeout(function () {
+        root.classList.remove('ehora-loading');
+        loader.remove();
+      }, 800);
+    }
+
+    function whenLoaded() {
+      var wait = Math.max(minTime - (performance.now() - start), 0);
+      setTimeout(finish, wait);
+    }
+
+    if (document.readyState === 'complete') whenLoaded();
+    else window.addEventListener('load', whenLoaded, { once: true });
+    setTimeout(finish, maxTime);
+  })();
+</script>

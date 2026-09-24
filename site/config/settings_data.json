@@ -194,7 +194,11 @@
       "ehora_editorial_fonts": true,
       "ehora_image_hover": true,
       "ehora_shipping_note": "[Pendiente: plazos y coste de envío]",
-      "ehora_returns_note": "[Pendiente: política de devoluciones]"
+      "ehora_returns_note": "[Pendiente: política de devoluciones]",
+      "ehora_loader": true,
+      "ehora_loader_once": true,
+      "ehora_loader_pressure": "1.92",
+      "ehora_loader_word": "EHORA"
     }
   }
 }
