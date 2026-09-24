@@ -6,11 +6,11 @@
         "default_image": "ehora-foto-01.webp",
         "image_alt": "Paletero EHORA acolchado en azul marino con ribetes crema",
         "default_background": "ehora-foto-02.webp",
-        "title_left": "El pádel,",
+        "title_left": "El juego,",
         "title_right": "cuidado al detalle.",
         "hint": "Desliza para descubrir",
         "eyebrow": "EHORA",
-        "text": "Accesorios para quienes cuidan el juego antes, durante y después del partido.",
+        "text": "Accesorios de pádel y tenis para quienes cuidan el juego antes, durante y después del partido.",
         "button_label_1": "Comprar el paletero",
         "button_link_1": "/collections/all",
         "fallback_anchor": "manifiesto",
@@ -24,7 +24,7 @@
       "settings": {
         "anchor": "manifiesto",
         "eyebrow": "Manifiesto",
-        "text": "El pádel no termina cuando acaba el partido. Sigue en la bolsa que cierras sin prisa y en las pelotas que guardas para el siguiente. Para eso existe EHORA.",
+        "text": "El juego no termina cuando acaba el partido. Sigue en la bolsa que cierras sin prisa y en las pelotas que guardas para el siguiente. En la pista de pádel o en la de tenis. Para eso existe EHORA.",
         "color_scheme": "scheme-2"
       }
     },
@@ -46,7 +46,7 @@
             "default_image": "ehora-foto-08.webp",
             "image_alt": "Interior del paletero EHORA con compartimentos para botella, neceser, toalla, móvil y portátil",
             "title": "Todo en su sitio",
-            "text": "Un hueco para la botella, otro para el móvil, bolsillos con cremallera y espacio para lo que llevas después del partido."
+            "text": "Palas o raquetas, la botella, el móvil: cada cosa en su hueco. Y bolsillos con cremallera para lo que llevas después del partido."
           }
         },
         "mano": {
@@ -80,7 +80,7 @@
           "type": "color",
           "settings": {
             "default_image": "ehora-foto-02.webp",
-            "image_alt": "Jugadora con el paletero EHORA navy al hombro y dos palas",
+            "image_alt": "Jugadora con el paletero EHORA navy al hombro y dos raquetas de tenis",
             "title": "Navy",
             "detail": "Ribete crema",
             "swatch": "#1B2A4E",
@@ -116,7 +116,7 @@
       "settings": {
         "layout": "split",
         "default_image": "ehora-foto-07.webp",
-        "image_alt": "Paletero EHORA blanco con correas de mochila, en la pista con pelotas y una pala",
+        "image_alt": "Paletero EHORA blanco con correas de mochila, en la pista con pelotas y una pala de pádel",
         "overlay_opacity": 0,
         "height": "large",
         "content_position": "center",
@@ -219,7 +219,7 @@
         "default_image": "ehora-foto-09.webp",
         "eyebrow": "La pelota",
         "heading": "Por qué <em>presurizar</em> tus pelotas.",
-        "intro": "<p>Una pelota de pádel no se gasta solo jugando. También se gasta esperando al siguiente partido.</p>",
+        "intro": "<p>Una pelota de pádel o de tenis no se gasta solo jugando. También se gasta esperando al siguiente partido.</p>",
         "placeholder_label": "Presurizador EHORA abierto con una pelota dentro y la tapa digital al lado",
         "media_position": "left",
         "show_numbers": true,
