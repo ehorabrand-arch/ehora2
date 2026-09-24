@@ -16,19 +16,12 @@
   <div class="ehora-container ehora-story__grid">
     <div class="ehora-story__media">
       <div class="ehora-media">
-        {%- if image != blank -%}
-          {{
-            image
-            | image_url: width: 1600
-            | image_tag:
-              widths: '550, 750, 1100, 1400, 1600',
-              sizes: '(min-width: 990px) 45vw, 100vw',
-              loading: 'lazy',
-              alt: image.alt
-          }}
-        {%- else -%}
-          {%- render 'ehora-placeholder', label: section.settings.placeholder_label -%}
-        {%- endif -%}
+        {%- render 'ehora-image',
+          image: image,
+          fallback: section.settings.default_image,
+          alt: section.settings.placeholder_label,
+          sizes: '(min-width: 990px) 45vw, 100vw'
+        -%}
       </div>
     </div>
 
@@ -96,8 +89,13 @@
     },
     {
       "type": "text",
+      "id": "default_image",
+      "label": "Imagen por defecto (archivo del theme)"
+    },
+    {
+      "type": "text",
       "id": "placeholder_label",
-      "label": "Descripción de la imagen pendiente",
+      "label": "Texto alternativo de la imagen",
       "default": "Fotografía de producto"
     },
     {

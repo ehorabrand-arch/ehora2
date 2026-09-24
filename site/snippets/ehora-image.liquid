@@ -1,0 +1,52 @@
+{%- comment -%}
+  Imagen EHORA: usa la imagen del editor y, si no hay, una foto por defecto del theme.
+  Accepts:
+  - image: {Object} imagen de Shopify (opcional)
+  - fallback: {String} nombre de archivo en assets (opcional)
+  - alt: {String} texto alternativo para la foto por defecto
+  - sizes: {String}
+  - eager: {Boolean} carga prioritaria (imagen principal visible al cargar)
+  - class: {String}
+{%- endcomment -%}
+{%- liquid
+  if eager
+    assign loading = 'eager'
+    assign priority = 'high'
+  else
+    assign loading = 'lazy'
+    assign priority = 'auto'
+  endif
+-%}
+{%- if image != blank -%}
+  {%- liquid
+    assign focal = ''
+    if image.presentation.focal_point != blank
+      assign focal = 'object-position: ' | append: image.presentation.focal_point | append: ';'
+    endif
+  -%}
+  {{
+    image
+    | image_url: width: 2400
+    | image_tag:
+      widths: '480, 750, 1100, 1500, 1800, 2400',
+      sizes: sizes,
+      loading: loading,
+      fetchpriority: priority,
+      class: class,
+      style: focal,
+      alt: image.alt
+  }}
+{%- elsif fallback != blank -%}
+  <img
+    src="{{ fallback | asset_url }}"
+    alt="{{ alt | escape }}"
+    loading="{{ loading }}"
+    fetchpriority="{{ priority }}"
+    decoding="async"
+    class="{{ class }}"
+    width="1122"
+    height="1402"
+  >
+{%- else -%}
+  {%- render 'ehora-placeholder', label: alt -%}
+{%- endif -%}

@@ -1,0 +1,75 @@
+{%- liquid
+  if settings.animations_reveal_on_scroll
+    assign reveal = ' scroll-trigger animate--slide-in'
+  endif
+-%}
+<section class="ehora-duo ehora-section color-{{ section.settings.color_scheme }} gradient" aria-labelledby="EhoraDuo-{{ section.id }}">
+  <div class="ehora-container">
+    <header class="ehora-duo__header{{ reveal }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ehora-eyebrow ehora-eyebrow--plain">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="EhoraDuo-{{ section.id }}" class="ehora-display ehora-duo__heading">{{ section.settings.heading }}</h2>
+    </header>
+    <div class="ehora-duo__grid">
+      {%- for block in section.blocks -%}
+        <div class="ehora-duo__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="ehora-card-link">{%- else -%}<div class="ehora-card-link">{%- endif -%}
+            <div class="ehora-media ehora-duo__media">
+              {%- render 'ehora-image',
+                image: block.settings.image,
+                fallback: block.settings.default_image,
+                alt: block.settings.image_alt,
+                sizes: '(min-width: 750px) 45vw, 100vw'
+              -%}
+            </div>
+            <p class="ehora-duo__caption">
+              <span class="ehora-duo__swatch" style="--swatch: {{ block.settings.swatch }}; --trim: {{ block.settings.trim }};" aria-hidden="true"></span>
+              <span class="ehora-duo__name">{{ block.settings.title | escape }}</span>
+              <span class="ehora-duo__detail">{{ block.settings.detail | escape }}</span>
+            </p>
+          {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Dos colores",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Colores" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Dos colores. Un mismo <em>club</em>." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "color",
+      "name": "Color",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
+        { "type": "text", "id": "image_alt", "label": "Texto alternativo" },
+        { "type": "text", "id": "title", "label": "Nombre del color", "default": "Navy" },
+        { "type": "text", "id": "detail", "label": "Detalle", "default": "Ribete crema" },
+        { "type": "color", "id": "swatch", "label": "Color principal", "default": "#1B2A4E" },
+        { "type": "color", "id": "trim", "label": "Color del ribete", "default": "#EDE4D3" },
+        { "type": "url", "id": "link", "label": "Enlace", "info": "Por ejemplo, a la variante de este color." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Dos colores",
+      "blocks": [
+        { "type": "color", "settings": { "title": "Navy", "detail": "Ribete crema", "default_image": "ehora-foto-02.webp" } },
+        { "type": "color", "settings": { "title": "Blanco", "detail": "Ribete azul", "swatch": "#F4F2EC", "trim": "#1F3FBF", "default_image": "ehora-foto-06.webp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

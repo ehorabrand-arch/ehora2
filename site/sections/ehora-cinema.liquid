@@ -1,0 +1,80 @@
+{%- liquid
+  assign primary_link = section.settings.button_link_1
+  if primary_link == blank
+    assign primary_link = '#' | append: section.settings.fallback_anchor
+  endif
+  assign eager = false
+  if section.index == 1
+    assign eager = true
+  endif
+-%}
+
+<section
+  class="ehora-cinema color-{{ section.settings.color_scheme }} gradient"
+  aria-labelledby="EhoraCinema-{{ section.id }}"
+>
+  <div class="ehora-cinema__intro ehora-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ehora-eyebrow ehora-eyebrow--plain">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    <h2 id="EhoraCinema-{{ section.id }}" class="ehora-cinema__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p class="ehora-cinema__text">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+    <div class="ehora-actions ehora-actions--center">
+      {%- if section.settings.button_label_1 != blank -%}
+        <a href="{{ primary_link }}" class="button">{{ section.settings.button_label_1 | escape }}</a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank -%}
+        <a href="{{ section.settings.button_link_2 }}" class="ehora-link">
+          {{- section.settings.button_label_2 | escape -}}
+          {%- render 'ehora-icon-arrow' -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="ehora-cinema__stage">
+    {%- if section.settings.caption_left != blank -%}
+      <p class="ehora-cinema__note ehora-cinema__note--left">{{ section.settings.caption_left | escape }}</p>
+    {%- endif -%}
+    <div class="ehora-cinema__frame">
+      {%- render 'ehora-image',
+        image: section.settings.image,
+        fallback: section.settings.default_image,
+        alt: section.settings.image_alt,
+        sizes: '(min-width: 990px) 60vw, 100vw',
+        eager: eager
+      -%}
+    </div>
+    {%- if section.settings.caption_right != blank -%}
+      <p class="ehora-cinema__note ehora-cinema__note--right">{{ section.settings.caption_right | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Hero cine",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "EHORA" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "El pádel, <em>cuidado</em> al detalle." },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Accesorios para quienes cuidan el juego antes, durante y después del partido." },
+    { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Formato vertical 4:5. Crece al hacer scroll." },
+    { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-foto-01.webp" },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo de la imagen por defecto", "default": "Paletero EHORA acolchado en azul marino con ribetes crema" },
+    { "type": "text", "id": "caption_left", "label": "Anotación izquierda", "default": "Acolchado de trazo orgánico" },
+    { "type": "text", "id": "caption_right", "label": "Anotación derecha", "default": "Ribetes y asas en crema" },
+    { "type": "header", "content": "Botones" },
+    { "type": "text", "id": "button_label_1", "label": "Botón principal", "default": "Descubrir EHORA" },
+    { "type": "url", "id": "button_link_1", "label": "Enlace del botón principal", "info": "Vacío: baja hasta el ancla indicada." },
+    { "type": "text", "id": "fallback_anchor", "label": "Ancla de destino", "default": "manifiesto" },
+    { "type": "text", "id": "button_label_2", "label": "Enlace secundario", "default": "Ver colección" },
+    { "type": "url", "id": "button_link_2", "label": "Destino del enlace secundario", "default": "/collections/all" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "EHORA · Hero cine" }]
+}
+{% endschema %}

@@ -13,55 +13,59 @@
 -%}
 
 <section
-  class="ehora-hero ehora-hero--{{ layout }} ehora-hero--{{ section.settings.height }} ehora-hero--{{ section.settings.content_position }}{% if image == blank %} ehora-hero--no-image{% endif %} color-{{ section.settings.color_scheme }} gradient"
+  class="ehora-hero ehora-hero--{{ layout }} ehora-hero--{{ section.settings.height }} ehora-hero--{{ section.settings.content_position }}{% if image == blank and section.settings.default_image == blank %} ehora-hero--no-image{% endif %} color-{{ section.settings.color_scheme }} gradient"
   aria-labelledby="EhoraHeroHeading-{{ section.id }}"
 >
   <div class="ehora-hero__media">
-    {%- if image != blank -%}
-      <picture>
-        {%- if section.settings.image_mobile != blank and layout == 'overlay' -%}
-          <source
-            media="(max-width: 749px)"
-            srcset="
-              {{ mobile_image | image_url: width: 750 }} 750w,
-              {{ mobile_image | image_url: width: 1100 }} 1100w,
-              {{ mobile_image | image_url: width: 1500 }} 1500w
-            "
-            sizes="100vw"
-          >
-        {%- endif -%}
-        {%- liquid
-          if layout == 'split'
-            assign sizes = '(min-width: 990px) 58vw, 100vw'
-          else
-            assign sizes = '100vw'
-          endif
-          if section.index == 1
-            assign loading = 'eager'
-            assign priority = 'high'
-          else
-            assign loading = 'lazy'
-            assign priority = 'auto'
-          endif
-        -%}
-        {{
-          image
-          | image_url: width: 3000
-          | image_tag:
-            widths: '750, 1100, 1500, 1800, 2200, 2800',
-            sizes: sizes,
-            loading: loading,
-            fetchpriority: priority,
-            alt: image.alt,
-            style: focal_style
-        }}
-      </picture>
+    {%- if image == blank and section.settings.default_image != blank -%}
+      {%- render 'ehora-image', fallback: section.settings.default_image, alt: section.settings.image_alt, sizes: '(min-width: 990px) 58vw, 100vw', eager: false -%}
     {%- else -%}
-      {%- render 'ehora-placeholder', label: 'Imagen de campaña' -%}
+    {%- if image != blank -%}
+        <picture>
+          {%- if section.settings.image_mobile != blank and layout == 'overlay' -%}
+            <source
+              media="(max-width: 749px)"
+              srcset="
+                {{ mobile_image | image_url: width: 750 }} 750w,
+                {{ mobile_image | image_url: width: 1100 }} 1100w,
+                {{ mobile_image | image_url: width: 1500 }} 1500w
+              "
+              sizes="100vw"
+            >
+          {%- endif -%}
+          {%- liquid
+            if layout == 'split'
+              assign sizes = '(min-width: 990px) 58vw, 100vw'
+            else
+              assign sizes = '100vw'
+            endif
+            if section.index == 1
+              assign loading = 'eager'
+              assign priority = 'high'
+            else
+              assign loading = 'lazy'
+              assign priority = 'auto'
+            endif
+          -%}
+          {{
+            image
+            | image_url: width: 3000
+            | image_tag:
+              widths: '750, 1100, 1500, 1800, 2200, 2800',
+              sizes: sizes,
+              loading: loading,
+              fetchpriority: priority,
+              alt: image.alt,
+              style: focal_style
+          }}
+        </picture>
+      {%- else -%}
+        {%- render 'ehora-placeholder', label: 'Imagen de campaña' -%}
+      {%- endif -%}
     {%- endif -%}
-    {%- if layout == 'overlay' and image != blank -%}
+    {%- if layout == 'overlay' -%}{%- if image != blank or section.settings.default_image != blank -%}
       <div class="ehora-hero__scrim" style="--scrim: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
-    {%- endif -%}
+    {%- endif -%}{%- endif -%}
   </div>
 
   <div class="ehora-hero__content ehora-container">
@@ -114,6 +118,16 @@
       "id": "image",
       "label": "Imagen",
       "info": "Fotografía de campaña o de producto. Recomendado: 2800 px de ancho. El encuadre se ajusta con el punto focal de la imagen en Shopify."
+    },
+    {
+      "type": "text",
+      "id": "default_image",
+      "label": "Imagen por defecto (archivo del theme)"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texto alternativo de la imagen por defecto"
     },
     {
       "type": "image_picker",

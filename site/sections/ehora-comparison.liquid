@@ -39,9 +39,11 @@
             if i == 1
               assign compare_product = product_a
               assign label = section.settings.label_a
+              assign fallback = section.settings.default_image_a
             else
               assign compare_product = product_b
               assign label = section.settings.label_b
+              assign fallback = section.settings.default_image_b
             endif
             assign tagline = blank
             if compare_product != blank and section.settings.tagline_metafield != blank
@@ -53,19 +55,12 @@
             {%- if compare_product != blank -%}
               <a href="{{ compare_product.url }}" class="ehora-card-link" tabindex="-1" aria-hidden="true">
                 <div class="ehora-media">
-                  {%- if compare_product.featured_image != blank -%}
-                    {{
-                      compare_product.featured_image
-                      | image_url: width: 1100
-                      | image_tag:
-                        widths: '360, 550, 750, 1100',
-                        sizes: '(min-width: 990px) 36vw, 50vw',
-                        loading: 'lazy',
-                        alt: ''
-                    }}
-                  {%- else -%}
-                    {%- render 'ehora-placeholder', label: compare_product.title -%}
-                  {%- endif -%}
+                  {%- render 'ehora-image',
+                    image: compare_product.featured_image,
+                    fallback: fallback,
+                    alt: '',
+                    sizes: '(min-width: 990px) 36vw, 50vw'
+                  -%}
                 </div>
               </a>
               <p class="ehora-compare__label">{{ label | escape }}</p>
@@ -93,7 +88,7 @@
               {%- endif -%}
             {%- else -%}
               <div class="ehora-media">
-                {%- render 'ehora-placeholder', label: label -%}
+                {%- render 'ehora-image', fallback: fallback, alt: label -%}
               </div>
               <p class="ehora-compare__label">{{ label | escape }}</p>
               <p class="ehora-compare__title">Selecciona un producto</p>
@@ -217,6 +212,18 @@
       "id": "label_b",
       "label": "Etiqueta B",
       "default": "Automático"
+    },
+    {
+      "type": "text",
+      "id": "default_image_a",
+      "label": "Imagen por defecto A (si el producto no tiene foto)",
+      "default": "ehora-foto-12.webp"
+    },
+    {
+      "type": "text",
+      "id": "default_image_b",
+      "label": "Imagen por defecto B (si el producto no tiene foto)",
+      "default": "ehora-foto-11.webp"
     },
     {
       "type": "text",

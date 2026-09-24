@@ -1,0 +1,107 @@
+{%- liquid
+  if settings.animations_reveal_on_scroll
+    assign reveal = ' scroll-trigger animate--slide-in'
+  endif
+-%}
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="ehora-feature color-{{ section.settings.color_scheme }} gradient"
+  aria-labelledby="EhoraFeature-{{ section.id }}"
+>
+  <div class="ehora-container">
+    <header class="ehora-feature__header{{ reveal }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ehora-eyebrow ehora-eyebrow--plain">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="EhoraFeature-{{ section.id }}" class="ehora-feature__heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="ehora-feature__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="ehora-feature__frame">
+      {%- render 'ehora-image',
+        image: section.settings.image,
+        fallback: section.settings.default_image,
+        alt: section.settings.image_alt,
+        sizes: '(min-width: 990px) 70vw, 100vw'
+      -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="ehora-feature__list" role="list">
+        {%- for block in section.blocks -%}
+          <li class="ehora-feature__item{{ reveal }}" data-cascade {{ block.shopify_attributes }}>
+            {%- render 'ehora-icon', name: block.settings.icon -%}
+            <h3 class="ehora-feature__item-title">{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}
+              <p class="ehora-feature__item-text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+      <div class="ehora-actions ehora-actions--center">
+        <a href="{{ section.settings.link }}" class="button">{{ section.settings.link_label | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Destacado",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "presurizador" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Presurizador automático" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "La presión, <em>a la vista</em>." },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Guarda tus pelotas, elige la presión y consúltala en la pantalla." },
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-foto-10.webp" },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo", "default": "Presurizador EHORA negro con pantalla digital que marca 1,92 bar" },
+    { "type": "text", "id": "link_label", "label": "Botón", "default": "Ver el presurizador" },
+    { "type": "url", "id": "link", "label": "Destino del botón" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-4" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Característica",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            { "value": "display", "label": "Pantalla" },
+            { "value": "touch", "label": "Botones" },
+            { "value": "usb", "label": "USB-C" },
+            { "value": "battery", "label": "Batería" },
+            { "value": "pressure", "label": "Presión" },
+            { "value": "ball", "label": "Pelota" },
+            { "value": "hand", "label": "Manual" }
+          ],
+          "default": "display"
+        },
+        { "type": "text", "id": "title", "label": "Título", "default": "Pantalla digital" },
+        { "type": "text", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Destacado",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "display", "title": "Pantalla digital", "text": "La presión, en bar, siempre visible." } },
+        { "type": "feature", "settings": { "icon": "touch", "title": "Controles táctiles", "text": "Encendido y ajuste desde la tapa." } },
+        { "type": "feature", "settings": { "icon": "usb", "title": "Carga USB-C", "text": "Batería recargable. [Pendiente: autonomía]" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

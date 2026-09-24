@@ -997,3 +997,441 @@ p { text-wrap: pretty; }
 }
 
 .ehora-media .ehora-placeholder { min-height: 0; }
+
+/* ==========================================================================
+   EHORA · Secciones de experiencia (cine, manifiesto, galería, colores, destacado)
+   ========================================================================== */
+
+.ehora-actions--center { justify-content: center; }
+
+.ehora-media img,
+.ehora-cinema__frame img,
+.ehora-feature__frame img,
+.ehora-gallery__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Hero cine ---------- */
+
+.ehora-cinema {
+  padding-top: clamp(4.8rem, 3rem + 6vw, 11.2rem);
+  overflow: clip;
+}
+
+.ehora-cinema__intro {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-l);
+  text-align: center;
+}
+
+.ehora-cinema__intro .ehora-eyebrow { margin: 0; }
+
+.ehora-cinema__heading {
+  margin: 0;
+  max-width: 11ch;
+  font-family: var(--font-heading-family);
+  font-size: clamp(5.2rem, 2rem + 8.4vw, 15.2rem);
+  font-weight: 300;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-cinema__text {
+  margin: 0;
+  max-width: 40ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.72);
+}
+
+.ehora-cinema__intro .ehora-actions { margin-top: var(--space-s); }
+
+.ehora-cinema__stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-m);
+  padding: var(--space-3xl) var(--gutter) var(--section-space);
+}
+
+.ehora-cinema__frame {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-width: 72rem;
+  justify-self: center;
+  overflow: hidden;
+  border-radius: var(--radius-s);
+  background: var(--ehora-sand);
+}
+
+.ehora-cinema__note {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgb(var(--color-link));
+}
+
+.ehora-cinema__note::before {
+  content: '';
+  width: 3.2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+@media screen and (min-width: 990px) {
+  .ehora-cinema__stage {
+    grid-template-columns: 1fr minmax(0, 72rem) 1fr;
+    align-items: center;
+    column-gap: var(--space-2xl);
+  }
+
+  .ehora-cinema__frame { grid-column: 2; grid-row: 1; }
+  .ehora-cinema__note--left { grid-column: 1; grid-row: 1; justify-self: end; flex-direction: row-reverse; text-align: right; }
+  .ehora-cinema__note--right { grid-column: 3; grid-row: 1; justify-self: start; align-self: end; margin-bottom: 20%; }
+  .ehora-cinema__note--left { align-self: start; margin-top: 30%; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ehora-cinema__intro > * { animation: ehoraRise 1s var(--ease-out) both; }
+  .ehora-cinema__intro > *:nth-child(2) { animation-delay: 90ms; }
+  .ehora-cinema__intro > *:nth-child(3) { animation-delay: 180ms; }
+  .ehora-cinema__intro > *:nth-child(4) { animation-delay: 270ms; }
+}
+
+/* ---------- Manifiesto palabra a palabra ---------- */
+
+.ehora-words__sticky { padding-block: var(--section-space); }
+
+.ehora-words__inner { display: grid; gap: var(--space-xl); }
+.ehora-words__inner .ehora-eyebrow { margin: 0; }
+
+.ehora-words__text {
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--font-heading-family);
+  font-size: clamp(3.4rem, 1.6rem + 4vw, 8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.022em;
+  color: rgb(var(--color-foreground));
+  text-wrap: pretty;
+}
+
+/* ---------- Galería fija ---------- */
+
+.ehora-gallery__grid { display: grid; gap: var(--space-3xl); }
+.ehora-gallery__stage { display: none; }
+.ehora-gallery__heading { font-size: var(--step-4); max-width: 12ch; }
+
+.ehora-gallery__steps {
+  list-style: none;
+  margin: var(--space-3xl) 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4xl);
+}
+
+.ehora-gallery__inline { aspect-ratio: 4 / 5; margin-bottom: var(--space-l); }
+
+.ehora-gallery__index {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: rgb(var(--color-link));
+}
+
+.ehora-gallery__title {
+  margin: var(--space-xs) 0 var(--space-s);
+  font-family: var(--font-heading-family);
+  font-size: var(--step-3);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.ehora-gallery__text {
+  margin: 0;
+  max-width: 38ch;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: rgba(var(--color-foreground), 0.74);
+}
+
+@media screen and (min-width: 990px) {
+  .ehora-gallery__grid {
+    grid-template-columns: 1.15fr 1fr;
+    column-gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  .ehora-gallery__stage {
+    display: block;
+    position: sticky;
+    top: calc(var(--header-height, 6.4rem) + 3svh);
+    height: min(86svh, 96rem);
+    overflow: hidden;
+    border-radius: var(--radius-s);
+    background: var(--ehora-sand);
+  }
+
+  .ehora-gallery__img {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 800ms var(--ease-out), transform 1400ms var(--ease-out);
+  }
+
+  .ehora-gallery__img.is-active { opacity: 1; transform: scale(1); }
+  .ehora-gallery__inline { display: none; }
+  .ehora-gallery__header { padding-top: 12svh; }
+  .ehora-gallery__steps { gap: 0; margin-bottom: 20svh; }
+
+  .ehora-gallery__step {
+    min-height: 72svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.25;
+    transition: opacity 500ms var(--ease-out);
+  }
+
+  .ehora-gallery__step.is-active { opacity: 1; }
+}
+
+/* ---------- Dos colores ---------- */
+
+.ehora-duo__header {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-l);
+  margin-bottom: var(--space-3xl);
+  text-align: center;
+}
+
+.ehora-duo__header .ehora-eyebrow { margin: 0; }
+.ehora-duo__heading { font-size: var(--step-4); max-width: 14ch; }
+
+.ehora-duo__grid { display: grid; gap: var(--space-2xl); }
+.ehora-duo__media { aspect-ratio: 4 / 5; }
+
+.ehora-duo__caption {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-m);
+  margin-top: var(--space-l);
+}
+
+.ehora-duo__swatch {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: inset 0 0 0 0.35rem var(--trim), 0 0 0 1px rgba(var(--color-foreground), 0.12);
+}
+
+.ehora-duo__name {
+  font-family: var(--font-heading-family);
+  font-size: var(--step-2);
+  font-weight: 300;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-duo__detail {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+@media screen and (min-width: 750px) {
+  .ehora-duo__grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+}
+
+/* ---------- Producto destacado (cine oscuro) ---------- */
+
+.ehora-feature {
+  padding-block: var(--section-space);
+  overflow: clip;
+}
+
+.ehora-feature__header {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-l);
+  text-align: center;
+}
+
+.ehora-feature__header .ehora-eyebrow { margin: 0; }
+
+.ehora-feature__heading {
+  margin: 0;
+  max-width: 12ch;
+  font-family: var(--font-heading-family);
+  font-size: clamp(4.4rem, 2rem + 6.4vw, 12rem);
+  font-weight: 300;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-feature__text {
+  margin: 0;
+  max-width: 40ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.72);
+}
+
+.ehora-feature__frame {
+  width: 100%;
+  max-width: 84rem;
+  aspect-ratio: 1 / 1;
+  margin: var(--space-3xl) auto 0;
+  overflow: hidden;
+  border-radius: var(--radius-s);
+}
+
+.ehora-feature__list {
+  list-style: none;
+  margin: var(--space-3xl) auto 0;
+  padding: 0;
+  max-width: 112rem;
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.ehora-feature__item {
+  padding-top: var(--space-l);
+  border-top: var(--hairline);
+}
+
+.ehora-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  color: rgb(var(--color-link));
+}
+
+.ehora-feature__item-title {
+  margin: var(--space-m) 0 var(--space-2xs);
+  font-family: var(--font-heading-family);
+  font-size: var(--step-2);
+  font-weight: 300;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-feature__item-text {
+  margin: 0;
+  max-width: 32ch;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+@media screen and (min-width: 750px) {
+  .ehora-feature__list { grid-template-columns: repeat(3, 1fr); gap: var(--space-2xl); }
+}
+
+/* ---------- Movimiento ligado al scroll (solo navegadores compatibles) ---------- */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ehora-cinema__frame,
+    .ehora-feature__frame {
+      animation: ehoraGrow linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+
+    .ehora-cinema__frame img,
+    .ehora-feature__frame img {
+      animation: ehoraSettle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    .ehora-cinema__note {
+      animation: ehoraNote linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+
+    .ehora-words { height: 250vh; view-timeline: --ehora-words block; }
+
+    .ehora-words__sticky {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-block: 0;
+    }
+
+    .ehora-words__w {
+      opacity: 0.14;
+      animation: ehoraWord linear both;
+      animation-timeline: --ehora-words;
+      animation-range:
+        contain calc(var(--i) / var(--n) * 82%)
+        contain calc(var(--i) / var(--n) * 82% + 8%);
+    }
+
+    @media screen and (min-width: 750px) {
+      .ehora-duo__item:nth-child(even) {
+        animation: ehoraDrift linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+      }
+    }
+  }
+}
+
+@keyframes ehoraGrow {
+  from { transform: scale(0.86); border-radius: 2.4rem; }
+  to { transform: scale(1); border-radius: 2px; }
+}
+
+@keyframes ehoraSettle {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+
+@keyframes ehoraNote {
+  from { opacity: 0; transform: translateY(1.2rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ehoraWord {
+  to { opacity: 1; }
+}
+
+@keyframes ehoraDrift {
+  from { transform: translateY(8rem); }
+  to { transform: translateY(-4rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ehora-gallery__img { transition: opacity 300ms linear; transform: none !important; }
+}
+
+/* Fraunces afina demasiado las astas a tamaño óptico máximo: se fija para mantener la «e» legible */
+h1, h2, h3, .h0, .h1, .h2,
+.ehora-display,
+.ehora-cinema__heading,
+.ehora-feature__heading,
+.ehora-hero__heading,
+.ehora-words__text,
+.ehora-gallery__title {
+  font-optical-sizing: none;
+  font-variation-settings: 'opsz' 48;
+}

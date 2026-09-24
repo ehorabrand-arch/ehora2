@@ -1,0 +1,97 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
+
+<ehora-sticky-gallery
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="ehora-gallery ehora-section color-{{ section.settings.color_scheme }} gradient"
+>
+  <section class="ehora-container ehora-gallery__grid" aria-labelledby="EhoraGallery-{{ section.id }}">
+    <div class="ehora-gallery__stage" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <div class="ehora-gallery__img{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}">
+          {%- render 'ehora-image',
+            image: block.settings.image,
+            fallback: block.settings.default_image,
+            alt: '',
+            sizes: '(min-width: 990px) 50vw, 1px'
+          -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="ehora-gallery__content">
+      <header class="ehora-gallery__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 id="EhoraGallery-{{ section.id }}" class="ehora-display ehora-gallery__heading">{{ section.settings.heading }}</h2>
+      </header>
+
+      <ol class="ehora-gallery__steps">
+        {%- for block in section.blocks -%}
+          <li class="ehora-gallery__step{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <div class="ehora-gallery__inline ehora-media">
+              {%- render 'ehora-image',
+                image: block.settings.image,
+                fallback: block.settings.default_image,
+                alt: block.settings.image_alt,
+                sizes: '(min-width: 990px) 1px, 100vw'
+              -%}
+            </div>
+            <span class="ehora-gallery__index" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <h3 class="ehora-gallery__title">{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}
+              <p class="ehora-gallery__text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+
+      {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}" class="ehora-link">
+          {{- section.settings.link_label | escape -}}
+          {%- render 'ehora-icon-arrow' -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </section>
+</ehora-sticky-gallery>
+
+{% schema %}
+{
+  "name": "EHORA · Galería fija",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "paletero" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "El paletero" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Todo en su <em>sitio</em>." },
+    { "type": "text", "id": "link_label", "label": "Enlace" },
+    { "type": "url", "id": "link", "label": "Destino del enlace" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Paso",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Formato vertical 4:5." },
+        { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
+        { "type": "text", "id": "image_alt", "label": "Texto alternativo" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Título" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Galería fija",
+      "blocks": [
+        { "type": "slide", "settings": { "title": "Diseñado para el club", "default_image": "ehora-foto-03.webp" } },
+        { "type": "slide", "settings": { "title": "Todo en su sitio", "default_image": "ehora-foto-08.webp" } },
+        { "type": "slide", "settings": { "title": "A mano", "default_image": "ehora-foto-05.webp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

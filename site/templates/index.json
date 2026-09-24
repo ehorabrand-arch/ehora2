@@ -1,15 +1,15 @@
 {
   "sections": {
     "hero": {
-      "type": "ehora-hero",
+      "type": "ehora-cinema",
       "settings": {
-        "layout": "overlay",
-        "overlay_opacity": 45,
-        "height": "full",
-        "content_position": "bottom",
         "eyebrow": "EHORA",
         "heading": "El pádel, <em>cuidado</em> al detalle.",
         "text": "Accesorios para quienes cuidan el juego antes, durante y después del partido.",
+        "default_image": "ehora-foto-01.webp",
+        "image_alt": "Paletero EHORA acolchado en azul marino con ribetes crema",
+        "caption_left": "Acolchado de trazo orgánico",
+        "caption_right": "Ribetes y asas en crema",
         "button_label_1": "Descubrir EHORA",
         "button_link_1": "",
         "fallback_anchor": "manifiesto",
@@ -19,141 +19,147 @@
       }
     },
     "manifiesto": {
-      "type": "ehora-statement",
+      "type": "ehora-words",
       "settings": {
         "anchor": "manifiesto",
         "eyebrow": "Manifiesto",
-        "heading": "El pádel no termina cuando acaba el <em>partido</em>.",
-        "text": "<p>Sigue en el vestuario. En la bolsa que cierras sin prisa, en las pelotas que guardas para el próximo partido, en la pala que vuelve a su sitio.</p><p>EHORA nace para cuidar esa parte del juego que no sale en el marcador.</p>",
-        "link_label": "Nuestra filosofía",
-        "link": "",
-        "alignment": "offset",
-        "color_scheme": "scheme-1"
-      }
-    },
-    "universos": {
-      "type": "ehora-universes",
-      "blocks": {
-        "paleteros": {
-          "type": "universe",
-          "settings": {
-            "title": "Paleteros",
-            "tagline": "Todo en su sitio.",
-            "text": "Acolchado, líneas limpias y el azul EHORA en cada ribete. Para llegar al club con calma.",
-            "link_label": "Ver paleteros",
-            "link": "/collections/all"
-          }
-        },
-        "presurizadores": {
-          "type": "universe",
-          "settings": {
-            "title": "Presurizadores",
-            "tagline": "Que la próxima pelota se sienta como la primera.",
-            "text": "Guarda tus pelotas bajo presión entre partido y partido. Manual o automático.",
-            "link_label": "Ver presurizadores",
-            "link": "/collections/all"
-          }
-        }
-      },
-      "block_order": ["paleteros", "presurizadores"],
-      "settings": {
-        "eyebrow": "La colección",
-        "heading": "Dos maneras de cuidar el juego.",
+        "text": "El pádel no termina cuando acaba el partido. Sigue en la bolsa que cierras sin prisa y en las pelotas que guardas para el siguiente. Para eso existe EHORA.",
         "color_scheme": "scheme-2"
       }
     },
     "paletero": {
-      "type": "ehora-story",
+      "type": "ehora-gallery",
       "blocks": {
-        "paso-1": {
-          "type": "step",
+        "club": {
+          "type": "slide",
           "settings": {
+            "default_image": "ehora-foto-03.webp",
+            "image_alt": "Detalle del acolchado navy, la cremallera y el ribete crema del paletero EHORA",
             "title": "Diseñado para el club",
-            "text": "<p>Acolchado de trazo orgánico, blanco roto y ribetes en azul EHORA. Se reconoce antes de llegar a la pista.</p>"
+            "text": "Acolchado en ondas, ribetes en contraste y un tirador pensado para la mano. Se reconoce antes de llegar a la pista."
           }
         },
-        "paso-2": {
-          "type": "step",
+        "orden": {
+          "type": "slide",
           "settings": {
+            "default_image": "ehora-foto-08.webp",
+            "image_alt": "Interior del paletero EHORA con compartimentos para botella, neceser, toalla, móvil y portátil",
             "title": "Todo en su sitio",
-            "text": "<p>Compartimento principal para las palas, bolsillos laterales y un hueco pensado para la botella.</p>"
+            "text": "Un hueco para la botella, otro para el móvil, bolsillos con cremallera y espacio para lo que llevas después del partido."
           }
         },
-        "paso-3": {
-          "type": "step",
+        "mano": {
+          "type": "slide",
           "settings": {
-            "title": "Hecho para acompañarte",
-            "text": "<p>Asas y correas para llevarlo del coche a la pista y de la pista a casa.</p>"
+            "default_image": "ehora-foto-05.webp",
+            "image_alt": "Bolsillos laterales del paletero EHORA blanco con botella, llaves y móvil",
+            "title": "A mano",
+            "text": "Bolsillos laterales para lo que necesitas sin abrir la bolsa: la botella, las llaves, el teléfono."
           }
         }
       },
-      "block_order": ["paso-1", "paso-2", "paso-3"],
+      "block_order": ["club", "orden", "mano"],
       "settings": {
         "anchor": "paletero",
         "eyebrow": "El paletero",
-        "heading": "Pensado para todo lo que llevas al <em>club</em>.",
-        "placeholder_label": "Paletero EHORA",
-        "media_position": "left",
-        "show_numbers": true,
-        "link_label": "Ver el paletero",
+        "heading": "Todo en su <em>sitio</em>.",
+        "link_label": "",
         "link": "",
         "color_scheme": "scheme-1"
+      }
+    },
+    "colores": {
+      "type": "ehora-duo",
+      "blocks": {
+        "navy": {
+          "type": "color",
+          "settings": {
+            "default_image": "ehora-foto-02.webp",
+            "image_alt": "Jugadora con el paletero EHORA navy al hombro y dos palas",
+            "title": "Navy",
+            "detail": "Ribete crema",
+            "swatch": "#1B2A4E",
+            "trim": "#EDE4D3",
+            "link": ""
+          }
+        },
+        "blanco": {
+          "type": "color",
+          "settings": {
+            "default_image": "ehora-foto-06.webp",
+            "image_alt": "Jugadora en la pista con el paletero EHORA blanco al hombro",
+            "title": "Blanco",
+            "detail": "Ribete azul",
+            "swatch": "#F4F2EC",
+            "trim": "#1F3FBF",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["navy", "blanco"],
+      "settings": {
+        "eyebrow": "Colores",
+        "heading": "Dos colores. Un mismo <em>club</em>.",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "formas": {
+      "type": "ehora-hero",
+      "settings": {
+        "layout": "split",
+        "default_image": "ehora-foto-07.webp",
+        "image_alt": "Paletero EHORA blanco con correas de mochila, en la pista con pelotas y una pala",
+        "overlay_opacity": 0,
+        "height": "large",
+        "content_position": "center",
+        "eyebrow": "Tu manera",
+        "heading": "En la mano, al hombro o a la <em>espalda</em>.",
+        "text": "Asas para el día a día y correas para llevarlo como mochila cuando vas cargado.",
+        "button_label_1": "",
+        "button_link_1": "",
+        "fallback_anchor": "",
+        "button_label_2": "Ver paleteros",
+        "button_link_2": "/collections/all",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "presurizador": {
+      "type": "ehora-feature",
+      "blocks": {
+        "pantalla": { "type": "feature", "settings": { "icon": "display", "title": "Pantalla digital", "text": "La presión, en bar, siempre a la vista." } },
+        "controles": { "type": "feature", "settings": { "icon": "touch", "title": "Controles táctiles", "text": "Encendido y ajuste desde la propia tapa." } },
+        "carga": { "type": "feature", "settings": { "icon": "usb", "title": "Carga USB-C", "text": "Batería recargable, sin pilas." } }
+      },
+      "block_order": ["pantalla", "controles", "carga"],
+      "settings": {
+        "anchor": "presurizador",
+        "eyebrow": "Presurizador automático",
+        "heading": "La presión, <em>a la vista</em>.",
+        "text": "Guarda tus pelotas, elige la presión y consúltala en la pantalla.",
+        "default_image": "ehora-foto-10.webp",
+        "image_alt": "Presurizador EHORA negro con pantalla digital que marca 1,92 bar sobre una pista de pádel",
+        "link_label": "",
+        "link": "",
+        "color_scheme": "scheme-4"
       }
     },
     "presion": {
       "type": "ehora-story",
       "blocks": {
-        "p1": {
-          "type": "step",
-          "settings": {
-            "title": "Pelotas nuevas",
-            "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>"
-          }
-        },
-        "p2": {
-          "type": "step",
-          "settings": {
-            "title": "El juego",
-            "text": "<p>Cada partido forma parte de su vida. Eso no se puede evitar, ni hace falta.</p>"
-          }
-        },
-        "p3": {
-          "type": "step",
-          "settings": {
-            "title": "La presión baja",
-            "text": "<p>Una vez abierto el bote, la pelota va perdiendo presión con el tiempo, también cuando no se usa.</p>"
-          }
-        },
-        "p4": {
-          "type": "step",
-          "settings": {
-            "title": "Se nota en la pista",
-            "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>"
-          }
-        },
-        "p5": {
-          "type": "step",
-          "settings": {
-            "title": "Guardarlas bajo presión",
-            "text": "<p>Un presurizador está pensado para guardar las pelotas en un entorno presurizado entre partidos.</p>"
-          }
-        },
-        "p6": {
-          "type": "step",
-          "settings": {
-            "title": "Listas para el siguiente partido",
-            "text": "<p>El objetivo es sencillo: conservarlas en mejores condiciones durante más tiempo.</p>"
-          }
-        }
+        "p1": { "type": "step", "settings": { "title": "Pelotas nuevas", "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>" } },
+        "p2": { "type": "step", "settings": { "title": "La presión baja", "text": "<p>Una vez abierto el bote, va perdiendo presión con el tiempo, también cuando no se usa.</p>" } },
+        "p3": { "type": "step", "settings": { "title": "Se nota en la pista", "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>" } },
+        "p4": { "type": "step", "settings": { "title": "Guárdalas bajo presión", "text": "<p>Dentro del presurizador, entre partido y partido, para conservarlas en mejores condiciones durante más tiempo.</p>" } }
       },
-      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "block_order": ["p1", "p2", "p3", "p4"],
       "settings": {
         "anchor": "presion",
+        "default_image": "ehora-foto-09.webp",
         "eyebrow": "La pelota",
         "heading": "Por qué <em>presurizar</em> tus pelotas.",
         "intro": "<p>Una pelota de pádel no se gasta solo jugando. También se gasta esperando al siguiente partido.</p>",
-        "placeholder_label": "Presurizador EHORA",
-        "media_position": "right",
+        "placeholder_label": "Presurizador EHORA abierto con una pelota dentro y la tapa digital al lado",
+        "media_position": "left",
         "show_numbers": true,
         "link_label": "",
         "link": "",
@@ -164,24 +170,24 @@
       "type": "ehora-comparison",
       "blocks": {
         "metodo": { "type": "row", "settings": { "label": "Método de uso", "metafield": "custom.usage_method", "value_a": "", "value_b": "" } },
-        "comodidad": { "type": "row", "settings": { "label": "Comodidad", "metafield": "custom.comfort", "value_a": "", "value_b": "" } },
-        "esfuerzo": { "type": "row", "settings": { "label": "Esfuerzo", "metafield": "custom.effort", "value_a": "", "value_b": "" } },
-        "velocidad": { "type": "row", "settings": { "label": "Velocidad", "metafield": "custom.speed", "value_a": "", "value_b": "" } },
-        "portabilidad": { "type": "row", "settings": { "label": "Portabilidad", "metafield": "custom.portability", "value_a": "", "value_b": "" } },
+        "presion": { "type": "row", "settings": { "label": "Lectura de presión", "metafield": "custom.pressure_reading", "value_a": "Escala en PSI", "value_b": "Pantalla digital en bar" } },
+        "carga": { "type": "row", "settings": { "label": "Alimentación", "metafield": "custom.power", "value_a": "Sin batería", "value_b": "Batería recargable USB-C" } },
         "capacidad": { "type": "row", "settings": { "label": "Capacidad", "metafield": "custom.capacity", "value_a": "", "value_b": "" } },
         "ideal": { "type": "row", "settings": { "label": "Ideal para", "metafield": "custom.ideal_for", "value_a": "", "value_b": "" } }
       },
-      "block_order": ["metodo", "comodidad", "esfuerzo", "velocidad", "portabilidad", "capacidad", "ideal"],
+      "block_order": ["metodo", "presion", "carga", "capacidad", "ideal"],
       "settings": {
         "anchor": "comparar",
         "eyebrow": "Presurizadores",
         "heading": "Manual o <em>automático</em>.",
-        "intro": "<p>Los dos cumplen la misma función. Cambia cómo lo haces tú.</p>",
+        "intro": "<p>Los dos guardan tus pelotas bajo presión. Cambia cómo lo haces tú.</p>",
         "label_a": "Manual",
         "label_b": "Automático",
+        "default_image_a": "ehora-foto-12.webp",
+        "default_image_b": "ehora-foto-11.webp",
         "tagline_metafield": "custom.tagline",
         "show_add_to_cart": true,
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-4"
       }
     },
     "coleccion": {
@@ -199,7 +205,7 @@
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "link",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -213,5 +219,5 @@
       }
     }
   },
-  "order": ["hero", "manifiesto", "universos", "paletero", "presion", "comparativa", "coleccion"]
+  "order": ["hero", "manifiesto", "paletero", "colores", "formas", "presurizador", "presion", "comparativa", "coleccion"]
 }

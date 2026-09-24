@@ -1,0 +1,41 @@
+{%- assign words = section.settings.text | split: ' ' -%}
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="ehora-words color-{{ section.settings.color_scheme }} gradient"
+  aria-label="{{ section.settings.eyebrow | default: 'Manifiesto' | escape }}"
+>
+  <div class="ehora-words__sticky">
+    <div class="ehora-container ehora-words__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ehora-eyebrow ehora-eyebrow--plain">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <p class="ehora-words__text">
+        {%- for word in words -%}
+          <span class="ehora-words__w" style="--i: {{ forloop.index0 }}; --n: {{ words.size }};">{{ word | escape }}</span>
+          {%- unless forloop.last %} {% endunless -%}
+        {%- endfor -%}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Manifiesto vivo",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "manifiesto" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Manifiesto" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "info": "Las palabras se iluminan una a una al hacer scroll.",
+      "default": "El pádel no termina cuando acaba el partido. Sigue en la bolsa que cierras sin prisa y en las pelotas que guardas para el siguiente. Para eso existe EHORA."
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "EHORA · Manifiesto vivo" }]
+}
+{% endschema %}
