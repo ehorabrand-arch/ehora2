@@ -1857,3 +1857,102 @@ h1, h2, h3, .h0, .h1, .h2,
   .button:not([disabled]):hover,
   .button:not([disabled]):active { transform: none; }
 }
+
+/* ==========================================================================
+   Botones: borde animado («moving border») + hover legible
+   ::before → cristal (backdrop) y borde interior de cristal
+   ::after  → anillo de 1.5px: borde fijo sutil + destello que recorre el contorno
+   ========================================================================== */
+
+@property --ehora-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.button,
+.shopify-challenge__button,
+.customer button {
+  --border-base: rgba(16, 42, 67, 0.28);
+  --border-glow: #2c5d93;
+}
+
+.color-scheme-4 .button,
+.color-scheme-5 .button,
+.ehora-expand .button,
+.ehora-hero--overlay:not(.ehora-hero--no-image) .button {
+  --border-base: rgba(252, 251, 247, 0.3);
+  --border-glow: #fcfbf7;
+}
+
+.button::before,
+.shopify-challenge__button::before,
+.customer button::before {
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.03),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 3px 3px 0.5px -3px rgba(var(--glass-rim), 0.9),
+    inset -3px -3px 0.5px -3px rgba(var(--glass-rim), 0.85),
+    inset 1px 1px 1px -0.5px rgba(var(--glass-rim), 0.6),
+    inset -1px -1px 1px -0.5px rgba(var(--glass-rim), 0.6),
+    inset 0 0 6px 6px rgba(var(--glass-rim), 0.12),
+    inset 0 0 2px 2px rgba(var(--glass-rim), 0.06),
+    0 0 12px rgba(var(--glass-glow), 0.15);
+  transition: background-color var(--dur-ui) var(--ease-out);
+}
+
+.button::after,
+.shopify-challenge__button::after,
+.customer button::after,
+.button:not([disabled]):hover::after {
+  inset: 0;
+  z-index: -1;
+  padding: 1.5px;
+  border-radius: inherit;
+  box-shadow: none;
+  background:
+    conic-gradient(
+      from var(--ehora-angle),
+      transparent 0deg 250deg,
+      var(--border-glow) 300deg,
+      transparent 350deg 360deg
+    ),
+    linear-gradient(var(--border-base), var(--border-base));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button::after,
+  .shopify-challenge__button::after,
+  .customer button::after {
+    animation: ehoraMovingBorder 3.2s linear infinite;
+  }
+}
+
+@keyframes ehoraMovingBorder {
+  to { --ehora-angle: 360deg; }
+}
+
+/* Hover: relleno crema con texto azul oscuro, legible sobre cualquier fondo */
+@media (hover: hover) and (pointer: fine) {
+  body .button:not(.button--tertiary):not([disabled]):not([aria-disabled='true']):hover,
+  body .shopify-challenge__button:hover,
+  body .customer button:hover {
+    background: transparent;
+    color: var(--ehora-navy-dark);
+  }
+
+  body .button:not(.button--tertiary):not([disabled]):not([aria-disabled='true']):hover::before,
+  body .shopify-challenge__button:hover::before,
+  body .customer button:hover::before {
+    background-color: rgba(247, 245, 239, 0.94);
+  }
+
+  body .button:not([disabled]):hover::after {
+    --border-glow: #102a43;
+    --border-base: rgba(16, 42, 67, 0.35);
+  }
+}
