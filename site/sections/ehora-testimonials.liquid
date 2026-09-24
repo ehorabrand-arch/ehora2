@@ -1,8 +1,6 @@
 {%- liquid
   assign count = section.blocks.size
   assign columns = section.settings.columns
-  assign scene_files = 'ehora-foto-03.webp,ehora-foto-10.webp,ehora-foto-05.webp,ehora-foto-11.webp,ehora-foto-08.webp,ehora-foto-09.webp,ehora-foto-04.webp,ehora-foto-12.webp,ehora-foto-07.webp,ehora-foto-01.webp' | split: ','
-  assign scene_positions = '50% 45%|50% 32%|40% 55%|50% 60%|50% 50%|45% 40%|55% 70%|50% 55%|60% 60%|50% 62%' | split: '|'
 -%}
 
 {%- if count > 0 -%}
@@ -38,21 +36,7 @@
                         assign idx = i | minus: 1 | plus: shift | modulo: count
                         assign block = section.blocks[idx]
                       -%}
-                      {%- liquid
-                        assign scene_index = idx | modulo: scene_files.size
-                        assign scene_file = scene_files[scene_index]
-                        assign scene_pos = scene_positions[scene_index]
-                      -%}
                       <figure class="ehora-voice">
-                        {%- if section.settings.show_scenes -%}
-                          <div class="ehora-voice__scene">
-                            {%- if block.settings.scene != blank -%}
-                              {{ block.settings.scene | image_url: width: 480 | image_tag: loading: 'lazy', alt: '', sizes: '240px' }}
-                            {%- else -%}
-                              <img src="{{ scene_file | asset_img_url: '480x' }}" alt="" loading="lazy" decoding="async" width="480" height="300" style="object-position: {{ scene_pos }};">
-                            {%- endif -%}
-                          </div>
-                        {%- endif -%}
                         <div class="ehora-voice__person">
                           <span class="ehora-voice__avatar">
                             {%- if block.settings.avatar != blank -%}
@@ -99,7 +83,6 @@
     { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Desde el club" },
     { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Lo que se dice en la <em>pista</em>." },
     { "type": "text", "id": "text", "label": "Texto" },
-    { "type": "checkbox", "id": "show_scenes", "label": "Mostrar fotos de escena en las tarjetas", "default": true },
     { "type": "range", "id": "columns", "label": "Columnas en escritorio", "min": 2, "max": 4, "step": 1, "default": 4 },
     { "type": "range", "id": "speed", "label": "Duración del recorrido", "min": 20, "max": 80, "step": 5, "unit": "s", "default": 40 },
     { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" },
@@ -114,8 +97,7 @@
         { "type": "text", "id": "name", "label": "Nombre", "default": "Nombre" },
         { "type": "text", "id": "detail", "label": "Detalle", "info": "Ciudad o club, p. ej. «Madrid»." },
         { "type": "text", "id": "product", "label": "Producto", "info": "Opcional, p. ej. «Paletero Navy»." },
-        { "type": "image_picker", "id": "avatar", "label": "Foto del cliente (opcional)", "info": "Solo con su permiso. Sin foto se muestra la inicial." },
-        { "type": "image_picker", "id": "scene", "label": "Foto de escena (opcional)", "info": "Imagen de la tarjeta. Sin ella se usa una escena de producto del theme." }
+        { "type": "image_picker", "id": "avatar", "label": "Foto (opcional)", "info": "Sin foto se muestra la inicial." }
       ]
     }
   ],
