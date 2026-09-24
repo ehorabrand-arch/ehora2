@@ -1,0 +1,106 @@
+{%- liquid
+  assign count = section.blocks.size
+  assign columns = section.settings.columns
+-%}
+
+{%- if count > 0 -%}
+  <section class="ehora-voices ehora-section color-{{ section.settings.color_scheme }} gradient" aria-labelledby="EhoraVoices-{{ section.id }}">
+    <div class="ehora-container ehora-voices__grid">
+      <header class="ehora-voices__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 id="EhoraVoices-{{ section.id }}" class="ehora-display ehora-voices__heading">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="ehora-voices__text">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+      </header>
+
+      {%- comment -%} Lista accesible: se lee una sola vez; las columnas animadas son decorativas. {%- endcomment -%}
+      <ul class="visually-hidden">
+        {%- for block in section.blocks -%}
+          <li>{{ block.settings.quote | escape }} — {{ block.settings.name | escape }}{% if block.settings.detail != blank %}, {{ block.settings.detail | escape }}{% endif %}</li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="ehora-voices__viewport" aria-hidden="true">
+        <div class="ehora-voices__scene" style="--cols: {{ columns }};">
+          {%- for c in (1..columns) -%}
+            {%- assign shift = c | minus: 1 | times: 2 -%}
+            <div class="ehora-voices__column{% cycle '', ' ehora-voices__column--reverse' %}" style="--duration: {{ section.settings.speed | plus: c }}s;">
+              <div class="ehora-voices__track">
+                {%- for copy in (1..2) -%}
+                  <div class="ehora-voices__set">
+                    {%- for i in (1..count) -%}
+                      {%- liquid
+                        assign idx = i | minus: 1 | plus: shift | modulo: count
+                        assign block = section.blocks[idx]
+                      -%}
+                      <figure class="ehora-voice">
+                        <div class="ehora-voice__person">
+                          <span class="ehora-voice__avatar">
+                            {%- if block.settings.avatar != blank -%}
+                              {{ block.settings.avatar | image_url: width: 96 | image_tag: loading: 'lazy', alt: '', width: 48, height: 48 }}
+                            {%- else -%}
+                              {{ block.settings.name | slice: 0 }}
+                            {%- endif -%}
+                          </span>
+                          <figcaption>
+                            <span class="ehora-voice__name">{{ block.settings.name | escape }}</span>
+                            {%- if block.settings.detail != blank -%}
+                              <span class="ehora-voice__detail">{{ block.settings.detail | escape }}</span>
+                            {%- endif -%}
+                          </figcaption>
+                        </div>
+                        <blockquote class="ehora-voice__quote">{{ block.settings.quote | escape }}</blockquote>
+                        {%- if block.settings.product != blank -%}
+                          <p class="ehora-voice__product">{{ block.settings.product | escape }}</p>
+                        {%- endif -%}
+                      </figure>
+                    {%- endfor -%}
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <section class="ehora-section ehora-container">
+    <p class="ehora-pending">EHORA · Testimonios: añade bloques «Testimonio» con reseñas reales de clientes. Sin bloques, esta sección no se muestra en la tienda.</p>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "EHORA · Testimonios",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Desde el club" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Lo que se dice en la <em>pista</em>." },
+    { "type": "text", "id": "text", "label": "Texto" },
+    { "type": "range", "id": "columns", "label": "Columnas en escritorio", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "range", "id": "speed", "label": "Duración del recorrido", "min": 20, "max": 80, "step": 5, "unit": "s", "default": 40 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" },
+    { "type": "paragraph", "content": "Usa solo reseñas reales, con permiso del cliente. Sin testimonios, la sección no aparece en la tienda." }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Reseña" },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Nombre" },
+        { "type": "text", "id": "detail", "label": "Detalle", "info": "Ciudad o club, p. ej. «Madrid»." },
+        { "type": "text", "id": "product", "label": "Producto", "info": "Opcional, p. ej. «Paletero Navy»." },
+        { "type": "image_picker", "id": "avatar", "label": "Foto (opcional)", "info": "Sin foto se muestra la inicial." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "EHORA · Testimonios" }]
+}
+{% endschema %}

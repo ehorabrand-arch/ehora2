@@ -58,7 +58,11 @@
           }
         }
       },
-      "block_order": ["club", "orden", "mano"],
+      "block_order": [
+        "club",
+        "orden",
+        "mano"
+      ],
       "settings": {
         "anchor": "paletero",
         "eyebrow": "El paletero",
@@ -96,7 +100,10 @@
           }
         }
       },
-      "block_order": ["navy", "blanco"],
+      "block_order": [
+        "navy",
+        "blanco"
+      ],
       "settings": {
         "eyebrow": "Colores",
         "heading": "Dos colores. Un mismo <em>club</em>.",
@@ -126,11 +133,36 @@
     "presurizador": {
       "type": "ehora-feature",
       "blocks": {
-        "pantalla": { "type": "feature", "settings": { "icon": "display", "title": "Pantalla digital", "text": "La presión, en bar, siempre a la vista." } },
-        "controles": { "type": "feature", "settings": { "icon": "touch", "title": "Controles táctiles", "text": "Encendido y ajuste desde la propia tapa." } },
-        "carga": { "type": "feature", "settings": { "icon": "usb", "title": "Carga USB-C", "text": "Batería recargable, sin pilas." } }
+        "pantalla": {
+          "type": "feature",
+          "settings": {
+            "icon": "display",
+            "title": "Pantalla digital",
+            "text": "La presión, en bar, siempre a la vista."
+          }
+        },
+        "controles": {
+          "type": "feature",
+          "settings": {
+            "icon": "touch",
+            "title": "Controles táctiles",
+            "text": "Encendido y ajuste desde la propia tapa."
+          }
+        },
+        "carga": {
+          "type": "feature",
+          "settings": {
+            "icon": "usb",
+            "title": "Carga USB-C",
+            "text": "Batería recargable, sin pilas."
+          }
+        }
       },
-      "block_order": ["pantalla", "controles", "carga"],
+      "block_order": [
+        "pantalla",
+        "controles",
+        "carga"
+      ],
       "settings": {
         "anchor": "presurizador",
         "eyebrow": "Presurizador automático",
@@ -146,12 +178,41 @@
     "presion": {
       "type": "ehora-story",
       "blocks": {
-        "p1": { "type": "step", "settings": { "title": "Pelotas nuevas", "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>" } },
-        "p2": { "type": "step", "settings": { "title": "La presión baja", "text": "<p>Una vez abierto el bote, va perdiendo presión con el tiempo, también cuando no se usa.</p>" } },
-        "p3": { "type": "step", "settings": { "title": "Se nota en la pista", "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>" } },
-        "p4": { "type": "step", "settings": { "title": "Guárdalas bajo presión", "text": "<p>Dentro del presurizador, entre partido y partido, para conservarlas en mejores condiciones durante más tiempo.</p>" } }
+        "p1": {
+          "type": "step",
+          "settings": {
+            "title": "Pelotas nuevas",
+            "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>"
+          }
+        },
+        "p2": {
+          "type": "step",
+          "settings": {
+            "title": "La presión baja",
+            "text": "<p>Una vez abierto el bote, va perdiendo presión con el tiempo, también cuando no se usa.</p>"
+          }
+        },
+        "p3": {
+          "type": "step",
+          "settings": {
+            "title": "Se nota en la pista",
+            "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>"
+          }
+        },
+        "p4": {
+          "type": "step",
+          "settings": {
+            "title": "Guárdalas bajo presión",
+            "text": "<p>Dentro del presurizador, entre partido y partido, para conservarlas en mejores condiciones durante más tiempo.</p>"
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
       "settings": {
         "anchor": "presion",
         "default_image": "ehora-foto-09.webp",
@@ -169,13 +230,59 @@
     "comparativa": {
       "type": "ehora-comparison",
       "blocks": {
-        "metodo": { "type": "row", "settings": { "label": "Método de uso", "metafield": "custom.usage_method", "value_a": "", "value_b": "" } },
-        "presion": { "type": "row", "settings": { "label": "Lectura de presión", "metafield": "custom.pressure_reading", "value_a": "Escala en PSI", "value_b": "Pantalla digital en bar" } },
-        "carga": { "type": "row", "settings": { "label": "Alimentación", "metafield": "custom.power", "value_a": "Sin batería", "value_b": "Batería recargable USB-C" } },
-        "capacidad": { "type": "row", "settings": { "label": "Capacidad", "metafield": "custom.capacity", "value_a": "", "value_b": "" } },
-        "ideal": { "type": "row", "settings": { "label": "Ideal para", "metafield": "custom.ideal_for", "value_a": "", "value_b": "" } }
+        "metodo": {
+          "type": "row",
+          "settings": {
+            "label": "Método de uso",
+            "metafield": "custom.usage_method",
+            "value_a": "",
+            "value_b": ""
+          }
+        },
+        "presion": {
+          "type": "row",
+          "settings": {
+            "label": "Lectura de presión",
+            "metafield": "custom.pressure_reading",
+            "value_a": "Escala en PSI",
+            "value_b": "Pantalla digital en bar"
+          }
+        },
+        "carga": {
+          "type": "row",
+          "settings": {
+            "label": "Alimentación",
+            "metafield": "custom.power",
+            "value_a": "Sin batería",
+            "value_b": "Batería recargable USB-C"
+          }
+        },
+        "capacidad": {
+          "type": "row",
+          "settings": {
+            "label": "Capacidad",
+            "metafield": "custom.capacity",
+            "value_a": "",
+            "value_b": ""
+          }
+        },
+        "ideal": {
+          "type": "row",
+          "settings": {
+            "label": "Ideal para",
+            "metafield": "custom.ideal_for",
+            "value_a": "",
+            "value_b": ""
+          }
+        }
       },
-      "block_order": ["metodo", "presion", "carga", "capacidad", "ideal"],
+      "block_order": [
+        "metodo",
+        "presion",
+        "carga",
+        "capacidad",
+        "ideal"
+      ],
       "settings": {
         "anchor": "comparar",
         "eyebrow": "Presurizadores",
@@ -217,7 +324,31 @@
         "padding_top": 96,
         "padding_bottom": 96
       }
+    },
+    "testimonios": {
+      "type": "ehora-testimonials",
+      "settings": {
+        "eyebrow": "Desde el club",
+        "heading": "Lo que se dice en la <em>pista</em>.",
+        "text": "Opiniones de quienes ya juegan con EHORA.",
+        "columns": 4,
+        "speed": 40,
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {},
+      "block_order": []
     }
   },
-  "order": ["hero", "manifiesto", "paletero", "colores", "formas", "presurizador", "presion", "comparativa", "coleccion"]
+  "order": [
+    "hero",
+    "manifiesto",
+    "paletero",
+    "colores",
+    "formas",
+    "presurizador",
+    "presion",
+    "comparativa",
+    "testimonios",
+    "coleccion"
+  ]
 }
