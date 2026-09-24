@@ -1,21 +1,22 @@
 {
   "sections": {
     "hero": {
-      "type": "ehora-cinema",
+      "type": "ehora-expand",
       "settings": {
-        "eyebrow": "EHORA",
-        "heading": "El pádel, <em>cuidado</em> al detalle.",
-        "text": "Accesorios para quienes cuidan el juego antes, durante y después del partido.",
         "default_image": "ehora-foto-01.webp",
         "image_alt": "Paletero EHORA acolchado en azul marino con ribetes crema",
-        "caption_left": "Acolchado de trazo orgánico",
-        "caption_right": "Ribetes y asas en crema",
+        "default_background": "ehora-foto-02.webp",
+        "title_left": "El pádel,",
+        "title_right": "cuidado al detalle.",
+        "hint": "Desliza para descubrir",
+        "eyebrow": "EHORA",
+        "text": "Accesorios para quienes cuidan el juego antes, durante y después del partido.",
         "button_label_1": "Descubrir EHORA",
         "button_link_1": "",
         "fallback_anchor": "manifiesto",
         "button_label_2": "Ver colección",
         "button_link_2": "/collections/all",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-4"
       }
     },
     "manifiesto": {

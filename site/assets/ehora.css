@@ -1581,3 +1581,169 @@ h1, h2, h3, .h0, .h1, .h2,
   to { transform: translateY(calc(-50% - var(--gap) / 2)); }
 }
 .ehora-voice__quote { border: 0; padding: 0; font-style: normal; color: var(--ehora-charcoal); }
+
+/* ---------- Hero de expansión ---------- */
+
+.ehora-expand {
+  --start-w: 72vw;
+  --start-h: 52svh;
+  display: block;
+  position: relative;
+  height: 260svh;
+  background: var(--ehora-navy-dark);
+}
+
+.ehora-expand__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.ehora-expand__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: calc(1 - var(--p) * 1.4);
+}
+
+.ehora-expand__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
+  transform: scale(calc(1.08 - var(--p) * 0.08));
+}
+
+.ehora-expand__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 26, 43, 0.45);
+}
+
+.ehora-expand__media {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--start-w) + (100vw - var(--start-w)) * var(--p));
+  height: calc(var(--start-h) + (100svh - var(--start-h)) * var(--p));
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border-radius: calc(2.4rem * (1 - var(--p)));
+  box-shadow: 0 3rem 8rem rgba(0, 0, 0, calc(0.35 * (1 - var(--p))));
+  z-index: -1;
+  will-change: width, height;
+}
+
+.ehora-expand__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+.ehora-expand__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(7, 26, 43, 0.7), rgba(7, 26, 43, 0.15) 45%, rgba(7, 26, 43, 0.25));
+  opacity: calc(0.35 + var(--p) * 0.65);
+}
+
+.ehora-expand__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1em;
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(4.4rem, 2rem + 6.4vw, 13rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: var(--ehora-warm-white);
+  pointer-events: none;
+  text-shadow: 0 0.2rem 3rem rgba(7, 26, 43, 0.35);
+}
+
+.ehora-expand__word { display: block; white-space: nowrap; opacity: calc(1 - var(--p) * 1.25); }
+.ehora-expand__word--left { transform: translateX(calc(var(--p) * -70vw)); }
+.ehora-expand__word--right { font-style: italic; transform: translateX(calc(var(--p) * 70vw)); }
+
+.ehora-expand__hint {
+  position: absolute;
+  bottom: var(--space-2xl);
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgba(252, 251, 247, 0.8);
+  opacity: calc(1 - var(--p) * 4);
+}
+
+.ehora-expand__hint::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 3.2rem;
+  margin: var(--space-s) auto 0;
+  background: currentColor;
+  transform-origin: top;
+  animation: ehoraHint 1.8s var(--ease-out) infinite;
+}
+
+@keyframes ehoraHint {
+  0% { transform: scaleY(0); opacity: 1; }
+  70% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+.ehora-expand__content {
+  position: absolute;
+  inset: auto 0 0;
+  padding-bottom: clamp(4rem, 8svh, 9.6rem);
+  color: var(--ehora-warm-white);
+  opacity: clamp(0, (var(--p) - 0.72) * 4, 1);
+  transform: translateY(calc((1 - clamp(0, (var(--p) - 0.72) * 4, 1)) * 2.4rem));
+  visibility: hidden;
+}
+
+.ehora-expand.is-expanded .ehora-expand__content,
+.ehora-expand.is-static .ehora-expand__content { visibility: visible; }
+
+.ehora-expand__content .ehora-eyebrow { color: inherit; }
+
+.ehora-expand__text {
+  margin: 0;
+  max-width: 38ch;
+  font-family: var(--font-heading-family);
+  font-size: var(--step-2);
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+.ehora-expand__content .button {
+  --color-button: 247, 245, 239;
+  --color-button-text: 7, 26, 43;
+}
+
+.ehora-expand__content .ehora-link { color: var(--ehora-warm-white); }
+
+.ehora-expand.is-static { height: auto; }
+.ehora-expand.is-static .ehora-expand__hint { display: none; }
+
+@media screen and (min-width: 750px) {
+  .ehora-expand { --start-w: 36rem; --start-h: 46rem; }
+  .ehora-expand__title { flex-direction: row; gap: 0.25em; }
+}
+
+@media screen and (min-width: 1200px) {
+  .ehora-expand { --start-w: 40rem; --start-h: 52rem; }
+}

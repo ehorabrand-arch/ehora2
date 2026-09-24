@@ -1,0 +1,92 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign primary_link = section.settings.button_link_1
+  if primary_link == blank
+    assign primary_link = '#' | append: section.settings.fallback_anchor
+  endif
+-%}
+
+<ehora-scroll-expand class="ehora-expand color-{{ section.settings.color_scheme }}" style="--p: 0;">
+  <section class="ehora-expand__sticky" aria-labelledby="EhoraExpand-{{ section.id }}">
+    <div class="ehora-expand__bg" aria-hidden="true">
+      {%- render 'ehora-image',
+        image: section.settings.background,
+        fallback: section.settings.default_background,
+        alt: '',
+        sizes: '100vw',
+        eager: true
+      -%}
+    </div>
+
+    <div class="ehora-expand__media">
+      {%- render 'ehora-image',
+        image: section.settings.image,
+        fallback: section.settings.default_image,
+        alt: section.settings.image_alt,
+        sizes: '100vw',
+        eager: true
+      -%}
+      <div class="ehora-expand__shade" aria-hidden="true"></div>
+    </div>
+
+    <h2 id="EhoraExpand-{{ section.id }}" class="ehora-expand__title">
+      <span class="ehora-expand__word ehora-expand__word--left">{{ section.settings.title_left }}</span>
+      <span class="ehora-expand__word ehora-expand__word--right">{{ section.settings.title_right }}</span>
+    </h2>
+
+    {%- if section.settings.hint != blank -%}
+      <p class="ehora-expand__hint" aria-hidden="true">{{ section.settings.hint | escape }}</p>
+    {%- endif -%}
+
+    <div class="ehora-expand__content">
+      <div class="ehora-container">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="ehora-expand__text">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+        <div class="ehora-actions">
+          {%- if section.settings.button_label_1 != blank -%}
+            <a href="{{ primary_link }}" class="button">{{ section.settings.button_label_1 | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 }}" class="ehora-link">
+              {{- section.settings.button_label_2 | escape -}}
+              {%- render 'ehora-icon-arrow' -%}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</ehora-scroll-expand>
+
+{% schema %}
+{
+  "name": "EHORA · Hero expansión",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "paragraph", "content": "La imagen central se expande a pantalla completa al hacer scroll y el titular se abre hacia los lados." },
+    { "type": "image_picker", "id": "image", "label": "Imagen central" },
+    { "type": "text", "id": "default_image", "label": "Imagen central por defecto (archivo del theme)", "default": "ehora-foto-01.webp" },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo", "default": "Paletero EHORA acolchado en azul marino con ribetes crema" },
+    { "type": "image_picker", "id": "background", "label": "Imagen de fondo" },
+    { "type": "text", "id": "default_background", "label": "Fondo por defecto (archivo del theme)", "default": "ehora-foto-02.webp" },
+    { "type": "text", "id": "title_left", "label": "Titular, primera parte", "default": "El pádel," },
+    { "type": "text", "id": "title_right", "label": "Titular, segunda parte", "default": "cuidado al detalle." },
+    { "type": "text", "id": "hint", "label": "Indicación de scroll", "default": "Desliza para descubrir" },
+    { "type": "header", "content": "Contenido final" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "EHORA" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Accesorios para quienes cuidan el juego antes, durante y después del partido." },
+    { "type": "text", "id": "button_label_1", "label": "Botón principal", "default": "Descubrir EHORA" },
+    { "type": "url", "id": "button_link_1", "label": "Enlace del botón principal", "info": "Vacío: baja hasta el ancla indicada." },
+    { "type": "text", "id": "fallback_anchor", "label": "Ancla de destino", "default": "manifiesto" },
+    { "type": "text", "id": "button_label_2", "label": "Enlace secundario", "default": "Ver colección" },
+    { "type": "url", "id": "button_link_2", "label": "Destino del enlace secundario", "default": "/collections/all" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-4" }
+  ],
+  "presets": [{ "name": "EHORA · Hero expansión" }]
+}
+{% endschema %}
