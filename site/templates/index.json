@@ -334,7 +334,8 @@
         "text": "Opiniones de quienes ya juegan con EHORA.",
         "columns": 4,
         "speed": 40,
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "show_scenes": true
       },
       "blocks": {},
       "block_order": []

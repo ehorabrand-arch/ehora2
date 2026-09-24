@@ -2175,3 +2175,14 @@ html.ehora-loading .ehora-loader {
 
 .ehora-buy-bar .ehora-buy-bar__button { color: var(--ehora-navy-dark); font-weight: 500; }
 .ehora-buy-bar .ehora-buy-bar__button::before { background-color: rgba(247, 245, 239, 0.96); }
+
+.ehora-voice__scene {
+  margin: calc(var(--space-l) * -1) calc(var(--space-l) * -1) var(--space-l);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+  background: var(--ehora-sand);
+}
+
+.ehora-voice__scene img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ehora-voice { overflow: hidden; }
