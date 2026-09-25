@@ -1,0 +1,59 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
+
+<ehora-scroll-scene
+  class="ehora-flip color-{{ section.settings.color_scheme }} gradient"
+  style="--n: {{ section.blocks.size }};"
+  data-hold="0.5"
+  data-edge="0.75"
+  data-keep-first
+  data-keep-last
+>
+  <div class="ehora-flip__sticky">
+    <div class="ehora-container">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ehora-eyebrow ehora-eyebrow--plain ehora-flip__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="ehora-flip__stack">
+        {%- for block in section.blocks -%}
+          <span class="ehora-flip__phrase" data-scene-item {{ block.shopify_attributes }}>
+            {{- block.settings.text -}}
+          </span>
+          {%- unless forloop.last %} {% endunless -%}
+        {%- endfor -%}
+      </h2>
+    </div>
+  </div>
+</ehora-scroll-scene>
+
+{% schema %}
+{
+  "name": "EHORA · Frases que giran",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "paragraph", "content": "La pantalla se detiene y cada frase gira hacia arriba para dar paso a la siguiente mientras haces scroll." },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "phrase",
+      "name": "Frase",
+      "settings": [
+        { "type": "inline_richtext", "id": "text", "label": "Frase", "default": "Pensado para la <em>pista</em>.", "info": "Corta: una línea en escritorio. La cursiva resalta una palabra." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Frases que giran",
+      "blocks": [
+        { "type": "phrase", "settings": { "text": "Pensado para la <em>pista</em>." } },
+        { "type": "phrase", "settings": { "text": "Del pádel al <em>tenis</em>." } },
+        { "type": "phrase", "settings": { "text": "Cuidado en cada <em>detalle</em>." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

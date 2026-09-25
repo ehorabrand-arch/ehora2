@@ -1,10 +1,11 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
 {%- assign words = section.settings.text | split: ' ' -%}
-<section
+<ehora-scroll-scene
   {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
   class="ehora-words color-{{ section.settings.color_scheme }} gradient"
-  aria-label="{{ section.settings.eyebrow | default: 'Manifiesto' | escape }}"
+  style="--n: {{ words.size }};"
 >
-  <div class="ehora-words__sticky">
+  <section class="ehora-words__sticky" aria-label="{{ section.settings.eyebrow | default: 'Manifiesto' | escape }}">
     <div class="ehora-container ehora-words__inner">
       {%- if section.settings.eyebrow != blank -%}
         <p class="ehora-eyebrow ehora-eyebrow--plain">{{ section.settings.eyebrow | escape }}</p>
@@ -16,8 +17,8 @@
         {%- endfor -%}
       </p>
     </div>
-  </div>
-</section>
+  </section>
+</ehora-scroll-scene>
 
 {% schema %}
 {
@@ -31,7 +32,7 @@
       "type": "textarea",
       "id": "text",
       "label": "Texto",
-      "info": "Las palabras se iluminan una a una al hacer scroll.",
+      "info": "Las palabras pasan de borrosas a nítidas una a una al hacer scroll.",
       "default": "El juego no termina cuando acaba el partido. Sigue en la bolsa que cierras sin prisa y en las pelotas que guardas para el siguiente. En la pista de pádel o en la de tenis. Para eso existe EHORA."
     },
     { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }

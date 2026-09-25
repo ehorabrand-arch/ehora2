@@ -1,0 +1,112 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign count = section.blocks.size
+  assign scenes_span = count | times: 70
+  assign total_span = scenes_span | plus: 90
+  assign split = scenes_span | times: 1.0 | divided_by: total_span | round: 3
+-%}
+
+<ehora-scroll-scene
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="ehora-columns color-{{ section.settings.color_scheme }} gradient"
+  style="--n: {{ count }}; --split: {{ split }};"
+  data-end="{{ split }}"
+  data-steps="{{ count }}"
+  data-hold="0.5"
+  data-edge="0.5"
+>
+  <section class="ehora-columns__sticky" aria-labelledby="EhoraColumns-{{ section.id }}">
+    <h2 id="EhoraColumns-{{ section.id }}" class="visually-hidden">{{ section.settings.heading | escape }}</h2>
+
+    <div class="ehora-columns__side ehora-columns__side--left">
+      {%- render 'ehora-image',
+        image: section.settings.image_left,
+        fallback: section.settings.default_left,
+        alt: section.settings.alt_left,
+        sizes: '(min-width: 750px) 25vw, 20vw'
+      -%}
+    </div>
+
+    <div class="ehora-columns__center">
+      {%- for block in section.blocks -%}
+        <div class="ehora-columns__img" style="--i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          {%- render 'ehora-image',
+            image: block.settings.image,
+            fallback: block.settings.default_image,
+            alt: block.settings.image_alt,
+            sizes: '100vw'
+          -%}
+        </div>
+      {%- endfor -%}
+      <div class="ehora-columns__shade" aria-hidden="true"></div>
+
+      <div class="ehora-columns__titles">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.title != blank -%}
+            {%- assign words = block.settings.title | split: ' ' -%}
+            <p class="ehora-columns__title" data-scene-item style="--m: {{ words.size }};">
+              {%- for word in words -%}
+                <span class="ehora-columns__w" style="--j: {{ forloop.index0 }};">{{ word | escape }}</span>
+                {%- unless forloop.last %} {% endunless -%}
+              {%- endfor -%}
+            </p>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="ehora-columns__side ehora-columns__side--right">
+      {%- render 'ehora-image',
+        image: section.settings.image_right,
+        fallback: section.settings.default_right,
+        alt: section.settings.alt_right,
+        sizes: '(min-width: 750px) 25vw, 20vw'
+      -%}
+    </div>
+  </section>
+</ehora-scroll-scene>
+
+{% schema %}
+{
+  "name": "EHORA · Columnas",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "paragraph", "content": "Una imagen a pantalla completa que cambia al hacer scroll mientras aparecen los títulos. Al final se estrecha y entran dos columnas con detalles." },
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "paletero" },
+    { "type": "text", "id": "heading", "label": "Título para lectores de pantalla", "default": "El paletero EHORA" },
+    { "type": "header", "content": "Columna izquierda" },
+    { "type": "image_picker", "id": "image_left", "label": "Imagen", "info": "Formato vertical." },
+    { "type": "text", "id": "default_left", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-foto-03.webp" },
+    { "type": "text", "id": "alt_left", "label": "Texto alternativo", "default": "Detalle del acolchado navy y la cremallera del paletero EHORA" },
+    { "type": "header", "content": "Columna derecha" },
+    { "type": "image_picker", "id": "image_right", "label": "Imagen", "info": "Formato vertical." },
+    { "type": "text", "id": "default_right", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-foto-08.webp" },
+    { "type": "text", "id": "alt_right", "label": "Texto alternativo", "default": "Interior del paletero EHORA con sus compartimentos" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-5" }
+  ],
+  "blocks": [
+    {
+      "type": "scene",
+      "name": "Escena",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Ocupa toda la pantalla; el centro de la foto es lo que se ve." },
+        { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
+        { "type": "text", "id": "image_alt", "label": "Texto alternativo" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Para la pista.", "info": "Aparece palabra a palabra. Mejor de dos a cuatro palabras." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Columnas",
+      "blocks": [
+        { "type": "scene", "settings": { "title": "Para la pista.", "default_image": "ehora-foto-04.webp" } },
+        { "type": "scene", "settings": { "title": "Para el viaje.", "default_image": "ehora-foto-06.webp" } },
+        { "type": "scene", "settings": { "title": "Para el club.", "default_image": "ehora-foto-02.webp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

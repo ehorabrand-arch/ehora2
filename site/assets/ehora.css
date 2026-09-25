@@ -1366,26 +1366,6 @@ p { text-wrap: pretty; }
       animation-range: entry 20% cover 45%;
     }
 
-    .ehora-words { height: 250vh; view-timeline: --ehora-words block; }
-
-    .ehora-words__sticky {
-      position: sticky;
-      top: 0;
-      height: 100svh;
-      display: flex;
-      align-items: center;
-      padding-block: 0;
-    }
-
-    .ehora-words__w {
-      opacity: 0.14;
-      animation: ehoraWord linear both;
-      animation-timeline: --ehora-words;
-      animation-range:
-        contain calc(var(--i) / var(--n) * 82%)
-        contain calc(var(--i) / var(--n) * 82% + 8%);
-    }
-
     @media screen and (min-width: 750px) {
       .ehora-duo__item:nth-child(even) {
         animation: ehoraDrift linear both;
@@ -1411,10 +1391,6 @@ p { text-wrap: pretty; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes ehoraWord {
-  to { opacity: 1; }
-}
-
 @keyframes ehoraDrift {
   from { transform: translateY(8rem); }
   to { transform: translateY(-4rem); }
@@ -1431,7 +1407,9 @@ h1, h2, h3, .h0, .h1, .h2,
 .ehora-feature__heading,
 .ehora-hero__heading,
 .ehora-words__text,
-.ehora-gallery__title {
+.ehora-gallery__title,
+.ehora-flip__stack,
+.ehora-columns__title {
   font-optical-sizing: none;
   font-variation-settings: 'opsz' 48;
 }
@@ -2175,3 +2153,189 @@ html.ehora-loading .ehora-loader {
 
 .ehora-buy-bar .ehora-buy-bar__button { color: var(--ehora-navy-dark); font-weight: 500; }
 .ehora-buy-bar .ehora-buy-bar__button::before { background-color: rgba(247, 245, 239, 0.96); }
+
+/* ---------- Escenas ligadas al scroll (ehora-scroll-scene publica --p, --vis y --dir) ---------- */
+
+ehora-scroll-scene { display: block; }
+
+/* Manifiesto: cada palabra pasa de borrosa a nítida */
+.ehora-words.is-ready { height: 260svh; }
+
+.ehora-words.is-ready .ehora-words__sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.ehora-words.is-ready .ehora-words__w {
+  --w: clamp(0, calc((var(--p, 0) * 1.25 * var(--n) - var(--i)) / 3), 1);
+  opacity: calc(0.12 + 0.88 * var(--w));
+  filter: blur(calc((1 - var(--w)) * 10px));
+}
+
+.ehora-words.is-reduced .ehora-words__w { filter: none; }
+
+/* Frases que giran */
+.ehora-flip__sticky { padding-block: var(--section-space); }
+
+.ehora-flip__eyebrow { justify-content: center; margin-bottom: var(--space-2xl); }
+
+.ehora-flip__stack {
+  display: grid;
+  gap: var(--space-l);
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(4rem, 1.6rem + 5.6vw, 10.4rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.028em;
+  text-align: center;
+  text-wrap: balance;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-flip__phrase { display: block; }
+
+.ehora-flip.is-ready { height: calc(100svh + var(--n) * 60svh); }
+
+.ehora-flip.is-ready .ehora-flip__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 0;
+  overflow: hidden;
+}
+
+.ehora-flip.is-ready .ehora-flip__stack {
+  gap: 0;
+  perspective: 120rem;
+}
+
+.ehora-flip.is-ready .ehora-flip__phrase {
+  grid-area: 1 / 1;
+  opacity: var(--vis, 0);
+  transform: rotateX(calc(var(--dir, -1) * (1 - var(--vis, 0)) * 90deg));
+  transform-origin: 50% 50% -0.5em;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.ehora-flip.is-reduced .ehora-flip__phrase { transform: none; }
+
+/* Columnas: imagen a pantalla completa → se estrecha y entran los laterales */
+.ehora-columns {
+  --pad: var(--space-xs);
+  --gap: var(--space-xs);
+  --side: 17%;
+  --q: clamp(0, calc((var(--p, 0) - var(--split)) / (1 - var(--split))), 1);
+  background-color: rgb(var(--color-background));
+}
+
+@media screen and (min-width: 750px) {
+  .ehora-columns { --pad: var(--space-m); --gap: var(--space-m); --side: 22%; }
+}
+
+.ehora-columns__sticky {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.ehora-columns.is-ready { height: calc(100svh + var(--n) * 70svh + 90svh); }
+.ehora-columns.is-ready .ehora-columns__sticky { position: sticky; top: 0; }
+
+.ehora-columns__center {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(
+    calc(var(--q) * var(--pad))
+    calc(var(--q) * (var(--side) + var(--gap) + var(--pad)))
+    round calc(var(--q) * 2px)
+  );
+}
+
+.ehora-columns__img {
+  position: absolute;
+  inset: 0;
+  opacity: clamp(0, calc(var(--step, 0) - var(--i) + 1), 1);
+  transition: opacity 700ms var(--ease-out);
+}
+
+.ehora-columns__img img,
+.ehora-columns__side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ehora-columns__img img { transform: scale(calc(1.06 - var(--q) * 0.06)); }
+
+.ehora-columns__shade {
+  position: absolute;
+  inset: 0;
+  background: #071a2b;
+  opacity: calc(0.5 * (1 - var(--q)));
+}
+
+.ehora-columns__titles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-inline: var(--space-l);
+  pointer-events: none;
+}
+
+.ehora-columns__title {
+  grid-area: 1 / 1;
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(4.4rem, 2rem + 6vw, 11.2rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.028em;
+  text-align: center;
+  color: #fcfbf7;
+  text-shadow: 0 0.2rem 3.2rem rgba(7, 26, 43, 0.35);
+}
+
+.ehora-columns:not(.is-ready) .ehora-columns__title:not(:first-child) { display: none; }
+
+.ehora-columns__w {
+  --w: clamp(0, calc(var(--vis, 1) * (var(--m) + 1) - var(--j)), 1);
+  display: inline-block;
+  opacity: var(--w);
+  filter: blur(calc((1 - var(--w)) * 24px));
+}
+
+.ehora-columns__side {
+  position: absolute;
+  top: var(--pad);
+  bottom: var(--pad);
+  width: var(--side);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.ehora-columns__side--left {
+  left: var(--pad);
+  transform: translateX(calc((1 - var(--q)) * -115%));
+}
+
+.ehora-columns__side--right {
+  right: var(--pad);
+  transform: translateX(calc((1 - var(--q)) * 115%));
+}
+
+.ehora-columns__side img { transform: scale(calc(1.14 - var(--q) * 0.14)); }
+
+.ehora-columns.is-reduced .ehora-columns__side { transform: none; opacity: var(--q); }
+.ehora-columns.is-reduced .ehora-columns__side img,
+.ehora-columns.is-reduced .ehora-columns__img img { transform: none; }
+.ehora-columns.is-reduced .ehora-columns__w { filter: none; }
+.ehora-columns.is-reduced .ehora-columns__img { transition-duration: 300ms; }

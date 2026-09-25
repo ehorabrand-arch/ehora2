@@ -29,48 +29,46 @@
       }
     },
     "paletero": {
-      "type": "ehora-gallery",
+      "type": "ehora-columns",
       "blocks": {
+        "pista": {
+          "type": "scene",
+          "settings": {
+            "default_image": "ehora-foto-04.webp",
+            "image_alt": "Paletero EHORA blanco en una pista, con una pala y pelotas",
+            "title": "Para la pista."
+          }
+        },
+        "viaje": {
+          "type": "scene",
+          "settings": {
+            "default_image": "ehora-foto-06.webp",
+            "image_alt": "Jugadora con el paletero EHORA blanco al hombro",
+            "title": "Para el viaje."
+          }
+        },
         "club": {
-          "type": "slide",
+          "type": "scene",
           "settings": {
-            "default_image": "ehora-foto-03.webp",
-            "image_alt": "Detalle del acolchado navy, la cremallera y el ribete crema del paletero EHORA",
-            "title": "Diseñado para el club",
-            "text": "Acolchado en ondas, ribetes en contraste y un tirador pensado para la mano. Se reconoce antes de llegar a la pista."
-          }
-        },
-        "orden": {
-          "type": "slide",
-          "settings": {
-            "default_image": "ehora-foto-08.webp",
-            "image_alt": "Interior del paletero EHORA con compartimentos para botella, neceser, toalla, móvil y portátil",
-            "title": "Todo en su sitio",
-            "text": "Palas o raquetas, la botella, el móvil: cada cosa en su hueco. Y bolsillos con cremallera para lo que llevas después del partido."
-          }
-        },
-        "mano": {
-          "type": "slide",
-          "settings": {
-            "default_image": "ehora-foto-05.webp",
-            "image_alt": "Bolsillos laterales del paletero EHORA blanco con botella, llaves y móvil",
-            "title": "A mano",
-            "text": "Bolsillos laterales para lo que necesitas sin abrir la bolsa: la botella, las llaves, el teléfono."
+            "default_image": "ehora-foto-02.webp",
+            "image_alt": "Jugadora con el paletero EHORA navy y dos raquetas en el club",
+            "title": "Para el club."
           }
         }
       },
       "block_order": [
-        "club",
-        "orden",
-        "mano"
+        "pista",
+        "viaje",
+        "club"
       ],
       "settings": {
         "anchor": "paletero",
-        "eyebrow": "El paletero",
-        "heading": "Todo en su <em>sitio</em>.",
-        "link_label": "",
-        "link": "",
-        "color_scheme": "scheme-1"
+        "heading": "El paletero EHORA",
+        "default_left": "ehora-foto-03.webp",
+        "alt_left": "Detalle del acolchado navy y la cremallera del paletero EHORA",
+        "default_right": "ehora-foto-08.webp",
+        "alt_right": "Interior del paletero EHORA con sus compartimentos",
+        "color_scheme": "scheme-5"
       }
     },
     "colores": {
@@ -349,10 +347,43 @@
         "link": "",
         "offset": 40
       }
+    },
+    "frases": {
+      "type": "ehora-flip",
+      "blocks": {
+        "f1": {
+          "type": "phrase",
+          "settings": {
+            "text": "Pensado para la <em>pista</em>."
+          }
+        },
+        "f2": {
+          "type": "phrase",
+          "settings": {
+            "text": "Del pádel al <em>tenis</em>."
+          }
+        },
+        "f3": {
+          "type": "phrase",
+          "settings": {
+            "text": "Cuidado en cada <em>detalle</em>."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "color_scheme": "scheme-2"
+      }
     }
   },
   "order": [
     "hero",
+    "frases",
     "manifiesto",
     "paletero",
     "colores",
