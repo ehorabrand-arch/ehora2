@@ -1,0 +1,177 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign collection_url = routes.all_products_collection_url
+  if section.settings.collection != blank
+    assign collection_url = section.settings.collection.url
+  endif
+-%}
+{%- if section.settings.show_add_to_cart -%}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<ehora-scroll-scene
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="ehora-showcase color-{{ section.settings.color_scheme }} gradient"
+>
+  <section class="ehora-showcase__stage" aria-labelledby="EhoraShowcase-{{ section.id }}">
+    <header class="ehora-container ehora-showcase__header">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 id="EhoraShowcase-{{ section.id }}" class="ehora-showcase__heading">{{ section.settings.heading }}</h2>
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ collection_url }}" class="ehora-link ehora-showcase__all">
+          {{- section.settings.link_label | escape -}}
+          {%- render 'ehora-icon-arrow' -%}
+        </a>
+      {%- endif -%}
+    </header>
+
+    <div class="ehora-showcase__viewport">
+      <ul class="ehora-showcase__track" role="list" data-scene-track>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign product = block.settings.product
+            assign link = block.settings.link | default: collection_url
+            assign title = block.settings.title
+            assign image = block.settings.image
+            assign image_hover = block.settings.image_hover
+            if product != blank
+              assign link = product.url
+              assign title = product.title
+              if image == blank
+                assign image = product.featured_media.preview_image
+              endif
+              if image_hover == blank and product.media.size > 1
+                assign image_hover = product.media[1].preview_image
+              endif
+            endif
+            assign has_hover = false
+            if image_hover != blank or block.settings.default_image_hover != blank
+              assign has_hover = true
+            endif
+          -%}
+          <li class="ehora-showcase__card" {{ block.shopify_attributes }}>
+            <a href="{{ link }}" class="ehora-showcase__media{% if has_hover %} has-hover{% endif %}">
+              <span class="ehora-showcase__img">
+                {%- render 'ehora-image', image: image, fallback: block.settings.default_image, alt: title, sizes: '(min-width: 750px) 32vw, 80vw' -%}
+              </span>
+              {%- if has_hover -%}
+                <span class="ehora-showcase__img ehora-showcase__img--hover" aria-hidden="true">
+                  {%- render 'ehora-image', image: image_hover, fallback: block.settings.default_image_hover, alt: '', sizes: '(min-width: 750px) 32vw, 80vw' -%}
+                </span>
+              {%- endif -%}
+              {%- if block.settings.label != blank -%}
+                <span class="ehora-showcase__label">{{ block.settings.label | escape }}</span>
+              {%- endif -%}
+              <span class="ehora-showcase__index" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            </a>
+
+            <div class="ehora-showcase__info">
+              <h3 class="ehora-showcase__title">
+                <a href="{{ link }}">{{ title | escape }}</a>
+              </h3>
+              <p class="ehora-showcase__price">
+                {%- if product != blank -%}
+                  {%- if product.price_varies -%}Desde {% endif -%}{{ product.price_min | money }}
+                {%- else -%}
+                  {{ section.settings.no_price_label | escape }}
+                {%- endif -%}
+              </p>
+              {%- if block.settings.detail != blank -%}
+                <p class="ehora-showcase__detail">
+                  {%- if block.settings.swatch != blank -%}
+                    <span class="ehora-showcase__swatch" style="--swatch: {{ block.settings.swatch }}; --trim: {{ block.settings.trim | default: block.settings.swatch }};" aria-hidden="true"></span>
+                  {%- endif -%}
+                  {{ block.settings.detail | escape }}
+                </p>
+              {%- endif -%}
+            </div>
+
+            <div class="ehora-showcase__cta">
+              {%- if product != blank and section.settings.show_add_to_cart -%}
+                {%- render 'ehora-quick-add', product: product, section_id: section.id -%}
+              {%- else -%}
+                <a href="{{ link }}" class="button button--full-width">
+                  {{- section.settings.fallback_button | escape -}}
+                  <span class="visually-hidden">: {{ title | escape }}</span>
+                </a>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+
+        <li class="ehora-showcase__card ehora-showcase__card--all">
+          <a href="{{ collection_url }}" class="ehora-showcase__end color-scheme-4">
+            <span class="ehora-showcase__end-kicker">{{ section.settings.end_kicker | escape }}</span>
+            <span class="ehora-showcase__end-title">{{ section.settings.end_title }}</span>
+            <span class="ehora-showcase__end-arrow" aria-hidden="true">{%- render 'ehora-icon-arrow' -%}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="ehora-container ehora-showcase__footer" aria-hidden="true">
+      <span class="ehora-showcase__bar"><span></span></span>
+      <span class="ehora-showcase__hint">{{ section.settings.hint | escape }}</span>
+    </div>
+  </section>
+</ehora-scroll-scene>
+
+{% schema %}
+{
+  "name": "EHORA · Escaparate",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "paragraph", "content": "En ordenador la pantalla se detiene y los productos se deslizan en horizontal al hacer scroll. En móvil se pasan con el dedo." },
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "coleccion" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "La colección" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Elige tu <em>EHORA</em>." },
+    { "type": "collection", "id": "collection", "label": "Colección para «ver todo»", "info": "Vacío: todos los productos." },
+    { "type": "text", "id": "link_label", "label": "Enlace a la colección", "default": "Ver toda la colección" },
+    { "type": "checkbox", "id": "show_add_to_cart", "label": "Botón de añadir al carrito", "default": true },
+    { "type": "text", "id": "fallback_button", "label": "Botón sin producto asignado", "default": "Descubrir" },
+    { "type": "text", "id": "no_price_label", "label": "Texto sin producto asignado", "default": "Próximamente" },
+    { "type": "text", "id": "end_kicker", "label": "Tarjeta final: antetítulo", "default": "Paleteros y presurizadores" },
+    { "type": "inline_richtext", "id": "end_title", "label": "Tarjeta final: título", "default": "Ver toda la <em>colección</em>" },
+    { "type": "text", "id": "hint", "label": "Indicación", "default": "Desliza" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Producto",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto", "info": "Usa su foto, nombre y precio reales, con botón de añadir al carrito." },
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "Paletero" },
+        { "type": "text", "id": "detail", "label": "Detalle (color, variante)" },
+        { "type": "color", "id": "swatch", "label": "Color de la muestra" },
+        { "type": "color", "id": "trim", "label": "Color del ribete" },
+        { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Vacío: la foto del producto." },
+        { "type": "image_picker", "id": "image_hover", "label": "Imagen al pasar el ratón", "info": "Vacío: la segunda foto del producto." },
+        { "type": "header", "content": "Sin producto asignado" },
+        { "type": "text", "id": "title", "label": "Nombre", "default": "Paletero EHORA" },
+        { "type": "url", "id": "link", "label": "Enlace" },
+        { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
+        { "type": "text", "id": "default_image_hover", "label": "Imagen al pasar por defecto (archivo del theme)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Escaparate",
+      "blocks": [
+        { "type": "item", "settings": { "label": "Paletero", "title": "Paletero EHORA", "detail": "Navy · Ribete crema", "swatch": "#1B2A4E", "trim": "#EDE4D3", "default_image": "ehora-foto-01.webp", "default_image_hover": "ehora-foto-03.webp" } },
+        { "type": "item", "settings": { "label": "Paletero", "title": "Paletero EHORA", "detail": "Blanco · Ribete azul", "swatch": "#F4F2EC", "trim": "#1F3FBF", "default_image": "ehora-foto-04.webp", "default_image_hover": "ehora-foto-05.webp" } },
+        { "type": "item", "settings": { "label": "Presurizador", "title": "Presurizador automático", "detail": "Pantalla digital · USB-C", "default_image": "ehora-foto-11.webp", "default_image_hover": "ehora-foto-10.webp" } },
+        { "type": "item", "settings": { "label": "Presurizador", "title": "Presurizador manual", "detail": "Escala en PSI", "default_image": "ehora-foto-12.webp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

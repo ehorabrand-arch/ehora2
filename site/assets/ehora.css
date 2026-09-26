@@ -2871,3 +2871,269 @@ ehora-scroll-scene { display: block; }
   font-optical-sizing: none;
   font-variation-settings: 'opsz' 48;
 }
+
+/* ---------- Escaparate de la colección (scroll horizontal) ---------- */
+
+.ehora-showcase { overflow: clip; }
+
+.ehora-showcase__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2xl);
+  padding-block: var(--section-space);
+}
+
+.ehora-showcase__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-l) var(--space-2xl);
+}
+
+.ehora-showcase__header .ehora-eyebrow { margin: 0 0 var(--space-m); }
+
+.ehora-showcase__heading {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(4rem, 2rem + 5vw, 9.6rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: rgb(var(--color-foreground));
+  font-optical-sizing: none;
+  font-variation-settings: 'opsz' 48;
+}
+
+.ehora-showcase__viewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.ehora-showcase__viewport::-webkit-scrollbar { display: none; }
+
+.ehora-showcase__track {
+  --card: 78vw;
+  display: flex;
+  gap: var(--space-m);
+  width: max-content;
+  margin: 0;
+  padding: 0 var(--gutter, 2rem);
+  list-style: none;
+}
+
+.ehora-showcase__card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--space-m);
+  width: var(--card);
+  scroll-snap-align: center;
+}
+
+.ehora-showcase__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #e8e2d6;
+}
+
+.ehora-showcase__img {
+  position: absolute;
+  inset: 0;
+}
+
+.ehora-showcase__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms var(--ease-out);
+}
+
+.ehora-showcase__img--hover {
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out);
+}
+
+.ehora-showcase__label,
+.ehora-showcase__index {
+  position: absolute;
+  top: var(--space-m);
+  padding: 0.5rem 1.1rem;
+  border-radius: 99rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f7f5ef;
+  background: rgba(7, 26, 43, 0.42);
+  border: 1px solid rgba(247, 245, 239, 0.22);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+}
+
+.ehora-showcase__label { left: var(--space-m); }
+.ehora-showcase__index { right: var(--space-m); font-family: var(--font-heading-family); font-style: italic; letter-spacing: 0; text-transform: none; font-size: 1.3rem; }
+
+.ehora-showcase__info {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-2xs) var(--space-m);
+}
+
+.ehora-showcase__title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.2rem, 1.8rem + 0.7vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-showcase__title a { color: inherit; text-decoration: none; }
+
+.ehora-showcase__price {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.ehora-showcase__detail {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin: 0;
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.ehora-showcase__swatch {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: inset 0 0 0 2px var(--trim), 0 0 0 1px rgba(var(--color-foreground), 0.2);
+}
+
+.ehora-showcase__cta .button { min-height: 4.8rem; }
+
+/* Tarjeta final */
+.ehora-showcase__card--all { grid-template-rows: auto; }
+
+.ehora-showcase__end {
+  position: relative;
+  display: grid;
+  align-content: end;
+  gap: var(--space-m);
+  aspect-ratio: 4 / 5;
+  padding: var(--space-xl);
+  border-radius: 2px;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  background: rgb(var(--color-background));
+  overflow: hidden;
+}
+
+.ehora-showcase__end-kicker {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.ehora-showcase__end-title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(3.2rem, 2rem + 2.4vw, 5.6rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ehora-showcase__end-arrow {
+  display: grid;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--color-foreground), 0.35);
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
+}
+
+.ehora-showcase__end-arrow svg { width: 1.8rem; height: 1.8rem; }
+
+.ehora-showcase__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-l);
+}
+
+.ehora-showcase__bar {
+  flex: 1;
+  height: 1px;
+  background: rgba(var(--color-foreground), 0.16);
+  overflow: hidden;
+}
+
+.ehora-showcase__bar span {
+  display: block;
+  height: 100%;
+  background: rgb(var(--color-foreground));
+  transform-origin: left;
+  transform: scaleX(calc(0.08 + 0.92 * var(--p, 0)));
+}
+
+.ehora-showcase__hint {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ehora-showcase__media:hover .ehora-showcase__img img { transform: scale(1.04); }
+  .ehora-showcase__media.has-hover:hover .ehora-showcase__img--hover { opacity: 1; }
+  .ehora-showcase__end:hover .ehora-showcase__end-arrow { background: rgb(var(--color-foreground)); color: rgb(var(--color-background)); }
+}
+
+/* Ordenador: escena fija y la fila se desliza con el scroll vertical */
+@media screen and (min-width: 750px) {
+  .ehora-showcase__track {
+    --card: clamp(26rem, min(28vw, calc((100svh - 46rem) * 0.8)), 44rem);
+    gap: var(--space-l);
+    padding-inline: max(var(--gutter), calc((100vw - var(--page-width, 140rem)) / 2 + var(--gutter)));
+  }
+
+  .ehora-showcase.is-ready { height: calc(100svh + var(--shift, 0px)); }
+
+  .ehora-showcase.is-ready .ehora-showcase__stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    align-content: center;
+    gap: var(--space-xl);
+    padding-block: var(--space-xl);
+  }
+
+  .ehora-showcase.is-ready .ehora-showcase__viewport {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .ehora-showcase.is-ready .ehora-showcase__track {
+    transform: translateX(calc(var(--p, 0) * var(--shift, 0px) * -1));
+    will-change: transform;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .ehora-showcase__bar { display: none; }
+  .ehora-showcase__footer { justify-content: center; }
+}

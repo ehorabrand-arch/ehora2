@@ -74,7 +74,8 @@ if (!customElements.get('ehora-scroll-expand')) {
   Cada [data-scene-item] recibe --vis (0 oculto, 1 visible) y --dir (-1 por llegar, 1 ya pasado)
   según su tramo dentro de [data-start, data-end]. Con data-steps, el host recibe --step y cada
   [data-step-item] los atributos data-reached / data-current. Los [data-scene-count] cuentan desde 0
-  hasta su propio texto entre data-count-from y data-count-to. El CSS decide cómo se ve cada estado.
+  hasta su propio texto entre data-count-from y data-count-to. Un [data-scene-track] publica en --shift
+  cuánto sobresale en horizontal. El CSS decide cómo se ve cada estado.
 */
 if (!customElements.get('ehora-scroll-scene')) {
   customElements.define(
@@ -95,6 +96,13 @@ if (!customElements.get('ehora-scroll-scene')) {
           counter.target = parseFloat(counter.textContent.replace(',', '.')) || 0;
           counter.decimals = (counter.textContent.split(/[.,]/)[1] || '').length;
         });
+
+        this.track = this.querySelector('[data-scene-track]');
+        if (this.track) {
+          this.measure = () => this.style.setProperty('--shift', `${Math.max(this.track.scrollWidth - this.clientWidth, 0)}px`);
+          this.measure();
+          window.addEventListener('resize', this.measure, { passive: true });
+        }
 
         this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         this.classList.add('is-ready');
@@ -117,6 +125,7 @@ if (!customElements.get('ehora-scroll-scene')) {
       disconnectedCallback() {
         window.removeEventListener('scroll', this.onScroll);
         window.removeEventListener('resize', this.onScroll);
+        if (this.measure) window.removeEventListener('resize', this.measure);
       }
 
       update() {

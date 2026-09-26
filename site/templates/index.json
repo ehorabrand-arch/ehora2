@@ -303,31 +303,70 @@
       }
     },
     "coleccion": {
-      "type": "featured-collection",
+      "type": "ehora-showcase",
+      "blocks": {
+        "navy": {
+          "type": "item",
+          "settings": {
+            "label": "Paletero",
+            "title": "Paletero EHORA",
+            "detail": "Navy · Ribete crema",
+            "swatch": "#1B2A4E",
+            "trim": "#EDE4D3",
+            "default_image": "ehora-foto-01.webp",
+            "default_image_hover": "ehora-foto-03.webp"
+          }
+        },
+        "blanco": {
+          "type": "item",
+          "settings": {
+            "label": "Paletero",
+            "title": "Paletero EHORA",
+            "detail": "Blanco · Ribete azul",
+            "swatch": "#F4F2EC",
+            "trim": "#1F3FBF",
+            "default_image": "ehora-foto-04.webp",
+            "default_image_hover": "ehora-foto-05.webp"
+          }
+        },
+        "auto": {
+          "type": "item",
+          "settings": {
+            "label": "Presurizador",
+            "title": "Presurizador automático",
+            "detail": "Pantalla digital · USB-C",
+            "default_image": "ehora-foto-11.webp",
+            "default_image_hover": "ehora-foto-10.webp"
+          }
+        },
+        "manual": {
+          "type": "item",
+          "settings": {
+            "label": "Presurizador",
+            "title": "Presurizador manual",
+            "detail": "Escala en PSI",
+            "default_image": "ehora-foto-12.webp"
+          }
+        }
+      },
+      "block_order": [
+        "navy",
+        "blanco",
+        "auto",
+        "manual"
+      ],
       "settings": {
-        "title": "La colección",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "link",
-        "color_scheme": "scheme-1",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 96,
-        "padding_bottom": 96
+        "anchor": "coleccion",
+        "eyebrow": "La colección",
+        "heading": "Elige tu <em>EHORA</em>.",
+        "link_label": "Ver toda la colección",
+        "show_add_to_cart": true,
+        "fallback_button": "Descubrir",
+        "no_price_label": "Próximamente",
+        "end_kicker": "Paleteros y presurizadores",
+        "end_title": "Ver toda la <em>colección</em>",
+        "hint": "Desliza",
+        "color_scheme": "scheme-1"
       }
     },
     "testimonios": {
