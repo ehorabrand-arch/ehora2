@@ -833,6 +833,7 @@ p { text-wrap: pretty; }
 .ehora-compare__cta product-form { width: 100%; max-width: 30rem; }
 
 .ehora-compare__table {
+  --hairline: 1px solid rgba(var(--color-foreground), 0.22);
   width: 100%;
   margin-top: var(--space-3xl);
   border-collapse: collapse;
@@ -906,37 +907,65 @@ p { text-wrap: pretty; }
   .ehora-compare__product .ehora-link { font-size: 1.1rem; letter-spacing: 0.1em; }
   .ehora-compare__title { font-size: 1.9rem; }
 
-  /* La tabla pasa a filas en rejilla: concepto arriba, valores debajo alineados con cada producto.
+  /* La tabla pasa a ficha técnica: cabecera fija de dos columnas, el concepto encima y los dos
+     valores debajo, todo alineado a la izquierda y separados por una línea vertical.
      Los roles ARIA explícitos conservan la semántica de tabla. */
   .ehora-compare__table,
   .ehora-compare__table thead,
   .ehora-compare__table tbody { display: block; }
-  .ehora-compare__table colgroup { display: none; }
+  .ehora-compare__table colgroup,
+  .ehora-compare__table thead td { display: none; }
 
   .ehora-compare__table tr {
     display: grid;
-    grid-template-columns: 1fr var(--mid) 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .ehora-compare__table thead th:first-child { grid-column: 1; }
-  .ehora-compare__table thead th:last-child { grid-column: 3; }
+  .ehora-compare__table thead th {
+    padding: 0 var(--space-s) var(--space-s) 0;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.35);
+    text-align: left;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ehora-compare__table thead th:last-child {
+    padding-left: var(--space-m);
+    border-left: var(--hairline);
+  }
+
+  .ehora-compare__table tbody tr { border-bottom: var(--hairline); }
+
+  .ehora-compare__table tbody th,
+  .ehora-compare__table tbody td {
+    border: 0;
+    text-align: left;
+  }
 
   .ehora-compare__table tbody th {
     grid-column: 1 / -1;
     grid-row: 1;
-    padding: var(--space-l) 0 var(--space-2xs);
+    padding: var(--space-l) 0 var(--space-xs);
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+    color: rgba(var(--color-foreground), 0.6);
   }
 
   .ehora-compare__table tbody td {
     grid-row: 2;
-    border-top: 0;
-    padding: var(--space-xs) var(--space-2xs) var(--space-l);
+    padding: 0 var(--space-s) var(--space-l) 0;
+    font-size: 1.7rem;
+    line-height: 1.3;
   }
 
   .ehora-compare__table tbody td:first-child { grid-column: 1; }
-  .ehora-compare__table tbody td:last-child { grid-column: 3; }
+
+  .ehora-compare__table tbody td:last-child {
+    grid-column: 2;
+    padding-left: var(--space-m);
+    border-left: var(--hairline);
+  }
+
   .ehora-compare__table tbody tr:last-child > * { border-bottom: 0; }
-  .ehora-compare__table tbody tr:last-child { border-bottom: var(--hairline); }
 }
 
 @media screen and (min-width: 750px) {
