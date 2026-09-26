@@ -135,25 +135,28 @@
         "pantalla": {
           "type": "feature",
           "settings": {
-            "icon": "display",
             "title": "Pantalla digital",
-            "text": "La presión, en bar, siempre a la vista."
+            "text": "La presión, en bar, siempre a la vista.",
+            "x": 73,
+            "y": 25
           }
         },
         "controles": {
           "type": "feature",
           "settings": {
-            "icon": "touch",
             "title": "Controles táctiles",
-            "text": "Encendido y ajuste desde la propia tapa."
+            "text": "Encendido y ajuste desde la propia tapa.",
+            "x": 40,
+            "y": 34
           }
         },
         "carga": {
           "type": "feature",
           "settings": {
-            "icon": "usb",
             "title": "Carga USB-C",
-            "text": "Batería recargable, sin pilas."
+            "text": "Batería recargable, sin pilas.",
+            "x": 60,
+            "y": 47
           }
         }
       },
@@ -171,7 +174,8 @@
         "image_alt": "Presurizador EHORA negro con pantalla digital que marca 1,92 bar sobre una pista de pádel",
         "link_label": "",
         "link": "",
-        "color_scheme": "scheme-4"
+        "color_scheme": "scheme-4",
+        "pressure": "1.92"
       }
     },
     "presion": {

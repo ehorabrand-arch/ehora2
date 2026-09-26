@@ -1,54 +1,85 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
 {%- liquid
-  if settings.animations_reveal_on_scroll
-    assign reveal = ' scroll-trigger animate--slide-in'
-  endif
+  assign steps = section.blocks.size | plus: 1
+  assign pressure = section.settings.pressure | default: '1.92'
 -%}
-<section
+
+<ehora-scroll-scene
   {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
   class="ehora-feature color-{{ section.settings.color_scheme }} gradient"
-  aria-labelledby="EhoraFeature-{{ section.id }}"
+  style="--n: {{ steps }};"
+  data-start="0.3"
+  data-end="0.96"
+  data-steps="{{ steps }}"
 >
-  <div class="ehora-container">
-    <header class="ehora-feature__header{{ reveal }}">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="ehora-eyebrow ehora-eyebrow--plain">{{ section.settings.eyebrow | escape }}</p>
-      {%- endif -%}
-      <h2 id="EhoraFeature-{{ section.id }}" class="ehora-feature__heading">{{ section.settings.heading }}</h2>
-      {%- if section.settings.text != blank -%}
-        <p class="ehora-feature__text">{{ section.settings.text | escape }}</p>
-      {%- endif -%}
-    </header>
+  <section class="ehora-feature__stage" aria-labelledby="EhoraFeature-{{ section.id }}">
+    <div class="ehora-container ehora-feature__grid">
+      <div class="ehora-feature__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ehora-eyebrow ehora-eyebrow--plain">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 id="EhoraFeature-{{ section.id }}" class="ehora-feature__heading">{{ section.settings.heading }}</h2>
 
-    <div class="ehora-feature__frame">
-      {%- render 'ehora-image',
-        image: section.settings.image,
-        fallback: section.settings.default_image,
-        alt: section.settings.image_alt,
-        sizes: '(min-width: 990px) 70vw, 100vw'
-      -%}
-    </div>
+        <p class="ehora-feature__gauge">
+          <span class="ehora-feature__value" data-scene-count data-count-from="0" data-count-to="0.3">
+            {{- pressure | escape -}}
+          </span>
+          <span class="ehora-feature__unit">bar</span>
+        </p>
 
-    {%- if section.blocks.size > 0 -%}
-      <ul class="ehora-feature__list" role="list">
-        {%- for block in section.blocks -%}
-          <li class="ehora-feature__item{{ reveal }}" data-cascade {{ block.shopify_attributes }}>
-            {%- render 'ehora-icon', name: block.settings.icon -%}
-            <h3 class="ehora-feature__item-title">{{ block.settings.title | escape }}</h3>
-            {%- if block.settings.text != blank -%}
-              <p class="ehora-feature__item-text">{{ block.settings.text | escape }}</p>
-            {%- endif -%}
-          </li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="ehora-feature__text">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
 
-    {%- if section.settings.link_label != blank and section.settings.link != blank -%}
-      <div class="ehora-actions ehora-actions--center">
-        <a href="{{ section.settings.link }}" class="button">{{ section.settings.link_label | escape }}</a>
+        {%- if section.blocks.size > 0 -%}
+          <ol class="ehora-feature__list" role="list">
+            {%- for block in section.blocks -%}
+              <li class="ehora-feature__item" data-step-item="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                <span class="ehora-feature__index" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                <div>
+                  <h3 class="ehora-feature__item-title">{{ block.settings.title | escape }}</h3>
+                  {%- if block.settings.text != blank -%}
+                    <p class="ehora-feature__item-text">{{ block.settings.text | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ol>
+        {%- endif -%}
+
+        {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+          <div class="ehora-actions">
+            <a href="{{ section.settings.link }}" class="button">{{ section.settings.link_label | escape }}</a>
+          </div>
+        {%- endif -%}
       </div>
-    {%- endif -%}
-  </div>
-</section>
+
+      <div class="ehora-feature__visual">
+        <div class="ehora-feature__frame">
+          {%- render 'ehora-image',
+            image: section.settings.image,
+            fallback: section.settings.default_image,
+            alt: section.settings.image_alt,
+            sizes: '(min-width: 990px) 50vw, 100vw'
+          -%}
+          <div class="ehora-feature__vignette" aria-hidden="true"></div>
+
+          {%- for block in section.blocks -%}
+            <span
+              class="ehora-feature__spot"
+              style="--x: {{ block.settings.x }}%; --y: {{ block.settings.y }}%;"
+              data-step-item="{{ forloop.index0 }}"
+              aria-hidden="true"
+            >
+              <span class="ehora-feature__dot">{{ forloop.index }}</span>
+              <span class="ehora-feature__tag">{{ block.settings.title | escape }}</span>
+            </span>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</ehora-scroll-scene>
 
 {% schema %}
 {
@@ -57,11 +88,13 @@
   "class": "section",
   "max_blocks": 4,
   "settings": [
+    { "type": "paragraph", "content": "Al hacer scroll la cifra de presión sube hasta su valor y se van señalando las partes del producto, una a una." },
     { "type": "text", "id": "anchor", "label": "Ancla", "default": "presurizador" },
     { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Presurizador automático" },
     { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "La presión, <em>a la vista</em>." },
+    { "type": "text", "id": "pressure", "label": "Cifra de presión", "default": "1.92", "info": "La que se ve en la pantalla de la foto. Usa punto decimal." },
     { "type": "text", "id": "text", "label": "Texto", "default": "Guarda tus pelotas, elige la presión y consúltala en la pantalla." },
-    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Cuadrada. Coloca los puntos de cada característica con sus coordenadas." },
     { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-foto-10.webp" },
     { "type": "text", "id": "image_alt", "label": "Texto alternativo", "default": "Presurizador EHORA negro con pantalla digital que marca 1,92 bar" },
     { "type": "text", "id": "link_label", "label": "Botón", "default": "Ver el presurizador" },
@@ -73,23 +106,10 @@
       "type": "feature",
       "name": "Característica",
       "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icono",
-          "options": [
-            { "value": "display", "label": "Pantalla" },
-            { "value": "touch", "label": "Botones" },
-            { "value": "usb", "label": "USB-C" },
-            { "value": "battery", "label": "Batería" },
-            { "value": "pressure", "label": "Presión" },
-            { "value": "ball", "label": "Pelota" },
-            { "value": "hand", "label": "Manual" }
-          ],
-          "default": "display"
-        },
         { "type": "text", "id": "title", "label": "Título", "default": "Pantalla digital" },
-        { "type": "text", "id": "text", "label": "Texto" }
+        { "type": "text", "id": "text", "label": "Texto" },
+        { "type": "range", "id": "x", "label": "Punto: horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "y", "label": "Punto: vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 }
       ]
     }
   ],
@@ -97,9 +117,9 @@
     {
       "name": "EHORA · Destacado",
       "blocks": [
-        { "type": "feature", "settings": { "icon": "display", "title": "Pantalla digital", "text": "La presión, en bar, siempre visible." } },
-        { "type": "feature", "settings": { "icon": "touch", "title": "Controles táctiles", "text": "Encendido y ajuste desde la tapa." } },
-        { "type": "feature", "settings": { "icon": "usb", "title": "Carga USB-C", "text": "Batería recargable. [Pendiente: autonomía]" } }
+        { "type": "feature", "settings": { "title": "Pantalla digital", "text": "La presión, en bar, siempre visible.", "x": 73, "y": 25 } },
+        { "type": "feature", "settings": { "title": "Controles táctiles", "text": "Encendido y ajuste desde la tapa.", "x": 40, "y": 34 } },
+        { "type": "feature", "settings": { "title": "Carga USB-C", "text": "Batería recargable, sin pilas.", "x": 60, "y": 47 } }
       ]
     }
   ]

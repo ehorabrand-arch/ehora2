@@ -72,7 +72,9 @@ if (!customElements.get('ehora-scroll-expand')) {
 /*
   Escena ligada al scroll: publica el avance (0 → 1) en --p mientras la sección cruza la pantalla.
   Cada [data-scene-item] recibe --vis (0 oculto, 1 visible) y --dir (-1 por llegar, 1 ya pasado)
-  según su tramo dentro de [data-start, data-end]. El CSS decide cómo se ve cada estado.
+  según su tramo dentro de [data-start, data-end]. Con data-steps, el host recibe --step y cada
+  [data-step-item] los atributos data-reached / data-current. Los [data-scene-count] cuentan desde 0
+  hasta su propio texto entre data-count-from y data-count-to. El CSS decide cómo se ve cada estado.
 */
 if (!customElements.get('ehora-scroll-scene')) {
   customElements.define(
@@ -87,8 +89,16 @@ if (!customElements.get('ehora-scroll-scene')) {
         this.keepFirst = this.hasAttribute('data-keep-first');
         this.keepLast = this.hasAttribute('data-keep-last');
 
+        this.stepItems = [...this.querySelectorAll('[data-step-item]')];
+        this.counters = [...this.querySelectorAll('[data-scene-count]')];
+        this.counters.forEach((counter) => {
+          counter.target = parseFloat(counter.textContent.replace(',', '.')) || 0;
+          counter.decimals = (counter.textContent.split(/[.,]/)[1] || '').length;
+        });
+
+        this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         this.classList.add('is-ready');
-        this.classList.toggle('is-reduced', window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        this.classList.toggle('is-reduced', this.reduced);
 
         this.ticking = false;
         this.onScroll = () => {
@@ -117,7 +127,24 @@ if (!customElements.get('ehora-scroll-scene')) {
 
         const span = Math.min(Math.max((progress - this.start) / (this.end - this.start), 0), 1);
         const steps = parseInt(this.dataset.steps, 10);
-        if (steps) this.style.setProperty('--step', Math.min(Math.floor(span * steps), steps - 1));
+        if (steps) {
+          const step = Math.min(Math.floor(span * steps), steps - 1);
+          this.style.setProperty('--step', step);
+          this.stepItems.forEach((item, position) => {
+            const index = item.dataset.stepItem ? parseInt(item.dataset.stepItem, 10) : position;
+            item.toggleAttribute('data-reached', index < step);
+            item.toggleAttribute('data-current', index === step - 1);
+          });
+        }
+
+        this.counters.forEach((counter) => {
+          const from = parseFloat(counter.dataset.countFrom) || 0;
+          const to = parseFloat(counter.dataset.countTo) || 1;
+          const t = this.reduced ? 1 : Math.min(Math.max((progress - from) / (to - from), 0), 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const value = (counter.target * eased).toFixed(counter.decimals);
+          if (counter.textContent !== value) counter.textContent = value;
+        });
 
         const count = this.items.length;
         if (!count) return;
