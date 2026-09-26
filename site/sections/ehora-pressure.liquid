@@ -1,0 +1,131 @@
+<script src="{{ 'ehora.js' | asset_url }}" defer="defer"></script>
+{%- comment -%}
+  Curva cualitativa: sin cifras, solo la tendencia. Pasos 1–3 recorren la línea sin presurizador;
+  el paso 4 dibuja la línea que se mantiene arriba. Coordenadas en un lienzo de 600 × 400.
+{%- endcomment -%}
+{%- liquid
+  assign spots = '6.67,17.5|45,47.2|93.33,82.5|93.33,21.5' | split: '|'
+-%}
+
+<ehora-scroll-scene
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="ehora-pressure color-{{ section.settings.color_scheme }} gradient"
+  style="--n: {{ section.blocks.size }};"
+  data-steps="{{ section.blocks.size }}"
+>
+  <section class="ehora-pressure__stage" aria-labelledby="EhoraPressure-{{ section.id }}">
+    <div class="ehora-container ehora-pressure__grid">
+      <div class="ehora-pressure__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 id="EhoraPressure-{{ section.id }}" class="ehora-pressure__heading">{{ section.settings.heading }}</h2>
+        {%- if section.settings.intro != blank -%}
+          <p class="ehora-pressure__intro">{{ section.settings.intro | escape }}</p>
+        {%- endif -%}
+
+        <ol class="ehora-pressure__steps" role="list">
+          {%- for block in section.blocks -%}
+            <li class="ehora-pressure__step" data-step-item="{{ forloop.index0 | minus: 1 }}" {{ block.shopify_attributes }}>
+              <span class="ehora-pressure__num" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <h3 class="ehora-pressure__title">{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.text != blank -%}
+                <div class="ehora-pressure__text">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ol>
+
+        <div class="ehora-pressure__progress" aria-hidden="true">
+          {%- for block in section.blocks -%}
+            <span data-step-item="{{ forloop.index0 | minus: 1 }}"></span>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <figure class="ehora-pressure__chart">
+        <div class="ehora-pressure__plot">
+          <svg viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+            <line class="ehora-pressure__grid-line" x1="40" y1="70" x2="580" y2="70" />
+            <line class="ehora-pressure__grid-line" x1="40" y1="200" x2="580" y2="200" />
+            <line class="ehora-pressure__grid-line" x1="40" y1="330" x2="580" y2="330" />
+            <line class="ehora-pressure__axis" x1="40" y1="30" x2="40" y2="370" />
+            <line class="ehora-pressure__axis" x1="40" y1="370" x2="580" y2="370" />
+            <path class="ehora-pressure__area" d="M40,70 C220,70 300,300 560,330 L560,370 L40,370 Z" />
+            <path class="ehora-pressure__line ehora-pressure__line--drop" pathLength="1" d="M40,70 C220,70 300,300 560,330" />
+            <path class="ehora-pressure__line ehora-pressure__line--kept" pathLength="1" d="M40,70 C220,70 400,78 560,86" />
+          </svg>
+
+          {%- for block in section.blocks limit: 4 -%}
+            {%- assign xy = spots[forloop.index0] | split: ',' -%}
+            <span
+              class="ehora-pressure__spot{% if forloop.index > 2 %} ehora-pressure__spot--flip{% endif %}{% if forloop.index == 4 %} ehora-pressure__spot--brand{% endif %}"
+              style="--x: {{ xy[0] }}%; --y: {{ xy[1] }}%;"
+              data-step-item="{{ forloop.index0 | minus: 1 }}"
+              aria-hidden="true"
+            >
+              <span class="ehora-pressure__dot">
+                {%- if forloop.index == 4 -%}
+                  {%- render 'ehora-image', image: section.settings.image, fallback: section.settings.default_image, alt: '', sizes: '96px' -%}
+                {%- endif -%}
+              </span>
+              {%- if block.settings.marker != blank -%}
+                <span class="ehora-pressure__tag">{{ block.settings.marker | escape }}</span>
+              {%- endif -%}
+            </span>
+          {%- endfor -%}
+        </div>
+
+        <figcaption class="ehora-pressure__axes">
+          <span class="ehora-pressure__y">{{ section.settings.y_label | escape }}</span>
+          <span class="ehora-pressure__x">{{ section.settings.x_label | escape }}</span>
+          <span class="visually-hidden">{{ section.settings.chart_summary | escape }}</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+</ehora-scroll-scene>
+
+{% schema %}
+{
+  "name": "EHORA · Curva de presión",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "paragraph", "content": "Una curva se dibuja al hacer scroll: la presión cae con el bote abierto y, en el último paso, se mantiene con el presurizador. Es orientativa, sin cifras." },
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "presion" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "La pelota" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Por qué <em>presurizar</em> tus pelotas." },
+    { "type": "textarea", "id": "intro", "label": "Entradilla", "default": "Una pelota de pádel o de tenis no se gasta solo jugando. También se gasta esperando al siguiente partido." },
+    { "type": "text", "id": "y_label", "label": "Eje vertical", "default": "Presión" },
+    { "type": "text", "id": "x_label", "label": "Eje horizontal", "default": "Tiempo con el bote abierto" },
+    { "type": "text", "id": "chart_summary", "label": "Descripción de la curva (lectores de pantalla)", "default": "Curva orientativa: la presión de una pelota baja con el tiempo una vez abierto el bote, y se mantiene cuando se guarda en el presurizador." },
+    { "type": "image_picker", "id": "image", "label": "Imagen del último punto", "info": "Se muestra en círculo al final de la curva que se mantiene." },
+    { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-foto-09.webp" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-3" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Paso",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Título del paso" },
+        { "type": "richtext", "id": "text", "label": "Texto" },
+        { "type": "text", "id": "marker", "label": "Etiqueta en la curva", "info": "Muy corta. Los pasos 1 a 4 se colocan en puntos fijos de la curva." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EHORA · Curva de presión",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Pelotas nuevas", "marker": "Bote nuevo" } },
+        { "type": "step", "settings": { "title": "La presión baja", "marker": "Pierde presión" } },
+        { "type": "step", "settings": { "title": "Se nota en la pista", "marker": "Menos bote" } },
+        { "type": "step", "settings": { "title": "Guárdalas bajo presión", "marker": "Con presurizador" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

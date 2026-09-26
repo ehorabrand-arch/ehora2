@@ -2563,3 +2563,311 @@ ehora-scroll-scene { display: block; }
 .ehora-columns.is-reduced .ehora-columns__img img { transform: none; }
 .ehora-columns.is-reduced .ehora-columns__w { filter: none; }
 .ehora-columns.is-reduced .ehora-columns__img { transition-duration: 300ms; }
+
+/* ---------- Curva de presión (por qué presurizar) ---------- */
+
+.ehora-pressure {
+  --draw-a: clamp(0, calc(var(--p, 1) * 2), 1);
+  --draw-b: clamp(0, calc((var(--p, 1) - 0.75) * 6), 1);
+  --ink: 16, 42, 67;
+  overflow: clip;
+}
+
+.ehora-pressure__stage { padding-block: var(--section-space); }
+
+.ehora-pressure__grid {
+  display: grid;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.ehora-pressure__copy { display: grid; gap: var(--space-l); align-content: center; }
+.ehora-pressure__copy .ehora-eyebrow { margin: 0; }
+
+.ehora-pressure__heading {
+  margin: 0;
+  max-width: 13ch;
+  font-family: var(--font-heading-family);
+  font-size: clamp(3.4rem, 1.6rem + 3.4vw, 6.4rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-pressure__intro {
+  margin: 0;
+  max-width: 40ch;
+  font-size: var(--step-0);
+  line-height: 1.55;
+  color: rgba(var(--color-foreground), 0.72);
+}
+
+.ehora-pressure__steps {
+  list-style: none;
+  margin: var(--space-s) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-l);
+}
+
+.ehora-pressure__step {
+  display: grid;
+  grid-template-columns: 4.8rem 1fr;
+  column-gap: var(--space-s);
+  padding-top: var(--space-m);
+  border-top: 1px solid rgba(var(--color-foreground), 0.2);
+}
+
+.ehora-pressure__num {
+  grid-row: span 2;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: rgb(var(--ink));
+}
+
+.ehora-pressure__title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.2rem, 1.8rem + 0.8vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: rgb(var(--color-foreground));
+}
+
+.ehora-pressure__text {
+  margin-top: var(--space-2xs);
+  max-width: 40ch;
+  font-size: 1.6rem;
+  line-height: 1.55;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.ehora-pressure__text p { margin: 0; }
+
+.ehora-pressure__progress { display: none; }
+
+/* Gráfica */
+.ehora-pressure__chart { margin: 0; }
+
+.ehora-pressure__plot {
+  position: relative;
+  aspect-ratio: 3 / 2;
+}
+
+.ehora-pressure__plot svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ehora-pressure__grid-line {
+  stroke: rgba(var(--color-foreground), 0.12);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+.ehora-pressure__axis {
+  stroke: rgba(var(--color-foreground), 0.45);
+  stroke-width: 1;
+}
+
+.ehora-pressure__line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+}
+
+.ehora-pressure__line--drop {
+  stroke: rgba(var(--color-foreground), 0.55);
+  stroke-width: 2;
+  stroke-dashoffset: calc(1 - var(--draw-a));
+  opacity: clamp(0, calc(var(--draw-a) * 20), 1);
+}
+
+.ehora-pressure__line--kept {
+  stroke: rgb(var(--ink));
+  stroke-width: 3.5;
+  stroke-dashoffset: calc(1 - var(--draw-b));
+  opacity: clamp(0, calc(var(--draw-b) * 20), 1);
+}
+
+.ehora-pressure__area {
+  fill: rgba(var(--color-foreground), 0.06);
+  clip-path: inset(0 calc((1 - var(--draw-a)) * 100%) 0 0);
+}
+
+.ehora-pressure__spot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+}
+
+.ehora-pressure__dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: rgb(var(--color-background));
+  border: 2px solid rgba(var(--color-foreground), 0.7);
+}
+
+.ehora-pressure__spot--brand .ehora-pressure__dot {
+  width: 6.4rem;
+  height: 6.4rem;
+  overflow: hidden;
+  border: 2px solid rgb(var(--ink));
+  box-shadow: 0 0 0 0.6rem rgba(var(--ink), 0.12), 0 1rem 2.4rem rgba(7, 26, 43, 0.25);
+}
+
+.ehora-pressure__spot--brand .ehora-pressure__dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ehora-pressure__tag {
+  position: absolute;
+  left: 1.6rem;
+  bottom: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 99rem;
+  white-space: nowrap;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+  background: rgba(var(--color-background), 0.85);
+  border: 1px solid rgba(var(--color-foreground), 0.18);
+}
+
+.ehora-pressure__spot--flip .ehora-pressure__tag { left: auto; right: 1.6rem; }
+.ehora-pressure__spot--brand .ehora-pressure__tag {
+  bottom: auto;
+  top: 4.4rem;
+  right: -1.2rem;
+  color: rgb(var(--color-background));
+  background: rgb(var(--ink));
+  border-color: transparent;
+}
+
+.ehora-pressure__axes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-s);
+  padding-left: 6.67%;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.ehora-pressure__y::before { content: '↑ '; }
+.ehora-pressure__x::after { content: ' →'; }
+
+.ehora-pressure:not(.is-ready) .ehora-pressure__tag { display: none; }
+
+@media screen and (min-width: 990px) {
+  .ehora-pressure__grid { grid-template-columns: 5fr 7fr; gap: var(--space-4xl); }
+}
+
+/* Con JavaScript: escena fija, un paso cada vez */
+.ehora-pressure.is-ready { height: calc(100svh + var(--n) * 70svh); }
+
+.ehora-pressure.is-ready .ehora-pressure__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-xl);
+}
+
+.ehora-pressure.is-ready .ehora-pressure__grid { width: 100%; }
+
+.ehora-pressure.is-ready .ehora-pressure__steps { display: grid; gap: 0; }
+
+.ehora-pressure.is-ready .ehora-pressure__step {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(1.2rem);
+  filter: blur(6px);
+  transition: opacity 450ms var(--ease-out), transform 450ms var(--ease-out), filter 450ms var(--ease-out);
+  pointer-events: none;
+}
+
+.ehora-pressure.is-ready .ehora-pressure__step[data-current] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  pointer-events: auto;
+}
+
+.ehora-pressure.is-ready .ehora-pressure__progress {
+  display: flex;
+  gap: var(--space-2xs);
+}
+
+.ehora-pressure__progress span {
+  flex: 1;
+  height: 2px;
+  background: rgba(var(--color-foreground), 0.16);
+  transition: background-color 300ms var(--ease-out);
+}
+
+.ehora-pressure__progress span[data-reached] { background: rgb(var(--ink)); }
+
+.ehora-pressure.is-ready .ehora-pressure__spot {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+}
+
+.ehora-pressure.is-ready .ehora-pressure__spot[data-reached] { opacity: 1; transform: none; }
+
+.ehora-pressure.is-ready .ehora-pressure__tag {
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+}
+
+.ehora-pressure.is-ready .ehora-pressure__spot[data-current] .ehora-pressure__tag,
+.ehora-pressure.is-ready .ehora-pressure__spot--brand[data-reached] .ehora-pressure__tag { opacity: 1; }
+
+.ehora-pressure.is-ready .ehora-pressure__spot[data-current] .ehora-pressure__dot {
+  background: rgb(var(--ink));
+  border-color: rgb(var(--ink));
+}
+
+.ehora-pressure.is-ready .ehora-pressure__spot--brand[data-current] .ehora-pressure__dot { background: rgb(var(--color-background)); }
+
+@media screen and (max-width: 989px) {
+  .ehora-pressure.is-ready .ehora-pressure__stage { padding-block: var(--space-l); }
+  .ehora-pressure.is-ready .ehora-pressure__grid { gap: var(--space-l); }
+  .ehora-pressure.is-ready .ehora-pressure__copy { display: contents; }
+  .ehora-pressure.is-ready .ehora-pressure__intro { display: none; }
+  .ehora-pressure.is-ready .ehora-pressure__chart { order: 1; }
+  .ehora-pressure.is-ready .ehora-pressure__progress { order: 2; }
+  .ehora-pressure.is-ready .ehora-pressure__steps { order: 3; margin: 0; }
+  .ehora-pressure.is-ready .ehora-pressure__heading { font-size: clamp(3rem, 8vw, 4.4rem); }
+  .ehora-pressure__spot--brand .ehora-pressure__dot { width: 4.8rem; height: 4.8rem; }
+  .ehora-pressure__spot--brand .ehora-pressure__tag { top: 3.2rem; }
+  .ehora-pressure__tag { font-size: 1rem; padding: 0.5rem 1rem; }
+}
+
+.ehora-pressure.is-reduced .ehora-pressure__step,
+.ehora-pressure.is-reduced .ehora-pressure__spot { transform: none; filter: none; }
+
+.ehora-pressure__heading,
+.ehora-pressure__title {
+  font-optical-sizing: none;
+  font-variation-settings: 'opsz' 48;
+}

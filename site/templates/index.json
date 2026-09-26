@@ -179,34 +179,38 @@
       }
     },
     "presion": {
-      "type": "ehora-story",
+      "type": "ehora-pressure",
       "blocks": {
         "p1": {
           "type": "step",
           "settings": {
             "title": "Pelotas nuevas",
-            "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>"
+            "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>",
+            "marker": "Bote nuevo"
           }
         },
         "p2": {
           "type": "step",
           "settings": {
             "title": "La presión baja",
-            "text": "<p>Una vez abierto el bote, va perdiendo presión con el tiempo, también cuando no se usa.</p>"
+            "text": "<p>Una vez abierto el bote, va perdiendo presión con el tiempo, también cuando no se usa.</p>",
+            "marker": "Pierde presión"
           }
         },
         "p3": {
           "type": "step",
           "settings": {
             "title": "Se nota en la pista",
-            "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>"
+            "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>",
+            "marker": "Menos bote"
           }
         },
         "p4": {
           "type": "step",
           "settings": {
             "title": "Guárdalas bajo presión",
-            "text": "<p>Dentro del presurizador, entre partido y partido, para conservarlas en mejores condiciones durante más tiempo.</p>"
+            "text": "<p>Dentro del presurizador, entre partido y partido, para conservarlas en mejores condiciones durante más tiempo.</p>",
+            "marker": "Con presurizador"
           }
         }
       },
@@ -218,15 +222,13 @@
       ],
       "settings": {
         "anchor": "presion",
-        "default_image": "ehora-foto-09.webp",
         "eyebrow": "La pelota",
         "heading": "Por qué <em>presurizar</em> tus pelotas.",
-        "intro": "<p>Una pelota de pádel o de tenis no se gasta solo jugando. También se gasta esperando al siguiente partido.</p>",
-        "placeholder_label": "Presurizador EHORA abierto con una pelota dentro y la tapa digital al lado",
-        "media_position": "left",
-        "show_numbers": true,
-        "link_label": "",
-        "link": "",
+        "intro": "Una pelota de pádel o de tenis no se gasta solo jugando. También se gasta esperando al siguiente partido.",
+        "y_label": "Presión",
+        "x_label": "Tiempo con el bote abierto",
+        "chart_summary": "Curva orientativa: la presión de una pelota baja con el tiempo una vez abierto el bote, y se mantiene cuando se guarda en el presurizador.",
+        "default_image": "ehora-foto-09.webp",
         "color_scheme": "scheme-3"
       }
     },
