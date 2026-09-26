@@ -2383,7 +2383,7 @@ html.ehora-loading .ehora-loader {
 ehora-scroll-scene { display: block; }
 
 /* Manifiesto: cada palabra pasa de borrosa a nítida */
-.ehora-words.is-ready { height: 260svh; }
+.ehora-words.is-ready { height: 170svh; }
 
 .ehora-words.is-ready .ehora-words__sticky {
   position: sticky;
@@ -2394,7 +2394,7 @@ ehora-scroll-scene { display: block; }
 }
 
 .ehora-words.is-ready .ehora-words__w {
-  --w: clamp(0, calc((var(--p, 0) * 1.25 * var(--n) - var(--i)) / 3), 1);
+  --w: clamp(0, calc((var(--p, 0) * 1.4 * var(--n) - var(--i)) / 2.5), 1);
   opacity: calc(0.12 + 0.88 * var(--w));
   filter: blur(calc((1 - var(--w)) * 10px));
 }
