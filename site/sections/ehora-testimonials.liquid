@@ -19,7 +19,7 @@
       {%- comment -%} Lista accesible: se lee una sola vez; las columnas animadas son decorativas. {%- endcomment -%}
       <ul class="visually-hidden">
         {%- for block in section.blocks -%}
-          <li>{{ block.settings.quote | escape }} — {{ block.settings.name | escape }}{% if block.settings.detail != blank %}, {{ block.settings.detail | escape }}{% endif %}</li>
+          <li>{% if block.settings.rating != blank %}{{ block.settings.rating }} de 5 estrellas. {% endif %}{{ block.settings.quote | escape }} — {{ block.settings.name | escape }}{% if block.settings.detail != blank %}, {{ block.settings.detail | escape }}{% endif %}</li>
         {%- endfor -%}
       </ul>
 
@@ -52,6 +52,14 @@
                             {%- endif -%}
                           </figcaption>
                         </div>
+                        {%- if block.settings.rating != blank -%}
+                          {%- assign rating = block.settings.rating | plus: 0 -%}
+                          <p class="ehora-voice__stars">
+                            {%- for star in (1..5) -%}
+                              <svg viewBox="0 0 16 16" class="{% if star > rating %}is-empty{% endif %}" focusable="false"><path d="M8 1.2l2.06 4.27 4.7.62-3.43 3.26.85 4.66L8 11.75 3.82 14l.85-4.66L1.24 6.1l4.7-.62z"/></svg>
+                            {%- endfor -%}
+                          </p>
+                        {%- endif -%}
                         <blockquote class="ehora-voice__quote">{{ block.settings.quote | escape }}</blockquote>
                         {%- if block.settings.product != blank -%}
                           <p class="ehora-voice__product">{{ block.settings.product | escape }}</p>
@@ -93,6 +101,21 @@
       "type": "testimonial",
       "name": "Testimonio",
       "settings": [
+        {
+          "type": "select",
+          "id": "rating",
+          "label": "Puntuación",
+          "options": [
+            { "value": "", "label": "Sin estrellas" },
+            { "value": "5", "label": "5 estrellas" },
+            { "value": "4", "label": "4 estrellas" },
+            { "value": "3", "label": "3 estrellas" },
+            { "value": "2", "label": "2 estrellas" },
+            { "value": "1", "label": "1 estrella" }
+          ],
+          "default": "",
+          "info": "La que dio el cliente en su reseña."
+        },
         { "type": "textarea", "id": "quote", "label": "Reseña" },
         { "type": "text", "id": "name", "label": "Nombre", "default": "Nombre" },
         { "type": "text", "id": "detail", "label": "Detalle", "info": "Ciudad o club, p. ej. «Madrid»." },

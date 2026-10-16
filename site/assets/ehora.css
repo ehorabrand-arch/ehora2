@@ -1743,6 +1743,16 @@ h1, h2, h3, .h0, .h1, .h2,
   color: rgba(32, 35, 33, 0.55);
 }
 
+.ehora-voice__stars {
+  display: flex;
+  gap: 0.2rem;
+  margin: var(--space-s) 0 calc(var(--space-xs) * -1);
+  color: #163d68;
+}
+
+.ehora-voice__stars svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+.ehora-voice__stars svg.is-empty { fill: none; stroke: currentColor; stroke-width: 1.1; opacity: 0.45; }
+
 .ehora-voice__quote {
   margin: var(--space-m) 0 0;
   font-family: var(--font-heading-family);
