@@ -24,7 +24,9 @@
               -%}
             </div>
             <p class="ehora-duo__caption">
-              <span class="ehora-duo__swatch" style="--swatch: {{ block.settings.swatch }}; --trim: {{ block.settings.trim }};" aria-hidden="true"></span>
+              {%- if block.settings.swatch != blank -%}
+                <span class="ehora-duo__swatch" style="--swatch: {{ block.settings.swatch }}; --trim: {{ block.settings.trim | default: block.settings.swatch }};" aria-hidden="true"></span>
+              {%- endif -%}
               <span class="ehora-duo__name">{{ block.settings.title | escape }}</span>
               <span class="ehora-duo__detail">{{ block.settings.detail | escape }}</span>
             </p>
@@ -37,13 +39,13 @@
 
 {% schema %}
 {
-  "name": "EHORA · Dos colores",
+  "name": "EHORA · Dúo",
   "tag": "div",
   "class": "section",
   "max_blocks": 4,
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Colores" },
-    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Dos colores. Un mismo <em>club</em>." },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Para los dos" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Pádel o tenis. Un mismo <em>club</em>." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
   ],
   "blocks": [
@@ -54,20 +56,20 @@
         { "type": "image_picker", "id": "image", "label": "Imagen" },
         { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
         { "type": "text", "id": "image_alt", "label": "Texto alternativo" },
-        { "type": "text", "id": "title", "label": "Nombre del color", "default": "Navy" },
-        { "type": "text", "id": "detail", "label": "Detalle", "default": "Ribete crema" },
-        { "type": "color", "id": "swatch", "label": "Color principal", "default": "#1B2A4E" },
-        { "type": "color", "id": "trim", "label": "Color del ribete", "default": "#EDE4D3" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Pádel" },
+        { "type": "text", "id": "detail", "label": "Detalle" },
+        { "type": "color", "id": "swatch", "label": "Muestra de color (opcional)" },
+        { "type": "color", "id": "trim", "label": "Color del ribete (opcional)" },
         { "type": "url", "id": "link", "label": "Enlace", "info": "Por ejemplo, a la variante de este color." }
       ]
     }
   ],
   "presets": [
     {
-      "name": "EHORA · Dos colores",
+      "name": "EHORA · Dúo",
       "blocks": [
-        { "type": "color", "settings": { "title": "Navy", "detail": "Ribete crema", "default_image": "ehora-foto-02.webp" } },
-        { "type": "color", "settings": { "title": "Blanco", "detail": "Ribete azul", "swatch": "#F4F2EC", "trim": "#1F3FBF", "default_image": "ehora-foto-06.webp" } }
+        { "type": "color", "settings": { "title": "Pádel", "detail": "Pala, botella y pelotas", "default_image": "ehora-v2-06.webp" } },
+        { "type": "color", "settings": { "title": "Tenis", "detail": "Raquetas, toalla y pelotas", "default_image": "ehora-v2-07.webp" } }
       ]
     }
   ]

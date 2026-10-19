@@ -3,9 +3,9 @@
     "hero": {
       "type": "ehora-expand",
       "settings": {
-        "default_image": "ehora-foto-01.webp",
-        "image_alt": "Paletero EHORA acolchado en azul marino con ribetes crema",
-        "default_background": "ehora-foto-02.webp",
+        "default_image": "ehora-v2-03.webp",
+        "image_alt": "Paletero EHORA blanco acolchado con ribete verde, en estudio",
+        "default_background": "ehora-v2-01.webp",
         "title_left": "El juego,",
         "title_right": "cuidado al detalle.",
         "hint": "Desliza para descubrir",
@@ -34,24 +34,24 @@
         "pista": {
           "type": "scene",
           "settings": {
-            "default_image": "ehora-foto-04.webp",
-            "image_alt": "Paletero EHORA blanco en una pista, con una pala y pelotas",
+            "default_image": "ehora-v2-01.webp",
+            "image_alt": "Paletero EHORA blanco con ribete verde llevado en la mano por la pista",
             "title": "Para la pista."
           }
         },
         "viaje": {
           "type": "scene",
           "settings": {
-            "default_image": "ehora-foto-06.webp",
-            "image_alt": "Jugadora con el paletero EHORA blanco al hombro",
+            "default_image": "ehora-v2-09.webp",
+            "image_alt": "Jugadora con el paletero EHORA a la espalda, como mochila",
             "title": "Para el viaje."
           }
         },
         "club": {
           "type": "scene",
           "settings": {
-            "default_image": "ehora-foto-02.webp",
-            "image_alt": "Jugadora con el paletero EHORA navy y dos raquetas en el club",
+            "default_image": "ehora-v2-10.webp",
+            "image_alt": "Jugadora en la pista con el paletero EHORA al hombro y una pala de pádel",
             "title": "Para el club."
           }
         }
@@ -64,48 +64,48 @@
       "settings": {
         "anchor": "paletero",
         "heading": "El paletero EHORA",
-        "default_left": "ehora-foto-03.webp",
-        "alt_left": "Detalle del acolchado navy y la cremallera del paletero EHORA",
-        "default_right": "ehora-foto-08.webp",
-        "alt_right": "Interior del paletero EHORA con sus compartimentos",
+        "default_left": "ehora-v2-05.webp",
+        "alt_left": "Detalle del acolchado y del ribete verde del paletero EHORA",
+        "default_right": "ehora-v2-02.webp",
+        "alt_right": "Interior del paletero EHORA con botella, portátil, móvil, neceser y toalla",
         "color_scheme": "scheme-5"
       }
     },
     "colores": {
       "type": "ehora-duo",
       "blocks": {
-        "navy": {
+        "padel": {
           "type": "color",
           "settings": {
-            "default_image": "ehora-foto-02.webp",
-            "image_alt": "Jugadora con el paletero EHORA navy al hombro y dos raquetas de tenis",
-            "title": "Navy",
-            "detail": "Ribete crema",
-            "swatch": "#1B2A4E",
-            "trim": "#EDE4D3",
+            "default_image": "ehora-v2-06.webp",
+            "image_alt": "Paletero EHORA en una pista de pádel con una pala y una botella",
+            "title": "Pádel",
+            "detail": "Pala, botella y pelotas",
+            "swatch": "",
+            "trim": "",
             "link": ""
           }
         },
-        "blanco": {
+        "tenis": {
           "type": "color",
           "settings": {
-            "default_image": "ehora-foto-06.webp",
-            "image_alt": "Jugadora en la pista con el paletero EHORA blanco al hombro",
-            "title": "Blanco",
-            "detail": "Ribete azul",
-            "swatch": "#F4F2EC",
-            "trim": "#1F3FBF",
+            "default_image": "ehora-v2-07.webp",
+            "image_alt": "Paletero EHORA en una pista de tenis con dos raquetas, toalla y pelotas",
+            "title": "Tenis",
+            "detail": "Raquetas, toalla y pelotas",
+            "swatch": "",
+            "trim": "",
             "link": ""
           }
         }
       },
       "block_order": [
-        "navy",
-        "blanco"
+        "padel",
+        "tenis"
       ],
       "settings": {
-        "eyebrow": "Colores",
-        "heading": "Dos colores. Un mismo <em>club</em>.",
+        "eyebrow": "Para los dos",
+        "heading": "Pádel o tenis. Un mismo <em>club</em>.",
         "color_scheme": "scheme-2"
       }
     },
@@ -113,8 +113,8 @@
       "type": "ehora-hero",
       "settings": {
         "layout": "split",
-        "default_image": "ehora-foto-07.webp",
-        "image_alt": "Paletero EHORA blanco con correas de mochila, en la pista con pelotas y una pala de pádel",
+        "default_image": "ehora-v2-08.webp",
+        "image_alt": "Detalle del asa acolchada del paletero EHORA con ribete verde",
         "overlay_opacity": 0,
         "height": "large",
         "content_position": "center",
@@ -305,28 +305,16 @@
     "coleccion": {
       "type": "ehora-showcase",
       "blocks": {
-        "navy": {
+        "paletero": {
           "type": "item",
           "settings": {
             "label": "Paletero",
             "title": "Paletero EHORA",
-            "detail": "Navy · Ribete crema",
-            "swatch": "#1B2A4E",
-            "trim": "#EDE4D3",
-            "default_image": "ehora-foto-01.webp",
-            "default_image_hover": "ehora-foto-03.webp"
-          }
-        },
-        "blanco": {
-          "type": "item",
-          "settings": {
-            "label": "Paletero",
-            "title": "Paletero EHORA",
-            "detail": "Blanco · Ribete azul",
+            "detail": "Blanco · Ribete verde",
             "swatch": "#F4F2EC",
-            "trim": "#1F3FBF",
-            "default_image": "ehora-foto-04.webp",
-            "default_image_hover": "ehora-foto-05.webp"
+            "trim": "#123F2E",
+            "default_image": "ehora-v2-04.webp",
+            "default_image_hover": "ehora-v2-12.webp"
           }
         },
         "auto": {
@@ -350,8 +338,7 @@
         }
       },
       "block_order": [
-        "navy",
-        "blanco",
+        "paletero",
         "auto",
         "manual"
       ],
@@ -387,7 +374,7 @@
       "settings": {
         "title": "La colección EHORA",
         "subtitle": "Paleteros y presurizadores",
-        "default_image": "ehora-foto-01.webp",
+        "default_image": "ehora-v2-04.webp",
         "button_label": "Comprar",
         "link": "",
         "offset": 40

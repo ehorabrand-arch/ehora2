@@ -11,9 +11,9 @@
   --ehora-sand: #e8e2d6;
   --ehora-stone: #d8d3c8;
   --ehora-charcoal: #202321;
-  --ehora-navy: #102a43;
-  --ehora-navy-dark: #071a2b;
-  --ehora-blue: #163d68;
+  --ehora-green: #123f2e;
+  --ehora-green-dark: #0a2a1e;
+  --ehora-green-accent: #1e5a41;
 
   /* Espaciado — escala de 4pt */
   --space-2xs: 0.4rem;
@@ -43,7 +43,7 @@
   --radius-s: 2px;
   --radius-m: 4px;
   --hairline: 1px solid rgba(var(--color-foreground), 0.14);
-  --shadow-soft: 0 1px 2px rgba(7, 26, 43, 0.04), 0 12px 32px rgba(7, 26, 43, 0.05);
+  --shadow-soft: 0 1px 2px rgba(10, 42, 30, 0.04), 0 12px 32px rgba(10, 42, 30, 0.05);
 
   /* Movimiento */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -81,7 +81,7 @@ h1 em, h2 em, h3 em, .h0 em, .h1 em, .h2 em {
 p { text-wrap: pretty; }
 
 ::selection {
-  background: var(--ehora-navy);
+  background: var(--ehora-green);
   color: var(--ehora-warm-white);
 }
 
@@ -240,14 +240,14 @@ p { text-wrap: pretty; }
   min-height: 24rem;
   background:
     linear-gradient(var(--ehora-sand), var(--ehora-sand)) padding-box;
-  color: var(--ehora-navy);
+  color: var(--ehora-green);
 }
 
 .ehora-placeholder::before {
   content: '';
   position: absolute;
   inset: var(--space-m);
-  border: 1px solid rgba(16, 42, 67, 0.18);
+  border: 1px solid rgba(18, 63, 46, 0.18);
   pointer-events: none;
 }
 
@@ -417,9 +417,9 @@ p { text-wrap: pretty; }
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(7, 26, 43, calc(var(--scrim) * 1)) 0%,
-    rgba(7, 26, 43, calc(var(--scrim) * 0.35)) 45%,
-    rgba(7, 26, 43, 0) 75%
+    rgba(10, 42, 30, calc(var(--scrim) * 1)) 0%,
+    rgba(10, 42, 30, calc(var(--scrim) * 0.35)) 45%,
+    rgba(10, 42, 30, 0) 75%
   );
 }
 
@@ -456,7 +456,7 @@ p { text-wrap: pretty; }
 
 .ehora-hero--overlay .button {
   --color-button: 247, 245, 239;
-  --color-button-text: 7, 26, 43;
+  --color-button-text: 10, 42, 30;
 }
 
 .ehora-hero--overlay .ehora-link { color: var(--ehora-warm-white); }
@@ -988,10 +988,10 @@ p { text-wrap: pretty; }
 }
 
 /* Hero sin imagen todavía: texto oscuro sobre el placeholder */
-.ehora-hero--overlay.ehora-hero--no-image .ehora-hero__content { color: var(--ehora-navy); }
-.ehora-hero--overlay.ehora-hero--no-image .ehora-link { color: var(--ehora-navy); }
+.ehora-hero--overlay.ehora-hero--no-image .ehora-hero__content { color: var(--ehora-green); }
+.ehora-hero--overlay.ehora-hero--no-image .ehora-link { color: var(--ehora-green); }
 .ehora-hero--overlay.ehora-hero--no-image .button {
-  --color-button: 16, 42, 67;
+  --color-button: 18, 63, 46;
   --color-button-text: 252, 251, 247;
 }
 .ehora-hero--overlay.ehora-hero--no-image .ehora-placeholder { min-height: 100%; }
@@ -1415,7 +1415,7 @@ p { text-wrap: pretty; }
 .ehora-feature__vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 55% 38%, transparent 40%, rgba(7, 26, 43, 0.5) 100%);
+  background: radial-gradient(circle at 55% 38%, transparent 40%, rgba(10, 42, 30, 0.5) 100%);
   pointer-events: none;
 }
 
@@ -1438,9 +1438,9 @@ p { text-wrap: pretty; }
   font-size: 1.1rem;
   font-weight: 500;
   line-height: 1;
-  color: #071a2b;
+  color: #0a2a1e;
   background: #f7f5ef;
-  box-shadow: 0 0 0 0.5rem rgba(247, 245, 239, 0.16), 0 0.4rem 1.6rem rgba(7, 26, 43, 0.4);
+  box-shadow: 0 0 0 0.5rem rgba(247, 245, 239, 0.16), 0 0.4rem 1.6rem rgba(10, 42, 30, 0.4);
 }
 
 .ehora-feature__tag {
@@ -1454,7 +1454,7 @@ p { text-wrap: pretty; }
   font-size: 1.3rem;
   letter-spacing: 0.02em;
   color: #f7f5ef;
-  background: rgba(7, 26, 43, 0.55);
+  background: rgba(10, 42, 30, 0.55);
   border: 1px solid rgba(247, 245, 239, 0.24);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
@@ -1725,7 +1725,7 @@ h1, h2, h3, .h0, .h1, .h2,
   height: 3.6rem;
   overflow: hidden;
   border-radius: 50%;
-  background: var(--ehora-navy);
+  background: var(--ehora-green);
   color: var(--ehora-warm-white);
   font-family: var(--font-heading-family);
   font-size: 1.6rem;
@@ -1747,7 +1747,7 @@ h1, h2, h3, .h0, .h1, .h2,
   display: flex;
   gap: 0.2rem;
   margin: var(--space-s) 0 calc(var(--space-xs) * -1);
-  color: #163d68;
+  color: #1e5a41;
 }
 
 .ehora-voice__stars svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
@@ -1767,7 +1767,7 @@ h1, h2, h3, .h0, .h1, .h2,
   font-weight: 500;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--ehora-blue);
+  color: var(--ehora-green-accent);
 }
 
 @media screen and (min-width: 750px) {
@@ -1802,7 +1802,7 @@ h1, h2, h3, .h0, .h1, .h2,
   display: block;
   position: relative;
   height: 260svh;
-  background: var(--ehora-navy-dark);
+  background: var(--ehora-green-dark);
 }
 
 .ehora-expand__sticky {
@@ -1834,7 +1834,7 @@ h1, h2, h3, .h0, .h1, .h2,
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(7, 26, 43, 0.45);
+  background: rgba(10, 42, 30, 0.45);
 }
 
 .ehora-expand__media {
@@ -1861,7 +1861,9 @@ h1, h2, h3, .h0, .h1, .h2,
 .ehora-expand__shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(7, 26, 43, 0.7), rgba(7, 26, 43, 0.15) 45%, rgba(7, 26, 43, 0.25));
+  background:
+    linear-gradient(to right, rgba(10, 42, 30, 0.62), rgba(10, 42, 30, 0) 62%),
+    linear-gradient(to top, rgba(10, 42, 30, 0.82), rgba(10, 42, 30, 0.2) 50%, rgba(10, 42, 30, 0.25));
   opacity: calc(0.35 + var(--p) * 0.65);
 }
 
@@ -1879,7 +1881,7 @@ h1, h2, h3, .h0, .h1, .h2,
   text-align: center;
   color: var(--ehora-warm-white);
   pointer-events: none;
-  text-shadow: 0 0.2rem 3rem rgba(7, 26, 43, 0.35);
+  text-shadow: 0 0.2rem 3rem rgba(10, 42, 30, 0.35);
 }
 
 .ehora-expand__word { display: block; white-space: nowrap; opacity: calc(1 - var(--p) * 1.25); }
@@ -1943,7 +1945,7 @@ h1, h2, h3, .h0, .h1, .h2,
 
 .ehora-expand__content .button {
   --color-button: 247, 245, 239;
-  --color-button-text: 7, 26, 43;
+  --color-button-text: 10, 42, 30;
 }
 
 .ehora-expand__content .ehora-link { color: var(--ehora-warm-white); }
@@ -2085,7 +2087,7 @@ h1, h2, h3, .h0, .h1, .h2,
 .button,
 .shopify-challenge__button,
 .customer button {
-  --border-base: rgba(16, 42, 67, 0.28);
+  --border-base: rgba(18, 63, 46, 0.28);
   --border-glow: #2c5d93;
 }
 
@@ -2154,7 +2156,7 @@ h1, h2, h3, .h0, .h1, .h2,
   body .shopify-challenge__button:hover,
   body .customer button:hover {
     background: transparent;
-    color: var(--ehora-navy-dark);
+    color: var(--ehora-green-dark);
   }
 
   body .button:not(.button--tertiary):not([disabled]):not([aria-disabled='true']):hover::before,
@@ -2164,8 +2166,8 @@ h1, h2, h3, .h0, .h1, .h2,
   }
 
   body .button:not([disabled]):hover::after {
-    --border-glow: #102a43;
-    --border-base: rgba(16, 42, 67, 0.35);
+    --border-glow: #123f2e;
+    --border-base: rgba(18, 63, 46, 0.35);
   }
 }
 
@@ -2184,7 +2186,7 @@ html.ehora-loading .ehora-loader {
   z-index: 2147483000;
   display: grid;
   place-items: center;
-  background: var(--ehora-navy-dark);
+  background: var(--ehora-green-dark);
   color: var(--ehora-warm-white);
   clip-path: inset(0 0 0 0);
   transition: clip-path 800ms var(--ease-in-out);
@@ -2230,7 +2232,7 @@ html.ehora-loading .ehora-loader {
 }
 
 .ehora-loader__ball circle { fill: var(--ehora-warm-white); }
-.ehora-loader__ball path { fill: none; stroke: var(--ehora-navy); stroke-width: 1.6; stroke-linecap: round; }
+.ehora-loader__ball path { fill: none; stroke: var(--ehora-green); stroke-width: 1.6; stroke-linecap: round; }
 
 .ehora-loader__shadow {
   position: absolute;
@@ -2328,13 +2330,13 @@ html.ehora-loading .ehora-loader {
   gap: var(--space-m);
   padding: 0.8rem 0.8rem 0.8rem 0.8rem;
   border-radius: 999px;
-  background: rgba(7, 26, 43, 0.72);
+  background: rgba(10, 42, 30, 0.72);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   backdrop-filter: blur(18px) saturate(160%);
   box-shadow:
     inset 0 1px 0 rgba(252, 251, 247, 0.12),
     inset 0 0 0 1px rgba(252, 251, 247, 0.08),
-    0 1.6rem 4rem rgba(7, 26, 43, 0.28);
+    0 1.6rem 4rem rgba(10, 42, 30, 0.28);
   color: var(--ehora-warm-white);
 }
 
@@ -2385,7 +2387,7 @@ html.ehora-loading .ehora-loader {
   .ehora-buy-bar { transition: opacity 200ms linear; transform: translate(-50%, 0); }
 }
 
-.ehora-buy-bar .ehora-buy-bar__button { color: var(--ehora-navy-dark); font-weight: 500; }
+.ehora-buy-bar .ehora-buy-bar__button { color: var(--ehora-green-dark); font-weight: 500; }
 .ehora-buy-bar .ehora-buy-bar__button::before { background-color: rgba(247, 245, 239, 0.96); }
 
 /* ---------- Escenas ligadas al scroll (ehora-scroll-scene publica --p, --vis y --dir) ---------- */
@@ -2512,8 +2514,8 @@ ehora-scroll-scene { display: block; }
 .ehora-columns__shade {
   position: absolute;
   inset: 0;
-  background: #071a2b;
-  opacity: calc(0.5 * (1 - var(--q)));
+  background: #0a2a1e;
+  opacity: calc(0.34 * (1 - var(--q)));
 }
 
 .ehora-columns__titles {
@@ -2535,7 +2537,7 @@ ehora-scroll-scene { display: block; }
   letter-spacing: -0.028em;
   text-align: center;
   color: #fcfbf7;
-  text-shadow: 0 0.2rem 3.2rem rgba(7, 26, 43, 0.35);
+  text-shadow: 0 0.2rem 3.2rem rgba(10, 42, 30, 0.35);
 }
 
 .ehora-columns:not(.is-ready) .ehora-columns__title:not(:first-child) { display: none; }
@@ -2579,7 +2581,7 @@ ehora-scroll-scene { display: block; }
 .ehora-pressure {
   --draw-a: clamp(0, calc(var(--p, 1) * 2), 1);
   --draw-b: clamp(0, calc((var(--p, 1) - 0.75) * 6), 1);
-  --ink: 16, 42, 67;
+  --ink: 18, 63, 46;
   overflow: clip;
 }
 
@@ -2734,7 +2736,7 @@ ehora-scroll-scene { display: block; }
   height: 6.4rem;
   overflow: hidden;
   border: 2px solid rgb(var(--ink));
-  box-shadow: 0 0 0 0.6rem rgba(var(--ink), 0.12), 0 1rem 2.4rem rgba(7, 26, 43, 0.25);
+  box-shadow: 0 0 0 0.6rem rgba(var(--ink), 0.12), 0 1rem 2.4rem rgba(10, 42, 30, 0.25);
 }
 
 .ehora-pressure__spot--brand .ehora-pressure__dot img {
@@ -2979,7 +2981,7 @@ ehora-scroll-scene { display: block; }
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #f7f5ef;
-  background: rgba(7, 26, 43, 0.42);
+  background: rgba(10, 42, 30, 0.42);
   border: 1px solid rgba(247, 245, 239, 0.22);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
@@ -3147,3 +3149,8 @@ ehora-scroll-scene { display: block; }
   .ehora-showcase__bar { display: none; }
   .ehora-showcase__footer { justify-content: center; }
 }
+
+/* Dawn oculta los div vacíos (div:empty); estas capas son decorativas y deben verse */
+div.ehora-expand__shade,
+div.ehora-columns__shade,
+div.ehora-feature__vignette { display: block; }

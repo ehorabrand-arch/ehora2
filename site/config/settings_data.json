@@ -10,9 +10,9 @@
             "background": "#FCFBF7",
             "background_gradient": "",
             "text": "#202321",
-            "button": "#102A43",
+            "button": "#123F2E",
             "button_label": "#FCFBF7",
-            "secondary_button_label": "#102A43",
+            "secondary_button_label": "#123F2E",
             "shadow": "#202321"
           }
         },
@@ -21,9 +21,9 @@
             "background": "#F7F5EF",
             "background_gradient": "",
             "text": "#202321",
-            "button": "#102A43",
+            "button": "#123F2E",
             "button_label": "#F7F5EF",
-            "secondary_button_label": "#102A43",
+            "secondary_button_label": "#123F2E",
             "shadow": "#202321"
           }
         },
@@ -32,32 +32,32 @@
             "background": "#E8E2D6",
             "background_gradient": "",
             "text": "#202321",
-            "button": "#102A43",
+            "button": "#123F2E",
             "button_label": "#F7F5EF",
-            "secondary_button_label": "#102A43",
+            "secondary_button_label": "#123F2E",
             "shadow": "#202321"
           }
         },
         "scheme-4": {
           "settings": {
-            "background": "#071A2B",
+            "background": "#0A2A1E",
             "background_gradient": "",
             "text": "#F7F5EF",
             "button": "#F7F5EF",
-            "button_label": "#071A2B",
+            "button_label": "#0A2A1E",
             "secondary_button_label": "#F7F5EF",
-            "shadow": "#071A2B"
+            "shadow": "#0A2A1E"
           }
         },
         "scheme-5": {
           "settings": {
-            "background": "#102A43",
+            "background": "#123F2E",
             "background_gradient": "",
             "text": "#F7F5EF",
             "button": "#F7F5EF",
-            "button_label": "#102A43",
+            "button_label": "#123F2E",
             "secondary_button_label": "#F7F5EF",
-            "shadow": "#071A2B"
+            "shadow": "#0A2A1E"
           }
         }
       },
