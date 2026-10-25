@@ -13,6 +13,7 @@
 <ehora-scroll-scene
   {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
   class="ehora-showcase color-{{ section.settings.color_scheme }} gradient"
+  data-hide-buy-bar
 >
   <section class="ehora-showcase__stage" aria-labelledby="EhoraShowcase-{{ section.id }}">
     <header class="ehora-container ehora-showcase__header">

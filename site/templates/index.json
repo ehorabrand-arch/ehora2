@@ -64,8 +64,8 @@
       "settings": {
         "anchor": "paletero",
         "heading": "El paletero EHORA",
-        "default_left": "ehora-v2-05.webp",
-        "alt_left": "Detalle del acolchado y del ribete verde del paletero EHORA",
+        "default_left": "ehora-v2-11.webp",
+        "alt_left": "Detalle de la cremallera, el tirador y el ribete verde del paletero EHORA",
         "default_right": "ehora-v2-02.webp",
         "alt_right": "Interior del paletero EHORA con botella, portátil, móvil, neceser y toalla",
         "color_scheme": "scheme-5"
@@ -415,6 +415,7 @@
   },
   "order": [
     "hero",
+    "coleccion",
     "frases",
     "manifiesto",
     "paletero",
@@ -424,7 +425,6 @@
     "presion",
     "comparativa",
     "testimonios",
-    "coleccion",
     "comprar"
   ]
 }

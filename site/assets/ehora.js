@@ -181,15 +181,19 @@ if (!customElements.get('ehora-buy-bar')) {
       connectedCallback() {
         this.hidden = false;
         this.offset = (parseFloat(this.dataset.offset) || 40) / 100;
-        this.footerVisible = false;
+        this.covering = new Set();
 
-        const footer = document.querySelector('footer, .footer');
-        if (footer && 'IntersectionObserver' in window) {
-          this.observer = new IntersectionObserver(([entry]) => {
-            this.footerVisible = entry.isIntersecting;
-            this.update();
-          });
-          this.observer.observe(footer);
+        // Se oculta sobre el pie de página y sobre las secciones que ya muestran productos ([data-hide-buy-bar]).
+        const targets = [document.querySelector('footer, .footer'), ...document.querySelectorAll('[data-hide-buy-bar]')].filter(Boolean);
+        if (targets.length && 'IntersectionObserver' in window) {
+          this.observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => (entry.isIntersecting ? this.covering.add(entry.target) : this.covering.delete(entry.target)));
+              this.update();
+            },
+            { rootMargin: '-15% 0px -15% 0px' }
+          );
+          targets.forEach((target) => this.observer.observe(target));
         }
 
         this.onScroll = () => requestAnimationFrame(() => this.update());
@@ -203,7 +207,7 @@ if (!customElements.get('ehora-buy-bar')) {
       }
 
       update() {
-        const show = window.scrollY > window.innerHeight * this.offset && !this.footerVisible;
+        const show = window.scrollY > window.innerHeight * this.offset && this.covering.size === 0;
         this.classList.toggle('is-visible', show);
         this.querySelector('a')?.setAttribute('tabindex', show ? '0' : '-1');
       }
