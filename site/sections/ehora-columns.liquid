@@ -47,7 +47,6 @@
             <p class="ehora-columns__title" data-scene-item style="--m: {{ words.size }};">
               {%- for word in words -%}
                 <span class="ehora-columns__w" style="--j: {{ forloop.index0 }};">{{ word | escape }}</span>
-                {%- unless forloop.last %} {% endunless -%}
               {%- endfor -%}
             </p>
           {%- endif -%}

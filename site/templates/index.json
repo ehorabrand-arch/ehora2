@@ -352,13 +352,114 @@
       "settings": {
         "eyebrow": "Desde el club",
         "heading": "Lo que se dice en la <em>pista</em>.",
-        "text": "Opiniones de quienes ya juegan con EHORA.",
+        "text": "Reseñas de ejemplo para ver el diseño: no son clientes reales. Sustitúyelas por reseñas reales antes de publicar.",
         "columns": 4,
         "speed": 40,
         "color_scheme": "scheme-2"
       },
-      "blocks": {},
-      "block_order": []
+      "blocks": {
+        "resena-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5",
+            "quote": "Llevo dos palas, la ropa de cambio y las pelotas, y aún sobra hueco. El compartimento térmico se nota en verano. El blanco con el ribete verde es todavía más bonito en persona.",
+            "name": "Lucía Martín",
+            "detail": "Madrid · Pádel",
+            "product": "Paletero"
+          }
+        },
+        "resena-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5",
+            "quote": "Juego tres veces por semana y antes tiraba un bote cada dos partidos. Ahora las meto al acabar, le doy a 1,9 bar y listo. La pantalla es muy cómoda.",
+            "name": "Javier Ortega",
+            "detail": "Valencia · Pádel",
+            "product": "Presurizador Auto."
+          }
+        },
+        "resena-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5",
+            "quote": "Lo compré en blanco con miedo a que se ensuciara, pero se limpia con un paño sin problema. Caben dos raquetas de tenis sin forzar la cremallera.",
+            "name": "Marta Sánchez",
+            "detail": "Sevilla · Tenis",
+            "product": "Paletero"
+          }
+        },
+        "resena-4": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "4",
+            "quote": "Hace lo que promete. Bombeas unas cuantas veces y la aguja te marca la presión. Le quito una estrella porque me habría gustado que el bote fuera un poco más compacto para la bolsa.",
+            "name": "Pablo Ruiz",
+            "detail": "Barcelona · Pádel",
+            "product": "Presurizador Manual"
+          }
+        },
+        "resena-5": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5",
+            "quote": "Voy al club en bici y poder llevarlo a la espalda me ha cambiado la vida. Acolchado, firme y las asas no se clavan.",
+            "name": "Carmen Vidal",
+            "detail": "Málaga · Pádel",
+            "product": "Paletero"
+          }
+        },
+        "resena-6": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5",
+            "quote": "Lo cargo por USB-C una vez cada mucho. Lo tengo en la taquilla del club y las pelotas salen con el mismo bote que el primer día.",
+            "name": "Diego Fernández",
+            "detail": "Bilbao · Tenis",
+            "product": "Presurizador Auto."
+          }
+        },
+        "resena-7": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5",
+            "quote": "Los compartimentos interiores están muy bien pensados: llaves, móvil, grips… Nada de buscar al fondo de la bolsa. Las cremalleras van suaves.",
+            "name": "Elena Torres",
+            "detail": "Zaragoza · Pádel",
+            "product": "Paletero"
+          }
+        },
+        "resena-8": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5",
+            "quote": "Se lo regalé a mi pareja por su cumpleaños y acerté de lleno. Llegó en 48 horas y bien embalado.",
+            "name": "Álvaro Gil",
+            "detail": "Murcia · Pádel",
+            "product": "Pack Paletero + Presu."
+          }
+        },
+        "resena-9": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "4",
+            "quote": "Los acabados y el acolchado se ven premium. Para tenis con tres raquetas va justo, con dos perfecto.",
+            "name": "Nuria Prieto",
+            "detail": "A Coruña · Tenis",
+            "product": "Paletero"
+          }
+        }
+      },
+      "block_order": [
+        "resena-1",
+        "resena-2",
+        "resena-3",
+        "resena-4",
+        "resena-5",
+        "resena-6",
+        "resena-7",
+        "resena-8",
+        "resena-9"
+      ]
     },
     "comprar": {
       "type": "ehora-buy-bar",

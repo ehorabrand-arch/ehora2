@@ -1018,6 +1018,48 @@ p { text-wrap: pretty; }
 
 .footer { border-top: 0; }
 
+/* Pie: marca y enlaces a la izquierda, boletín a la derecha; en móvil, apilado. */
+.footer .footer__content-top {
+  display: grid;
+  gap: var(--space-3xl);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.footer .footer__content-top .footer__blocks-wrapper { margin: 0; row-gap: var(--space-xl); }
+
+.footer .footer-block--newsletter {
+  display: block;
+  margin: 0;
+  text-align: left;
+}
+
+.footer .footer-block__newsletter { max-width: 44rem; margin: 0; text-align: left; }
+.footer .footer-block__newsletter .footer-block__heading,
+.footer .footer-block__newsletter .footer-block__newsletter-text { text-align: left; margin-inline: 0; }
+.footer .footer-block__newsletter .footer-block__newsletter-text { margin-inline: 0; }
+
+.footer .footer-block__details-content.rte p { margin: 0 0 var(--space-xs); }
+.footer .footer-block__details-content.rte a,
+.footer .footer-block__details-content a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer .footer-block__details-content.rte a:hover,
+  .footer .footer-block__details-content a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 0.3em; }
+}
+
+@media screen and (min-width: 990px) {
+  .footer .footer__content-top {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    gap: var(--space-4xl);
+  }
+}
+
 .ehora-hero .ehora-placeholder__label { display: none; }
 
 @container (max-width: 240px) {
@@ -2546,6 +2588,7 @@ ehora-scroll-scene { display: block; }
 .ehora-columns__w {
   --w: var(--vis, 1);
   display: inline-block;
+  margin-inline: 0.13em;
   opacity: var(--w);
   filter: blur(calc((1 - var(--w)) * 24px));
 }

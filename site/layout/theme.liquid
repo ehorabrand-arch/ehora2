@@ -77,6 +77,86 @@
     %}
 
     {% style %}
+      {%- comment -%} Valores de respaldo: si Shopify no cargara un ajuste, se usa el valor de marca. {%- endcomment -%}
+      {%- assign v_badge_corner_radius = settings.badge_corner_radius | default: 2 -%}
+      {%- assign v_blog_card_border_opacity = settings.blog_card_border_opacity | default: 10 -%}
+      {%- assign v_blog_card_border_thickness = settings.blog_card_border_thickness | default: 0 -%}
+      {%- assign v_blog_card_corner_radius = settings.blog_card_corner_radius | default: 0 -%}
+      {%- assign v_blog_card_image_padding = settings.blog_card_image_padding | default: 0 -%}
+      {%- assign v_blog_card_shadow_blur = settings.blog_card_shadow_blur | default: 5 -%}
+      {%- assign v_blog_card_shadow_horizontal_offset = settings.blog_card_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_blog_card_shadow_opacity = settings.blog_card_shadow_opacity | default: 0 -%}
+      {%- assign v_blog_card_shadow_vertical_offset = settings.blog_card_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_body_scale = settings.body_scale | default: 100 -%}
+      {%- assign v_buttons_border_opacity = settings.buttons_border_opacity | default: 100 -%}
+      {%- assign v_buttons_border_thickness = settings.buttons_border_thickness | default: 1 -%}
+      {%- assign v_buttons_radius = settings.buttons_radius | default: 2 -%}
+      {%- assign v_buttons_shadow_blur = settings.buttons_shadow_blur | default: 5 -%}
+      {%- assign v_buttons_shadow_horizontal_offset = settings.buttons_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_buttons_shadow_opacity = settings.buttons_shadow_opacity | default: 0 -%}
+      {%- assign v_buttons_shadow_vertical_offset = settings.buttons_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_card_border_opacity = settings.card_border_opacity | default: 10 -%}
+      {%- assign v_card_border_thickness = settings.card_border_thickness | default: 0 -%}
+      {%- assign v_card_corner_radius = settings.card_corner_radius | default: 0 -%}
+      {%- assign v_card_image_padding = settings.card_image_padding | default: 0 -%}
+      {%- assign v_card_shadow_blur = settings.card_shadow_blur | default: 5 -%}
+      {%- assign v_card_shadow_horizontal_offset = settings.card_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_card_shadow_opacity = settings.card_shadow_opacity | default: 0 -%}
+      {%- assign v_card_shadow_vertical_offset = settings.card_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_collection_card_border_opacity = settings.collection_card_border_opacity | default: 10 -%}
+      {%- assign v_collection_card_border_thickness = settings.collection_card_border_thickness | default: 0 -%}
+      {%- assign v_collection_card_corner_radius = settings.collection_card_corner_radius | default: 0 -%}
+      {%- assign v_collection_card_image_padding = settings.collection_card_image_padding | default: 0 -%}
+      {%- assign v_collection_card_shadow_blur = settings.collection_card_shadow_blur | default: 5 -%}
+      {%- assign v_collection_card_shadow_horizontal_offset = settings.collection_card_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_collection_card_shadow_opacity = settings.collection_card_shadow_opacity | default: 0 -%}
+      {%- assign v_collection_card_shadow_vertical_offset = settings.collection_card_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_drawer_border_opacity = settings.drawer_border_opacity | default: 10 -%}
+      {%- assign v_drawer_border_thickness = settings.drawer_border_thickness | default: 1 -%}
+      {%- assign v_drawer_shadow_blur = settings.drawer_shadow_blur | default: 5 -%}
+      {%- assign v_drawer_shadow_horizontal_offset = settings.drawer_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_drawer_shadow_opacity = settings.drawer_shadow_opacity | default: 0 -%}
+      {%- assign v_drawer_shadow_vertical_offset = settings.drawer_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_heading_scale = settings.heading_scale | default: 100 -%}
+      {%- assign v_inputs_border_opacity = settings.inputs_border_opacity | default: 35 -%}
+      {%- assign v_inputs_border_thickness = settings.inputs_border_thickness | default: 1 -%}
+      {%- assign v_inputs_radius = settings.inputs_radius | default: 2 -%}
+      {%- assign v_inputs_shadow_blur = settings.inputs_shadow_blur | default: 5 -%}
+      {%- assign v_inputs_shadow_horizontal_offset = settings.inputs_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_inputs_shadow_opacity = settings.inputs_shadow_opacity | default: 0 -%}
+      {%- assign v_inputs_shadow_vertical_offset = settings.inputs_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_media_border_opacity = settings.media_border_opacity | default: 0 -%}
+      {%- assign v_media_border_thickness = settings.media_border_thickness | default: 0 -%}
+      {%- assign v_media_radius = settings.media_radius | default: 2 -%}
+      {%- assign v_media_shadow_blur = settings.media_shadow_blur | default: 5 -%}
+      {%- assign v_media_shadow_horizontal_offset = settings.media_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_media_shadow_opacity = settings.media_shadow_opacity | default: 0 -%}
+      {%- assign v_media_shadow_vertical_offset = settings.media_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_page_width = settings.page_width | default: 1400 -%}
+      {%- assign v_popup_border_opacity = settings.popup_border_opacity | default: 10 -%}
+      {%- assign v_popup_border_thickness = settings.popup_border_thickness | default: 1 -%}
+      {%- assign v_popup_corner_radius = settings.popup_corner_radius | default: 2 -%}
+      {%- assign v_popup_shadow_blur = settings.popup_shadow_blur | default: 5 -%}
+      {%- assign v_popup_shadow_horizontal_offset = settings.popup_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_popup_shadow_opacity = settings.popup_shadow_opacity | default: 5 -%}
+      {%- assign v_popup_shadow_vertical_offset = settings.popup_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_spacing_grid_horizontal = settings.spacing_grid_horizontal | default: 16 -%}
+      {%- assign v_spacing_grid_vertical = settings.spacing_grid_vertical | default: 24 -%}
+      {%- assign v_spacing_sections = settings.spacing_sections | default: 0 -%}
+      {%- assign v_text_boxes_border_opacity = settings.text_boxes_border_opacity | default: 10 -%}
+      {%- assign v_text_boxes_border_thickness = settings.text_boxes_border_thickness | default: 0 -%}
+      {%- assign v_text_boxes_radius = settings.text_boxes_radius | default: 0 -%}
+      {%- assign v_text_boxes_shadow_blur = settings.text_boxes_shadow_blur | default: 5 -%}
+      {%- assign v_text_boxes_shadow_horizontal_offset = settings.text_boxes_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_text_boxes_shadow_opacity = settings.text_boxes_shadow_opacity | default: 0 -%}
+      {%- assign v_text_boxes_shadow_vertical_offset = settings.text_boxes_shadow_vertical_offset | default: 4 -%}
+      {%- assign v_variant_pills_border_opacity = settings.variant_pills_border_opacity | default: 35 -%}
+      {%- assign v_variant_pills_border_thickness = settings.variant_pills_border_thickness | default: 1 -%}
+      {%- assign v_variant_pills_radius = settings.variant_pills_radius | default: 2 -%}
+      {%- assign v_variant_pills_shadow_blur = settings.variant_pills_shadow_blur | default: 5 -%}
+      {%- assign v_variant_pills_shadow_horizontal_offset = settings.variant_pills_shadow_horizontal_offset | default: 0 -%}
+      {%- assign v_variant_pills_shadow_opacity = settings.variant_pills_shadow_opacity | default: 0 -%}
+      {%- assign v_variant_pills_shadow_vertical_offset = settings.variant_pills_shadow_vertical_offset | default: 4 -%}
       {%- if settings.ehora_editorial_fonts -%}
         @font-face {
           font-family: 'Fraunces';
@@ -147,6 +227,95 @@
       }
       {% endfor %}
 
+      {%- comment -%} Respaldo de la paleta EHORA: solo si Shopify no carga los esquemas de color guardados. {%- endcomment -%}
+      {%- unless scheme_classes contains 'scheme-5' -%}
+        :root,
+        .color-scheme-1 {
+          --color-background: 252,251,247;
+          --gradient-background: #FCFBF7;
+          --color-foreground: 32,35,33;
+          --color-background-contrast: 88,95,89;
+          --color-shadow: 32,35,33;
+          --color-button: 18,63,46;
+          --color-button-text: 252,251,247;
+          --color-secondary-button: 252,251,247;
+          --color-secondary-button-text: 18,63,46;
+          --color-link: 18,63,46;
+          --color-badge-foreground: 32,35,33;
+          --color-badge-background: 252,251,247;
+          --color-badge-border: 32,35,33;
+          --payment-terms-background-color: rgb(252 251 247);
+        }
+        .color-scheme-2 {
+          --color-background: 247,245,239;
+          --gradient-background: #F7F5EF;
+          --color-foreground: 32,35,33;
+          --color-background-contrast: 88,95,89;
+          --color-shadow: 32,35,33;
+          --color-button: 18,63,46;
+          --color-button-text: 247,245,239;
+          --color-secondary-button: 247,245,239;
+          --color-secondary-button-text: 18,63,46;
+          --color-link: 18,63,46;
+          --color-badge-foreground: 32,35,33;
+          --color-badge-background: 247,245,239;
+          --color-badge-border: 32,35,33;
+          --payment-terms-background-color: rgb(247 245 239);
+        }
+        .color-scheme-3 {
+          --color-background: 232,226,214;
+          --gradient-background: #E8E2D6;
+          --color-foreground: 32,35,33;
+          --color-background-contrast: 88,95,89;
+          --color-shadow: 32,35,33;
+          --color-button: 18,63,46;
+          --color-button-text: 247,245,239;
+          --color-secondary-button: 232,226,214;
+          --color-secondary-button-text: 18,63,46;
+          --color-link: 18,63,46;
+          --color-badge-foreground: 32,35,33;
+          --color-badge-background: 232,226,214;
+          --color-badge-border: 32,35,33;
+          --payment-terms-background-color: rgb(232 226 214);
+        }
+        .color-scheme-4 {
+          --color-background: 10,42,30;
+          --gradient-background: #0A2A1E;
+          --color-foreground: 247,245,239;
+          --color-background-contrast: 66,119,98;
+          --color-shadow: 10,42,30;
+          --color-button: 247,245,239;
+          --color-button-text: 10,42,30;
+          --color-secondary-button: 10,42,30;
+          --color-secondary-button-text: 247,245,239;
+          --color-link: 247,245,239;
+          --color-badge-foreground: 247,245,239;
+          --color-badge-background: 10,42,30;
+          --color-badge-border: 247,245,239;
+          --payment-terms-background-color: rgb(10 42 30);
+        }
+        .color-scheme-5 {
+          --color-background: 18,63,46;
+          --gradient-background: #123F2E;
+          --color-foreground: 247,245,239;
+          --color-background-contrast: 66,119,98;
+          --color-shadow: 10,42,30;
+          --color-button: 247,245,239;
+          --color-button-text: 18,63,46;
+          --color-secondary-button: 18,63,46;
+          --color-secondary-button-text: 247,245,239;
+          --color-link: 247,245,239;
+          --color-badge-foreground: 247,245,239;
+          --color-badge-background: 18,63,46;
+          --color-badge-border: 247,245,239;
+          --payment-terms-background-color: rgb(18 63 46);
+        }
+        body, .color-scheme-1, .color-scheme-2, .color-scheme-3, .color-scheme-4, .color-scheme-5 {
+          color: rgba(var(--color-foreground), 0.75);
+          background-color: rgb(var(--color-background));
+        }
+      {%- endunless -%}
+
       {{ scheme_classes | prepend: 'body' }} {
         color: rgba(var(--color-foreground), 0.75);
         background-color: rgb(var(--color-background));
@@ -175,119 +344,119 @@
           Valores por defecto: si Shopify no carga los ajustes globales, la escala no cae a 0
           (con 0 todo el texto y los contenedores medidos en rem desaparecen).
         {%- endcomment -%}
-        {%- assign body_scale = settings.body_scale | default: 100 -%}
-        {%- assign heading_scale = settings.heading_scale | default: 100 %}
+        {%- assign body_scale = v_body_scale | default: 100 -%}
+        {%- assign heading_scale = v_heading_scale | default: 100 %}
         --font-body-scale: {{ body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ heading_scale | times: 1.0 | divided_by: body_scale }};
 
         --media-padding: {{ settings.media_padding }}px;
-        --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
-        --media-border-width: {{ settings.media_border_thickness }}px;
-        --media-radius: {{ settings.media_radius }}px;
-        --media-shadow-opacity: {{ settings.media_shadow_opacity | divided_by: 100.0 }};
-        --media-shadow-horizontal-offset: {{ settings.media_shadow_horizontal_offset }}px;
-        --media-shadow-vertical-offset: {{ settings.media_shadow_vertical_offset }}px;
-        --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
-        --media-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --media-border-opacity: {{ v_media_border_opacity | divided_by: 100.0 }};
+        --media-border-width: {{ v_media_border_thickness }}px;
+        --media-radius: {{ v_media_radius }}px;
+        --media-shadow-opacity: {{ v_media_shadow_opacity | divided_by: 100.0 }};
+        --media-shadow-horizontal-offset: {{ v_media_shadow_horizontal_offset }}px;
+        --media-shadow-vertical-offset: {{ v_media_shadow_vertical_offset }}px;
+        --media-shadow-blur-radius: {{ v_media_shadow_blur }}px;
+        --media-shadow-visible: {% if v_media_shadow_opacity > 0 %}1{% else %}0{% endif %};
 
-        --page-width: {{ settings.page_width | default: 1400 | divided_by: 10 }}rem;
-        --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
+        --page-width: {{ v_page_width | default: 1400 | divided_by: 10 }}rem;
+        --page-width-margin: {% if v_page_width == '1600' %}2{% else %}0{% endif %}rem;
 
-        --product-card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
-        --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+        --product-card-image-padding: {{ v_card_image_padding | divided_by: 10.0 }}rem;
+        --product-card-corner-radius: {{ v_card_corner_radius | divided_by: 10.0 }}rem;
         --product-card-text-alignment: {{ settings.card_text_alignment }};
-        --product-card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
-        --product-card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
-        --product-card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
-        --product-card-shadow-visible: {% if settings.card_shadow_opacity > 0 %}1{% else %}0{% endif %};
-        --product-card-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-        --product-card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-        --product-card-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
+        --product-card-border-width: {{ v_card_border_thickness | divided_by: 10.0 }}rem;
+        --product-card-border-opacity: {{ v_card_border_opacity | divided_by: 100.0 }};
+        --product-card-shadow-opacity: {{ v_card_shadow_opacity | divided_by: 100.0 }};
+        --product-card-shadow-visible: {% if v_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --product-card-shadow-horizontal-offset: {{ v_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --product-card-shadow-vertical-offset: {{ v_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --product-card-shadow-blur-radius: {{ v_card_shadow_blur | divided_by: 10.0 }}rem;
 
-        --collection-card-image-padding: {{ settings.collection_card_image_padding | divided_by: 10.0 }}rem;
-        --collection-card-corner-radius: {{ settings.collection_card_corner_radius | divided_by: 10.0 }}rem;
+        --collection-card-image-padding: {{ v_collection_card_image_padding | divided_by: 10.0 }}rem;
+        --collection-card-corner-radius: {{ v_collection_card_corner_radius | divided_by: 10.0 }}rem;
         --collection-card-text-alignment: {{ settings.collection_card_text_alignment }};
-        --collection-card-border-width: {{ settings.collection_card_border_thickness | divided_by: 10.0 }}rem;
-        --collection-card-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
-        --collection-card-shadow-opacity: {{ settings.collection_card_shadow_opacity | divided_by: 100.0 }};
-        --collection-card-shadow-visible: {% if settings.collection_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
-        --collection-card-shadow-horizontal-offset: {{ settings.collection_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-        --collection-card-shadow-vertical-offset: {{ settings.collection_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-        --collection-card-shadow-blur-radius: {{ settings.collection_card_shadow_blur | divided_by: 10.0 }}rem;
+        --collection-card-border-width: {{ v_collection_card_border_thickness | divided_by: 10.0 }}rem;
+        --collection-card-border-opacity: {{ v_collection_card_border_opacity | divided_by: 100.0 }};
+        --collection-card-shadow-opacity: {{ v_collection_card_shadow_opacity | divided_by: 100.0 }};
+        --collection-card-shadow-visible: {% if v_collection_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --collection-card-shadow-horizontal-offset: {{ v_collection_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --collection-card-shadow-vertical-offset: {{ v_collection_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --collection-card-shadow-blur-radius: {{ v_collection_card_shadow_blur | divided_by: 10.0 }}rem;
 
-        --blog-card-image-padding: {{ settings.blog_card_image_padding | divided_by: 10.0 }}rem;
-        --blog-card-corner-radius: {{ settings.blog_card_corner_radius | divided_by: 10.0 }}rem;
+        --blog-card-image-padding: {{ v_blog_card_image_padding | divided_by: 10.0 }}rem;
+        --blog-card-corner-radius: {{ v_blog_card_corner_radius | divided_by: 10.0 }}rem;
         --blog-card-text-alignment: {{ settings.blog_card_text_alignment }};
-        --blog-card-border-width: {{ settings.blog_card_border_thickness | divided_by: 10.0 }}rem;
-        --blog-card-border-opacity: {{ settings.blog_card_border_opacity | divided_by: 100.0 }};
-        --blog-card-shadow-opacity: {{ settings.blog_card_shadow_opacity | divided_by: 100.0 }};
-        --blog-card-shadow-visible: {% if settings.blog_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
-        --blog-card-shadow-horizontal-offset: {{ settings.blog_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-        --blog-card-shadow-vertical-offset: {{ settings.blog_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-        --blog-card-shadow-blur-radius: {{ settings.blog_card_shadow_blur | divided_by: 10.0 }}rem;
+        --blog-card-border-width: {{ v_blog_card_border_thickness | divided_by: 10.0 }}rem;
+        --blog-card-border-opacity: {{ v_blog_card_border_opacity | divided_by: 100.0 }};
+        --blog-card-shadow-opacity: {{ v_blog_card_shadow_opacity | divided_by: 100.0 }};
+        --blog-card-shadow-visible: {% if v_blog_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --blog-card-shadow-horizontal-offset: {{ v_blog_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --blog-card-shadow-vertical-offset: {{ v_blog_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --blog-card-shadow-blur-radius: {{ v_blog_card_shadow_blur | divided_by: 10.0 }}rem;
 
-        --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
+        --badge-corner-radius: {{ v_badge_corner_radius | divided_by: 10.0 }}rem;
 
-        --popup-border-width: {{ settings.popup_border_thickness }}px;
-        --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
-        --popup-corner-radius: {{ settings.popup_corner_radius }}px;
-        --popup-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
-        --popup-shadow-horizontal-offset: {{ settings.popup_shadow_horizontal_offset }}px;
-        --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
-        --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
+        --popup-border-width: {{ v_popup_border_thickness }}px;
+        --popup-border-opacity: {{ v_popup_border_opacity | divided_by: 100.0 }};
+        --popup-corner-radius: {{ v_popup_corner_radius }}px;
+        --popup-shadow-opacity: {{ v_popup_shadow_opacity | divided_by: 100.0 }};
+        --popup-shadow-horizontal-offset: {{ v_popup_shadow_horizontal_offset }}px;
+        --popup-shadow-vertical-offset: {{ v_popup_shadow_vertical_offset }}px;
+        --popup-shadow-blur-radius: {{ v_popup_shadow_blur }}px;
 
-        --drawer-border-width: {{ settings.drawer_border_thickness }}px;
-        --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
-        --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
-        --drawer-shadow-horizontal-offset: {{ settings.drawer_shadow_horizontal_offset }}px;
-        --drawer-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
-        --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
+        --drawer-border-width: {{ v_drawer_border_thickness }}px;
+        --drawer-border-opacity: {{ v_drawer_border_opacity | divided_by: 100.0 }};
+        --drawer-shadow-opacity: {{ v_drawer_shadow_opacity | divided_by: 100.0 }};
+        --drawer-shadow-horizontal-offset: {{ v_drawer_shadow_horizontal_offset }}px;
+        --drawer-shadow-vertical-offset: {{ v_drawer_shadow_vertical_offset }}px;
+        --drawer-shadow-blur-radius: {{ v_drawer_shadow_blur }}px;
 
-        --spacing-sections-desktop: {{ settings.spacing_sections }}px;
-        --spacing-sections-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
+        --spacing-sections-desktop: {{ v_spacing_sections }}px;
+        --spacing-sections-mobile: {% if v_spacing_sections < 24 %}{{ v_spacing_sections }}{% else %}{{ v_spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
 
-        --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
-        --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
-        --grid-mobile-vertical-spacing: {{ settings.spacing_grid_vertical | divided_by: 2 }}px;
-        --grid-mobile-horizontal-spacing: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
+        --grid-desktop-vertical-spacing: {{ v_spacing_grid_vertical }}px;
+        --grid-desktop-horizontal-spacing: {{ v_spacing_grid_horizontal }}px;
+        --grid-mobile-vertical-spacing: {{ v_spacing_grid_vertical | divided_by: 2 }}px;
+        --grid-mobile-horizontal-spacing: {{ v_spacing_grid_horizontal | divided_by: 2 }}px;
 
-        --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
-        --text-boxes-border-width: {{ settings.text_boxes_border_thickness }}px;
-        --text-boxes-radius: {{ settings.text_boxes_radius }}px;
-        --text-boxes-shadow-opacity: {{ settings.text_boxes_shadow_opacity | divided_by: 100.0 }};
-        --text-boxes-shadow-visible: {% if settings.text_boxes_shadow_opacity > 0 %}1{% else %}0{% endif %};
-        --text-boxes-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset }}px;
-        --text-boxes-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset }}px;
-        --text-boxes-shadow-blur-radius: {{ settings.text_boxes_shadow_blur }}px;
+        --text-boxes-border-opacity: {{ v_text_boxes_border_opacity | divided_by: 100.0 }};
+        --text-boxes-border-width: {{ v_text_boxes_border_thickness }}px;
+        --text-boxes-radius: {{ v_text_boxes_radius }}px;
+        --text-boxes-shadow-opacity: {{ v_text_boxes_shadow_opacity | divided_by: 100.0 }};
+        --text-boxes-shadow-visible: {% if v_text_boxes_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --text-boxes-shadow-horizontal-offset: {{ v_text_boxes_shadow_horizontal_offset }}px;
+        --text-boxes-shadow-vertical-offset: {{ v_text_boxes_shadow_vertical_offset }}px;
+        --text-boxes-shadow-blur-radius: {{ v_text_boxes_shadow_blur }}px;
 
-        --buttons-radius: {{ settings.buttons_radius }}px;
-        --buttons-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
-        --buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
-        --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
-        --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
-        --buttons-shadow-visible: {% if settings.buttons_shadow_opacity > 0 %}1{% else %}0{% endif %};
-        --buttons-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
-        --buttons-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
-        --buttons-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
-        --buttons-border-offset: {% if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
+        --buttons-radius: {{ v_buttons_radius }}px;
+        --buttons-radius-outset: {% if v_buttons_radius > 0 %}{{ v_buttons_radius | plus: v_buttons_border_thickness }}{% else %}0{% endif %}px;
+        --buttons-border-width: {% if v_buttons_border_opacity > 0 %}{{ v_buttons_border_thickness }}{% else %}0{% endif %}px;
+        --buttons-border-opacity: {{ v_buttons_border_opacity | divided_by: 100.0 }};
+        --buttons-shadow-opacity: {{ v_buttons_shadow_opacity | divided_by: 100.0 }};
+        --buttons-shadow-visible: {% if v_buttons_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --buttons-shadow-horizontal-offset: {{ v_buttons_shadow_horizontal_offset }}px;
+        --buttons-shadow-vertical-offset: {{ v_buttons_shadow_vertical_offset }}px;
+        --buttons-shadow-blur-radius: {{ v_buttons_shadow_blur }}px;
+        --buttons-border-offset: {% if v_buttons_radius > 0 or v_buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
 
-        --inputs-radius: {{ settings.inputs_radius }}px;
-        --inputs-border-width: {{ settings.inputs_border_thickness }}px;
-        --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
-        --inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
-        --inputs-shadow-horizontal-offset: {{ settings.inputs_shadow_horizontal_offset }}px;
-        --inputs-margin-offset: {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_opacity > 0 %}{{ settings.inputs_shadow_vertical_offset | abs }}{% else %}0{% endif %}px;
-        --inputs-shadow-vertical-offset: {{ settings.inputs_shadow_vertical_offset }}px;
-        --inputs-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
-        --inputs-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
+        --inputs-radius: {{ v_inputs_radius }}px;
+        --inputs-border-width: {{ v_inputs_border_thickness }}px;
+        --inputs-border-opacity: {{ v_inputs_border_opacity | divided_by: 100.0 }};
+        --inputs-shadow-opacity: {{ v_inputs_shadow_opacity | divided_by: 100.0 }};
+        --inputs-shadow-horizontal-offset: {{ v_inputs_shadow_horizontal_offset }}px;
+        --inputs-margin-offset: {% if v_inputs_shadow_vertical_offset != 0 and v_inputs_shadow_opacity > 0 %}{{ v_inputs_shadow_vertical_offset | abs }}{% else %}0{% endif %}px;
+        --inputs-shadow-vertical-offset: {{ v_inputs_shadow_vertical_offset }}px;
+        --inputs-shadow-blur-radius: {{ v_inputs_shadow_blur }}px;
+        --inputs-radius-outset: {% if v_inputs_radius > 0 %}{{ v_inputs_radius | plus: v_inputs_border_thickness }}{% else %}0{% endif %}px;
 
-        --variant-pills-radius: {{ settings.variant_pills_radius }}px;
-        --variant-pills-border-width: {{ settings.variant_pills_border_thickness }}px;
-        --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
-        --variant-pills-shadow-opacity: {{ settings.variant_pills_shadow_opacity | divided_by: 100.0 }};
-        --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
-        --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
-        --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+        --variant-pills-radius: {{ v_variant_pills_radius }}px;
+        --variant-pills-border-width: {{ v_variant_pills_border_thickness }}px;
+        --variant-pills-border-opacity: {{ v_variant_pills_border_opacity | divided_by: 100.0 }};
+        --variant-pills-shadow-opacity: {{ v_variant_pills_shadow_opacity | divided_by: 100.0 }};
+        --variant-pills-shadow-horizontal-offset: {{ v_variant_pills_shadow_horizontal_offset }}px;
+        --variant-pills-shadow-vertical-offset: {{ v_variant_pills_shadow_vertical_offset }}px;
+        --variant-pills-shadow-blur-radius: {{ v_variant_pills_shadow_blur }}px;
       }
 
       *,
