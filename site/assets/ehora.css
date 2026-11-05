@@ -68,7 +68,7 @@ body {
 
 h1, h2, h3, h4,
 .h0, .h1, .h2, .h3, .h4 {
-  letter-spacing: -0.012em;
+  letter-spacing: 0;
   font-optical-sizing: auto;
   text-wrap: balance;
 }
@@ -112,7 +112,7 @@ p { text-wrap: pretty; }
   font-family: var(--font-heading-family);
   font-weight: 300;
   line-height: 1.02;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
   margin: 0;
 }
@@ -320,7 +320,7 @@ p { text-wrap: pretty; }
   font-family: var(--font-heading-family);
   font-size: 2.8rem;
   font-weight: 300;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 /* ---------- Tarjetas de producto ---------- */
@@ -330,7 +330,7 @@ p { text-wrap: pretty; }
   font-family: var(--font-heading-family);
   font-weight: 400;
   font-size: 1.9rem;
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
 }
 
 .card .price {
@@ -365,7 +365,7 @@ p { text-wrap: pretty; }
   font-family: var(--font-heading-family);
   font-size: var(--step-2);
   font-weight: 300;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   text-transform: none;
   opacity: 1;
 }
@@ -438,7 +438,7 @@ p { text-wrap: pretty; }
   font-size: var(--step-5);
   font-weight: 300;
   line-height: 0.98;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   max-width: 14ch;
   margin: 0;
   color: inherit;
@@ -1066,7 +1066,7 @@ p { text-wrap: pretty; }
   font-size: clamp(5.2rem, 2rem + 8.4vw, 15.2rem);
   font-weight: 300;
   line-height: 0.94;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
 }
 
@@ -1151,7 +1151,7 @@ p { text-wrap: pretty; }
   font-size: clamp(3.4rem, 1.6rem + 4vw, 8rem);
   font-weight: 300;
   line-height: 1.1;
-  letter-spacing: -0.022em;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
   text-wrap: pretty;
 }
@@ -1185,7 +1185,7 @@ p { text-wrap: pretty; }
   font-size: var(--step-3);
   font-weight: 300;
   line-height: 1.05;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
 }
 
 .ehora-gallery__text {
@@ -1319,7 +1319,7 @@ p { text-wrap: pretty; }
   font-size: clamp(3.2rem, 1.6rem + 3vw, 5.6rem);
   font-weight: 300;
   line-height: 1;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
 }
 
@@ -1336,7 +1336,7 @@ p { text-wrap: pretty; }
   font-family: var(--font-heading-family);
   font-size: clamp(8.8rem, 3rem + 10vw, 18rem);
   font-weight: 300;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1877,7 +1877,7 @@ h1, h2, h3, .h0, .h1, .h2,
   font-size: clamp(4.4rem, 2rem + 6.4vw, 13rem);
   font-weight: 300;
   line-height: 0.95;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   text-align: center;
   color: var(--ehora-warm-white);
   pointer-events: none;
@@ -2273,7 +2273,7 @@ html.ehora-loading .ehora-loader {
   font-weight: 300;
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .ehora-loader__unit {
@@ -2426,7 +2426,7 @@ ehora-scroll-scene { display: block; }
   font-size: clamp(4rem, 1.6rem + 5.6vw, 10.4rem);
   font-weight: 300;
   line-height: 1.04;
-  letter-spacing: -0.028em;
+  letter-spacing: 0;
   text-align: center;
   text-wrap: balance;
   color: rgb(var(--color-foreground));
@@ -2534,7 +2534,7 @@ ehora-scroll-scene { display: block; }
   font-size: clamp(4.4rem, 2rem + 6vw, 11.2rem);
   font-weight: 300;
   line-height: 1;
-  letter-spacing: -0.028em;
+  letter-spacing: 0;
   text-align: center;
   color: #fcfbf7;
   text-shadow: 0 0.2rem 3.2rem rgba(10, 42, 30, 0.35);
@@ -2603,7 +2603,7 @@ ehora-scroll-scene { display: block; }
   font-size: clamp(3.4rem, 1.6rem + 3.4vw, 6.4rem);
   font-weight: 300;
   line-height: 1;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
 }
 
@@ -2911,7 +2911,7 @@ ehora-scroll-scene { display: block; }
   font-size: clamp(4rem, 2rem + 5vw, 9.6rem);
   font-weight: 300;
   line-height: 0.95;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
   font-optical-sizing: none;
   font-variation-settings: 'opsz' 48;
@@ -3065,7 +3065,7 @@ ehora-scroll-scene { display: block; }
   font-size: clamp(3.2rem, 2rem + 2.4vw, 5.6rem);
   font-weight: 300;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .ehora-showcase__end-arrow {

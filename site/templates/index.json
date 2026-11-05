@@ -13,19 +13,10 @@
         "text": "Accesorios de pádel y tenis para quienes cuidan el juego antes, durante y después del partido.",
         "button_label_1": "Comprar el paletero",
         "button_link_1": "/collections/all",
-        "fallback_anchor": "manifiesto",
+        "fallback_anchor": "coleccion",
         "button_label_2": "Descubrir EHORA",
-        "button_link_2": "/#manifiesto",
+        "button_link_2": "/#paletero",
         "color_scheme": "scheme-4"
-      }
-    },
-    "manifiesto": {
-      "type": "ehora-words",
-      "settings": {
-        "anchor": "manifiesto",
-        "eyebrow": "Manifiesto",
-        "text": "El juego no acaba con el partido. Sigue en lo que llevas a la pista. Para eso existe EHORA.",
-        "color_scheme": "scheme-2"
       }
     },
     "paletero": {
@@ -417,7 +408,6 @@
     "hero",
     "coleccion",
     "frases",
-    "manifiesto",
     "paletero",
     "colores",
     "formas",
