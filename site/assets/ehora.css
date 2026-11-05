@@ -2536,6 +2536,7 @@ ehora-scroll-scene { display: block; }
   line-height: 1;
   letter-spacing: 0;
   text-align: center;
+  text-wrap: balance;
   color: #fcfbf7;
   text-shadow: 0 0.2rem 3.2rem rgba(10, 42, 30, 0.35);
 }
@@ -2543,7 +2544,7 @@ ehora-scroll-scene { display: block; }
 .ehora-columns:not(.is-ready) .ehora-columns__title:not(:first-child) { display: none; }
 
 .ehora-columns__w {
-  --w: clamp(0, calc(var(--vis, 1) * (var(--m) + 1) - var(--j)), 1);
+  --w: var(--vis, 1);
   display: inline-block;
   opacity: var(--w);
   filter: blur(calc((1 - var(--w)) * 24px));
@@ -2678,13 +2679,13 @@ ehora-scroll-scene { display: block; }
 }
 
 .ehora-pressure__grid-line {
-  stroke: rgba(var(--color-foreground), 0.12);
+  stroke: rgba(var(--ink), 0.22);
   stroke-width: 1;
   stroke-dasharray: 2 6;
 }
 
 .ehora-pressure__axis {
-  stroke: rgba(var(--color-foreground), 0.45);
+  stroke: rgba(var(--ink), 0.7);
   stroke-width: 1;
 }
 
@@ -2695,7 +2696,7 @@ ehora-scroll-scene { display: block; }
 }
 
 .ehora-pressure__line--drop {
-  stroke: rgba(var(--color-foreground), 0.55);
+  stroke: rgba(var(--ink), 0.6);
   stroke-width: 2;
   stroke-dashoffset: calc(1 - var(--draw-a));
   opacity: clamp(0, calc(var(--draw-a) * 20), 1);
@@ -2709,7 +2710,7 @@ ehora-scroll-scene { display: block; }
 }
 
 .ehora-pressure__area {
-  fill: rgba(var(--color-foreground), 0.06);
+  fill: rgba(var(--ink), 0.1);
   clip-path: inset(0 calc((1 - var(--draw-a)) * 100%) 0 0);
 }
 
@@ -2728,7 +2729,7 @@ ehora-scroll-scene { display: block; }
   translate: -50% -50%;
   border-radius: 50%;
   background: rgb(var(--color-background));
-  border: 2px solid rgba(var(--color-foreground), 0.7);
+  border: 2px solid rgb(var(--ink));
 }
 
 .ehora-pressure__spot--brand .ehora-pressure__dot {
@@ -2756,9 +2757,9 @@ ehora-scroll-scene { display: block; }
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgb(var(--color-foreground));
-  background: rgba(var(--color-background), 0.85);
-  border: 1px solid rgba(var(--color-foreground), 0.18);
+  color: rgb(var(--ink));
+  background: rgba(var(--color-background), 0.9);
+  border: 1px solid rgba(var(--ink), 0.35);
 }
 
 .ehora-pressure__spot--flip .ehora-pressure__tag { left: auto; right: 1.6rem; }
@@ -2780,7 +2781,7 @@ ehora-scroll-scene { display: block; }
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(var(--color-foreground), 0.6);
+  color: rgba(var(--ink), 0.8);
 }
 
 .ehora-pressure__y::before { content: '↑ '; }
