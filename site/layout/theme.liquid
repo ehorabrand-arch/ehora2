@@ -171,8 +171,14 @@
         --font-heading-weight: 300;
         {%- endif %}
 
-        --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
-        --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
+        {%- comment -%}
+          Valores por defecto: si Shopify no carga los ajustes globales, la escala no cae a 0
+          (con 0 todo el texto y los contenedores medidos en rem desaparecen).
+        {%- endcomment -%}
+        {%- assign body_scale = settings.body_scale | default: 100 -%}
+        {%- assign heading_scale = settings.heading_scale | default: 100 %}
+        --font-body-scale: {{ body_scale | divided_by: 100.0 }};
+        --font-heading-scale: {{ heading_scale | times: 1.0 | divided_by: body_scale }};
 
         --media-padding: {{ settings.media_padding }}px;
         --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
@@ -184,7 +190,7 @@
         --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
         --media-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
 
-        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+        --page-width: {{ settings.page_width | default: 1400 | divided_by: 10 }}rem;
         --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
 
         --product-card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;

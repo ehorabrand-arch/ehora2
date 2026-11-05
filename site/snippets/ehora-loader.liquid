@@ -5,7 +5,7 @@
 <script>
   (function () {
     try {
-      var once = {{ settings.ehora_loader_once | json }};
+      var once = {% if settings.ehora_loader_once %}true{% else %}false{% endif %};
       var seen = once && sessionStorage.getItem('ehora-loader-seen');
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!seen && !reduce) document.documentElement.classList.add('ehora-loading');
