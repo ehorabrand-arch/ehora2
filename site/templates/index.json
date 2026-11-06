@@ -526,12 +526,45 @@
         "link": "",
         "offset": 40
       }
+    },
+    "frases": {
+      "type": "ehora-flip",
+      "blocks": {
+        "f1": {
+          "type": "phrase",
+          "settings": {
+            "text": "Pensado para la <em>pista</em>."
+          }
+        },
+        "f2": {
+          "type": "phrase",
+          "settings": {
+            "text": "Del pádel al <em>tenis</em>."
+          }
+        },
+        "f3": {
+          "type": "phrase",
+          "settings": {
+            "text": "Cuidado en cada <em>detalle</em>."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
     "portada",
     "coleccion",
     "tira-1",
+    "frases",
     "pade-tenis",
     "presion",
     "comparativa",

@@ -318,6 +318,21 @@ body { background: var(--club-paper); }
 
 @keyframes clubMarquee { to { transform: translateX(-50%); } }
 
+/* ---------- Frases que giran, versión fina ---------- */
+
+.ehora-flip .ehora-flip__stack {
+  font-size: clamp(3rem, 1.6rem + 3.4vw, 7.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.035em;
+  font-variation-settings: 'opsz' 144;
+  color: rgba(var(--club-ink), 0.88);
+}
+
+.ehora-flip .ehora-flip__stack em { font-weight: 300; }
+
+.ehora-flip.is-ready { height: calc(100svh + var(--n) * 45svh); }
+
 /* ---------- Texto de marca ---------- */
 
 .club-statement { padding-block: clamp(6.4rem, 4rem + 5vw, 12.8rem); }
