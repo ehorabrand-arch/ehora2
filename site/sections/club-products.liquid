@@ -8,7 +8,7 @@
     assign collection_url = section.settings.collection.url
   endif
 -%}
-<section class="club-products" aria-labelledby="ClubProducts-{{ section.id }}" style="--club-cols: {{ section.settings.columns }};">
+<section class="club-products" data-hide-buy-bar aria-labelledby="ClubProducts-{{ section.id }}" style="--club-cols: {{ section.settings.columns }};">
   <div class="club-container">
     {%- if section.settings.heading != blank -%}
       <h2 id="ClubProducts-{{ section.id }}" class="club-title">{{ section.settings.heading | escape }}</h2>
