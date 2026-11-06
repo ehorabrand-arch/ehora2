@@ -1,0 +1,386 @@
+/* ==========================================================================
+   EHORA · Estilo club (rama de prueba)
+   Fondo gris claro, verde muy oscuro, mayúsculas espaciadas, cabecera flotante
+   translúcida, rejillas de estudio y tiras de fotos en movimiento.
+   ========================================================================== */
+
+:root {
+  --club-ink: 10, 42, 30;
+  --club-green: #123f2e;
+  --club-paper: #efeeea;
+  --club-card: #e6e5e0;
+  --club-track: 0.2em;
+  --club-gap: clamp(1.2rem, 0.6rem + 1.2vw, 2.4rem);
+  --club-pad: clamp(1.6rem, 1rem + 2vw, 4rem);
+}
+
+body { background: var(--club-paper); }
+
+.club-container {
+  width: 100%;
+  max-width: 160rem;
+  margin-inline: auto;
+  padding-inline: var(--club-pad);
+}
+
+/* Títulos y etiquetas: serif en mayúsculas muy espaciadas */
+.club-title {
+  margin: 0 0 var(--space-2xl);
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.6rem, 1.3rem + 0.6vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(var(--club-ink));
+}
+
+/* Botones: verde lleno o fantasma, mayúsculas espaciadas */
+.club-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.4rem;
+  padding: 0 2.8rem;
+  border: 1px solid var(--club-green);
+  border-radius: 2px;
+  background: var(--club-green);
+  color: #f7f5ef;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), transform 140ms var(--ease-out);
+}
+
+.club-button:active { transform: scale(0.97); }
+
+.club-button--ghost {
+  background: rgba(10, 42, 30, 0.32);
+  border-color: rgba(247, 245, 239, 0.85);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .club-button:hover { background: #0a2a1e; }
+  .club-button--ghost:hover { background: #f7f5ef; color: #0a2a1e; }
+}
+
+/* ---------- Barra de anuncio y cabecera flotante ---------- */
+
+.announcement-bar-section .announcement-bar { background: var(--club-green); }
+.announcement-bar__message {
+  font-size: 1.1rem;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 749px) {
+  .announcement-bar__message { font-size: 0.95rem; letter-spacing: 0.12em; }
+  .announcement-bar__message svg { display: none; }
+}
+
+.section-header { background: transparent; }
+
+.section-header .header-wrapper.gradient {
+  margin: 1rem var(--club-pad) 0;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 1.2rem;
+  background: rgba(239, 238, 234, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 0.8rem 2.4rem rgba(10, 42, 30, 0.08);
+}
+
+.section-header .header-wrapper--border-bottom { border-bottom: 1px solid rgba(255, 255, 255, 0.55); }
+.section-header .header { padding-top: 1.2rem; padding-bottom: 1.2rem; max-width: none; }
+
+.header__heading-link .h2,
+.header__heading-link {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgb(var(--club-ink));
+}
+
+.header__menu-item,
+.header__menu-item span {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+  color: rgb(var(--club-ink));
+}
+
+/* En la home la portada empieza bajo la cabecera flotante */
+.template-index .section-header { margin-bottom: calc(-1 * var(--club-header-h, 8.6rem)); }
+
+/* ---------- Portada ---------- */
+
+.club-hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  overflow: hidden;
+  color: #f7f5ef;
+}
+
+.club-hero__media,
+.club-hero__shade { position: absolute; inset: 0; }
+
+.club-hero__media img,
+.club-hero__media .ehora-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.club-hero__shade {
+  background:
+    linear-gradient(180deg, rgba(10, 42, 30, 0.2) 0%, rgba(10, 42, 30, 0) 35%),
+    radial-gradient(70% 55% at 50% 55%, rgba(10, 42, 30, 0.34), rgba(10, 42, 30, 0) 75%);
+}
+
+.club-hero__content {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-l);
+  padding: var(--club-pad);
+  text-align: center;
+}
+
+.club-hero__title {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: clamp(3.4rem, 1.6rem + 5vw, 8.4rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: #f7f5ef;
+  text-shadow: 0 0.2rem 2.4rem rgba(10, 42, 30, 0.35);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .club-hero__media img { animation: clubZoom 1600ms var(--ease-out) both; }
+  .club-hero__content { animation: clubRise 900ms 200ms var(--ease-out) both; }
+}
+
+@keyframes clubZoom { from { transform: scale(1.06); } to { transform: none; } }
+@keyframes clubRise { from { opacity: 0; transform: translateY(1.6rem); } to { opacity: 1; transform: none; } }
+
+/* ---------- Rejilla de producto ---------- */
+
+.club-products { padding-block: clamp(4.8rem, 3rem + 4vw, 9.6rem); }
+
+.club-products__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(3.2rem, 2rem + 2vw, 5.6rem) var(--club-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width: 990px) {
+  .club-products__grid { grid-template-columns: repeat(var(--club-cols, 4), minmax(0, 1fr)); }
+}
+
+.club-card__link {
+  display: grid;
+  gap: var(--space-xs);
+  text-align: center;
+  text-decoration: none;
+  color: rgb(var(--club-ink));
+}
+
+.club-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f1f0ec 0%, var(--club-card) 100%);
+  margin-bottom: var(--space-s);
+}
+
+.club-card__img,
+.club-card__img img,
+.club-card__img .ehora-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.club-card__img img { object-fit: cover; transition: transform 900ms var(--ease-out); }
+.club-card__img--hover { opacity: 0; transition: opacity 500ms var(--ease-out); }
+
+@media (hover: hover) and (pointer: fine) {
+  .club-card__link:hover .club-card__img--hover { opacity: 1; }
+  .club-card__link:hover .club-card__img img { transform: scale(1.03); }
+}
+
+.club-card__badge {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(239, 238, 234, 0.9);
+  font-size: 1rem;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+}
+
+.club-card__title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.15rem, 1rem + 0.3vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+}
+
+.club-card__price {
+  font-family: var(--font-heading-family);
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  color: rgba(var(--club-ink), 0.6);
+}
+
+.club-products__more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(4rem, 3rem + 2vw, 6.4rem);
+}
+
+/* ---------- Tira de fotos en movimiento ---------- */
+
+.club-marquee {
+  overflow: hidden;
+  padding-block: clamp(1.6rem, 1rem + 1vw, 2.4rem);
+  border-block: 1px solid rgba(var(--club-ink), 0.08);
+}
+
+.club-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: clubMarquee var(--club-speed, 60s) linear infinite;
+}
+
+.club-marquee--reverse .club-marquee__track { animation-direction: reverse; }
+
+.club-marquee__list {
+  display: flex;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0 1.2rem 0 0;
+  list-style: none;
+}
+
+.club-marquee__item {
+  width: clamp(16rem, 10rem + 12vw, 30rem);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background: var(--club-card);
+}
+
+.club-marquee__item img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (hover: hover) and (pointer: fine) {
+  .club-marquee:hover .club-marquee__track { animation-play-state: paused; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .club-marquee { overflow-x: auto; }
+  .club-marquee__track { animation: none; }
+  .club-marquee__list[aria-hidden='true'] { display: none; }
+}
+
+@keyframes clubMarquee { to { transform: translateX(-50%); } }
+
+/* ---------- Texto de marca ---------- */
+
+.club-statement { padding-block: clamp(6.4rem, 4rem + 5vw, 12.8rem); }
+
+.club-statement__inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-l);
+  max-width: 72rem;
+  text-align: center;
+}
+
+.club-statement__inner .club-title { margin: 0; }
+
+.club-statement__text {
+  font-family: var(--font-heading-family);
+  font-size: clamp(2rem, 1.5rem + 1.2vw, 3rem);
+  font-weight: 300;
+  line-height: 1.35;
+  color: rgb(var(--club-ink));
+}
+
+.club-statement__text p { margin: 0; }
+
+/* ---------- Pie claro en tres columnas ---------- */
+
+.footer.gradient { background: var(--club-paper); }
+.footer { border-top: 1px solid rgba(var(--club-ink), 0.1); color: rgba(var(--club-ink), 0.8); }
+
+.footer .footer-block__heading,
+.footer .footer-block__newsletter .footer-block__heading {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+  opacity: 1;
+  color: rgb(var(--club-ink));
+}
+
+.footer .footer-block__newsletter-text { font-size: 1.4rem; opacity: 0.8; }
+
+.footer .newsletter-form__field-wrapper .field__input { background: transparent; }
+
+.footer__copyright,
+.footer__copyright a {
+  font-size: 1rem;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 990px) {
+  .footer .footer__content-top { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  .footer .footer-block--newsletter { order: -1; }
+}
+
+/* ---------- Páginas de producto y colección ---------- */
+
+.card__heading,
+.card__heading a,
+.product__title h1 {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: var(--club-track);
+  text-transform: uppercase;
+}
+
+.card__heading { font-size: 1.3rem; text-align: center; }
+.card-information { text-align: center; }
+.product__title h1 { font-size: clamp(2rem, 1.6rem + 1vw, 2.8rem); }
+
+.button:not(.button--secondary):not(.button--tertiary) {
+  background-color: var(--club-green);
+  border-radius: 2px;
+  letter-spacing: var(--club-track);
+}

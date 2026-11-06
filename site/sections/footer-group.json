@@ -5,37 +5,29 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "ehora": {
-          "type": "text",
-          "settings": {
-            "heading": "EHORA",
-            "subtext": "<p>Accesorios de pádel y tenis para quienes cuidan el juego antes, durante y después del partido.</p>"
-          }
-        },
-        "coleccion": {
-          "type": "text",
-          "settings": {
-            "heading": "Colección",
-            "subtext": "<p><a href=\"/collections/all\">Toda la colección</a></p><p><a href=\"/search\">Buscar</a></p>"
-          }
-        },
         "ayuda": {
           "type": "text",
           "settings": {
             "heading": "Ayuda",
-            "subtext": "<p><a href=\"/cart\">Carrito</a></p><p><a href=\"/account\">Mi cuenta</a></p>"
+            "subtext": "<p><a href=\"/collections/all\">Toda la colección</a></p><p><a href=\"/search\">Buscar</a></p><p><a href=\"/cart\">Cesta</a></p><p><a href=\"/account\">Mi cuenta</a></p>"
+          }
+        },
+        "sobre": {
+          "type": "text",
+          "settings": {
+            "heading": "Sobre EHORA",
+            "subtext": "<p>Accesorios de pádel y tenis pensados para el club: blanco acolchado, ribete verde y nada que sobre.</p><p>Para quienes cuidan el juego antes, durante y después del partido.</p>"
           }
         }
       },
       "block_order": [
-        "ehora",
-        "coleccion",
-        "ayuda"
+        "ayuda",
+        "sobre"
       ],
       "settings": {
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Notas de EHORA",
+        "newsletter_heading": "Únete al club",
         "enable_follow_on_shop": false,
         "show_social": true,
         "enable_country_selector": false,
@@ -43,9 +35,9 @@
         "payment_enable": true,
         "show_policy": true,
         "margin_top": 0,
-        "padding_top": 64,
+        "padding_top": 48,
         "padding_bottom": 40,
-        "newsletter_text": "Producto, pádel, tenis y lo que ocurre alrededor del juego."
+        "newsletter_text": "Suscríbete y entérate antes que nadie de lanzamientos y novedades de EHORA."
       }
     }
   },

@@ -17,7 +17,7 @@
         "anuncio": {
           "type": "announcement",
           "settings": {
-            "text": "Presentamos EHORA · Paleteros y presurizadores",
+            "text": "Paleteros y presurizadores · Pádel y tenis",
             "link": "/collections/all"
           }
         }
@@ -34,8 +34,8 @@
         "logo_position": "middle-center",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
+        "sticky_header_type": "always",
+        "show_line_separator": false,
         "enable_country_selector": false,
         "enable_language_selector": false,
         "mobile_logo_position": "center",

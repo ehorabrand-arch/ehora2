@@ -1,0 +1,38 @@
+{%- comment -%} Portada a sangre: foto a pantalla completa, titular en mayúsculas y botón fantasma. {%- endcomment -%}
+<section class="club-hero" aria-labelledby="ClubHero-{{ section.id }}">
+  <div class="club-hero__media">
+    {%- render 'ehora-image',
+      image: section.settings.image,
+      fallback: section.settings.default_image,
+      alt: section.settings.image_alt,
+      sizes: '100vw',
+      eager: true
+    -%}
+  </div>
+  <div class="club-hero__shade" aria-hidden="true"></div>
+  <div class="club-hero__content">
+    <h2 id="ClubHero-{{ section.id }}" class="club-hero__title">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="club-button club-button--ghost">
+        {{- section.settings.button_label | escape -}}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Club · Portada",
+  "tag": "div",
+  "class": "section club-hero-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-v2-09.webp" },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo", "default": "Jugadora con el paletero EHORA a la espalda en la pista" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "Nos vemos en la pista" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Ver colección" },
+    { "type": "url", "id": "button_link", "label": "Enlace del botón" }
+  ],
+  "presets": [{ "name": "Club · Portada" }]
+}
+{% endschema %}

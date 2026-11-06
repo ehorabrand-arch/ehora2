@@ -1,521 +1,251 @@
 {
   "sections": {
-    "hero": {
-      "type": "ehora-expand",
+    "portada": {
+      "type": "club-hero",
       "settings": {
-        "default_image": "ehora-v2-03.webp",
-        "image_alt": "Paletero EHORA blanco acolchado con ribete verde, en estudio",
-        "default_background": "ehora-v2-01.webp",
-        "title_left": "El juego,",
-        "title_right": "cuidado al detalle.",
-        "hint": "Desliza para descubrir",
-        "eyebrow": "EHORA",
-        "text": "Accesorios de pádel y tenis para quienes cuidan el juego antes, durante y después del partido.",
-        "button_label_1": "Comprar el paletero",
-        "button_link_1": "/collections/all",
-        "fallback_anchor": "coleccion",
-        "button_label_2": "Descubrir EHORA",
-        "button_link_2": "/#paletero",
-        "color_scheme": "scheme-4"
+        "default_image": "ehora-v2-09.webp",
+        "heading": "Nos vemos en la pista",
+        "button_label": "Ver colección",
+        "image_alt": "Jugadora con el paletero EHORA a la espalda en la pista"
       }
     },
-    "paletero": {
-      "type": "ehora-columns",
-      "blocks": {
-        "pista": {
-          "type": "scene",
-          "settings": {
-            "default_image": "ehora-v2-01.webp",
-            "image_alt": "Paletero EHORA blanco con ribete verde llevado en la mano por la pista",
-            "title": "Para la pista."
-          }
-        },
-        "viaje": {
-          "type": "scene",
-          "settings": {
-            "default_image": "ehora-v2-09.webp",
-            "image_alt": "Jugadora con el paletero EHORA a la espalda, como mochila",
-            "title": "Para el viaje."
-          }
-        },
-        "club": {
-          "type": "scene",
-          "settings": {
-            "default_image": "ehora-v2-10.webp",
-            "image_alt": "Jugadora en la pista con el paletero EHORA al hombro y una pala de pádel",
-            "title": "Para el club."
-          }
-        }
+    "coleccion": {
+      "type": "club-products",
+      "settings": {
+        "heading": "",
+        "columns": 3,
+        "button_label": "Ver colección al completo"
       },
-      "block_order": [
-        "pista",
-        "viaje",
-        "club"
-      ],
-      "settings": {
-        "anchor": "paletero",
-        "heading": "El paletero EHORA",
-        "default_left": "ehora-v2-11.webp",
-        "alt_left": "Detalle de la cremallera, el tirador y el ribete verde del paletero EHORA",
-        "default_right": "ehora-v2-02.webp",
-        "alt_right": "Interior del paletero EHORA con botella, portátil, móvil, neceser y toalla",
-        "color_scheme": "scheme-5"
-      }
-    },
-    "colores": {
-      "type": "ehora-duo",
-      "blocks": {
-        "padel": {
-          "type": "color",
-          "settings": {
-            "default_image": "ehora-v2-06.webp",
-            "image_alt": "Paletero EHORA en una pista de pádel con una pala y una botella",
-            "title": "Pádel",
-            "detail": "Pala, botella y pelotas",
-            "swatch": "",
-            "trim": "",
-            "link": ""
-          }
-        },
-        "tenis": {
-          "type": "color",
-          "settings": {
-            "default_image": "ehora-v2-07.webp",
-            "image_alt": "Paletero EHORA en una pista de tenis con dos raquetas, toalla y pelotas",
-            "title": "Tenis",
-            "detail": "Raquetas, toalla y pelotas",
-            "swatch": "",
-            "trim": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "padel",
-        "tenis"
-      ],
-      "settings": {
-        "eyebrow": "Para los dos",
-        "heading": "Pádel o tenis. Un mismo <em>club</em>.",
-        "color_scheme": "scheme-2"
-      }
-    },
-    "formas": {
-      "type": "ehora-hero",
-      "settings": {
-        "layout": "split",
-        "default_image": "ehora-v2-08.webp",
-        "image_alt": "Detalle del asa acolchada del paletero EHORA con ribete verde",
-        "overlay_opacity": 0,
-        "height": "large",
-        "content_position": "center",
-        "eyebrow": "Tu manera",
-        "heading": "En la mano, al hombro o a la <em>espalda</em>.",
-        "text": "Asas para el día a día y correas para llevarlo como mochila cuando vas cargado.",
-        "button_label_1": "",
-        "button_link_1": "",
-        "fallback_anchor": "",
-        "button_label_2": "Ver paleteros",
-        "button_link_2": "/collections/all",
-        "color_scheme": "scheme-3"
-      }
-    },
-    "presurizador": {
-      "type": "ehora-feature",
-      "blocks": {
-        "pantalla": {
-          "type": "feature",
-          "settings": {
-            "title": "Pantalla digital",
-            "text": "La presión, en bar, siempre a la vista.",
-            "x": 73,
-            "y": 25
-          }
-        },
-        "controles": {
-          "type": "feature",
-          "settings": {
-            "title": "Controles táctiles",
-            "text": "Encendido y ajuste desde la propia tapa.",
-            "x": 40,
-            "y": 34
-          }
-        },
-        "carga": {
-          "type": "feature",
-          "settings": {
-            "title": "Carga USB-C",
-            "text": "Batería recargable, sin pilas.",
-            "x": 60,
-            "y": 47
-          }
-        }
-      },
-      "block_order": [
-        "pantalla",
-        "controles",
-        "carga"
-      ],
-      "settings": {
-        "anchor": "presurizador",
-        "eyebrow": "Presurizador automático",
-        "heading": "La presión, <em>a la vista</em>.",
-        "text": "Guarda tus pelotas, elige la presión y consúltala en la pantalla.",
-        "default_image": "ehora-foto-10.webp",
-        "image_alt": "Presurizador EHORA negro con pantalla digital que marca 1,92 bar sobre una pista de pádel",
-        "link_label": "",
-        "link": "",
-        "color_scheme": "scheme-4",
-        "pressure": "1.92"
-      }
-    },
-    "presion": {
-      "type": "ehora-pressure",
       "blocks": {
         "p1": {
-          "type": "step",
+          "type": "item",
           "settings": {
-            "title": "Pelotas nuevas",
-            "text": "<p>Al abrir el bote, la pelota tiene la presión con la que sale de fábrica. Es cuando mejor responde.</p>",
-            "marker": "Bote nuevo"
+            "title": "Paletero EHORA",
+            "caption": "Próximamente",
+            "default_image": "ehora-v2-04.webp",
+            "default_image_hover": "ehora-v2-12.webp",
+            "badge": "Nuevo"
           }
         },
         "p2": {
-          "type": "step",
+          "type": "item",
           "settings": {
-            "title": "La presión baja",
-            "text": "<p>Una vez abierto el bote, va perdiendo presión con el tiempo, también cuando no se usa.</p>",
-            "marker": "Pierde presión"
+            "title": "Presurizador automático",
+            "caption": "Próximamente",
+            "default_image": "ehora-foto-11.webp",
+            "default_image_hover": "ehora-foto-10.webp"
           }
         },
         "p3": {
-          "type": "step",
+          "type": "item",
           "settings": {
-            "title": "Se nota en la pista",
-            "text": "<p>Menos bote, menos salida. La sensación cambia, aunque la pelota parezca nueva.</p>",
-            "marker": "Menos bote"
-          }
-        },
-        "p4": {
-          "type": "step",
-          "settings": {
-            "title": "Guárdalas bajo presión",
-            "text": "<p>Dentro del presurizador, entre partido y partido, para conservarlas en mejores condiciones durante más tiempo.</p>",
-            "marker": "Con presurizador"
+            "title": "Presurizador manual",
+            "caption": "Próximamente",
+            "default_image": "ehora-foto-12.webp"
           }
         }
       },
       "block_order": [
         "p1",
         "p2",
-        "p3",
-        "p4"
-      ],
-      "settings": {
-        "anchor": "presion",
-        "eyebrow": "La pelota",
-        "heading": "Por qué <em>presurizar</em> tus pelotas.",
-        "intro": "Una pelota de pádel o de tenis no se gasta solo jugando. También se gasta esperando al siguiente partido.",
-        "y_label": "Presión",
-        "x_label": "Tiempo con el bote abierto",
-        "chart_summary": "Curva orientativa: la presión de una pelota baja con el tiempo una vez abierto el bote, y se mantiene cuando se guarda en el presurizador.",
-        "default_image": "ehora-foto-09.webp",
-        "color_scheme": "scheme-3"
-      }
-    },
-    "comparativa": {
-      "type": "ehora-comparison",
-      "blocks": {
-        "metodo": {
-          "type": "row",
-          "settings": {
-            "label": "Método de uso",
-            "metafield": "custom.usage_method",
-            "value_a": "",
-            "value_b": ""
-          }
-        },
-        "presion": {
-          "type": "row",
-          "settings": {
-            "label": "Lectura de presión",
-            "metafield": "custom.pressure_reading",
-            "value_a": "Escala en PSI",
-            "value_b": "Pantalla digital en bar"
-          }
-        },
-        "carga": {
-          "type": "row",
-          "settings": {
-            "label": "Alimentación",
-            "metafield": "custom.power",
-            "value_a": "Sin batería",
-            "value_b": "Batería recargable USB-C"
-          }
-        },
-        "capacidad": {
-          "type": "row",
-          "settings": {
-            "label": "Capacidad",
-            "metafield": "custom.capacity",
-            "value_a": "",
-            "value_b": ""
-          }
-        },
-        "ideal": {
-          "type": "row",
-          "settings": {
-            "label": "Ideal para",
-            "metafield": "custom.ideal_for",
-            "value_a": "",
-            "value_b": ""
-          }
-        }
-      },
-      "block_order": [
-        "metodo",
-        "presion",
-        "carga",
-        "capacidad",
-        "ideal"
-      ],
-      "settings": {
-        "anchor": "comparar",
-        "eyebrow": "Presurizadores",
-        "heading": "Manual o <em>automático</em>.",
-        "intro": "<p>Los dos guardan tus pelotas bajo presión. Cambia cómo lo haces tú.</p>",
-        "label_a": "Manual",
-        "label_b": "Automático",
-        "default_image_a": "ehora-foto-12.webp",
-        "default_image_b": "ehora-foto-11.webp",
-        "tagline_metafield": "custom.tagline",
-        "show_add_to_cart": true,
-        "color_scheme": "scheme-4"
-      }
-    },
-    "coleccion": {
-      "type": "ehora-showcase",
-      "blocks": {
-        "paletero": {
-          "type": "item",
-          "settings": {
-            "label": "Paletero",
-            "title": "Paletero EHORA",
-            "detail": "Blanco · Ribete verde",
-            "swatch": "#F4F2EC",
-            "trim": "#123F2E",
-            "default_image": "ehora-v2-04.webp",
-            "default_image_hover": "ehora-v2-12.webp"
-          }
-        },
-        "auto": {
-          "type": "item",
-          "settings": {
-            "label": "Presurizador",
-            "title": "Presurizador automático",
-            "detail": "Pantalla digital · USB-C",
-            "default_image": "ehora-foto-11.webp",
-            "default_image_hover": "ehora-foto-10.webp"
-          }
-        },
-        "manual": {
-          "type": "item",
-          "settings": {
-            "label": "Presurizador",
-            "title": "Presurizador manual",
-            "detail": "Escala en PSI",
-            "default_image": "ehora-foto-12.webp"
-          }
-        }
-      },
-      "block_order": [
-        "paletero",
-        "auto",
-        "manual"
-      ],
-      "settings": {
-        "anchor": "coleccion",
-        "eyebrow": "La colección",
-        "heading": "Elige tu <em>EHORA</em>.",
-        "link_label": "Ver toda la colección",
-        "show_add_to_cart": true,
-        "fallback_button": "Descubrir",
-        "no_price_label": "Próximamente",
-        "end_kicker": "Paleteros y presurizadores",
-        "end_title": "Ver toda la <em>colección</em>",
-        "hint": "Desliza",
-        "color_scheme": "scheme-1"
-      }
-    },
-    "testimonios": {
-      "type": "ehora-testimonials",
-      "settings": {
-        "eyebrow": "Desde el club",
-        "heading": "Lo que se dice en la <em>pista</em>.",
-        "text": "Reseñas de ejemplo para ver el diseño: no son clientes reales. Sustitúyelas por reseñas reales antes de publicar.",
-        "columns": 4,
-        "speed": 40,
-        "color_scheme": "scheme-2"
-      },
-      "blocks": {
-        "resena-1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5",
-            "quote": "Llevo dos palas, la ropa de cambio y las pelotas, y aún sobra hueco. El compartimento térmico se nota en verano. El blanco con el ribete verde es todavía más bonito en persona.",
-            "name": "Lucía Martín",
-            "detail": "Madrid · Pádel",
-            "product": "Paletero"
-          }
-        },
-        "resena-2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5",
-            "quote": "Juego tres veces por semana y antes tiraba un bote cada dos partidos. Ahora las meto al acabar, le doy a 1,9 bar y listo. La pantalla es muy cómoda.",
-            "name": "Javier Ortega",
-            "detail": "Valencia · Pádel",
-            "product": "Presurizador Auto."
-          }
-        },
-        "resena-3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5",
-            "quote": "Lo compré en blanco con miedo a que se ensuciara, pero se limpia con un paño sin problema. Caben dos raquetas de tenis sin forzar la cremallera.",
-            "name": "Marta Sánchez",
-            "detail": "Sevilla · Tenis",
-            "product": "Paletero"
-          }
-        },
-        "resena-4": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "4",
-            "quote": "Hace lo que promete. Bombeas unas cuantas veces y la aguja te marca la presión. Le quito una estrella porque me habría gustado que el bote fuera un poco más compacto para la bolsa.",
-            "name": "Pablo Ruiz",
-            "detail": "Barcelona · Pádel",
-            "product": "Presurizador Manual"
-          }
-        },
-        "resena-5": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5",
-            "quote": "Voy al club en bici y poder llevarlo a la espalda me ha cambiado la vida. Acolchado, firme y las asas no se clavan.",
-            "name": "Carmen Vidal",
-            "detail": "Málaga · Pádel",
-            "product": "Paletero"
-          }
-        },
-        "resena-6": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5",
-            "quote": "Lo cargo por USB-C una vez cada mucho. Lo tengo en la taquilla del club y las pelotas salen con el mismo bote que el primer día.",
-            "name": "Diego Fernández",
-            "detail": "Bilbao · Tenis",
-            "product": "Presurizador Auto."
-          }
-        },
-        "resena-7": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5",
-            "quote": "Los compartimentos interiores están muy bien pensados: llaves, móvil, grips… Nada de buscar al fondo de la bolsa. Las cremalleras van suaves.",
-            "name": "Elena Torres",
-            "detail": "Zaragoza · Pádel",
-            "product": "Paletero"
-          }
-        },
-        "resena-8": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5",
-            "quote": "Se lo regalé a mi pareja por su cumpleaños y acerté de lleno. Llegó en 48 horas y bien embalado.",
-            "name": "Álvaro Gil",
-            "detail": "Murcia · Pádel",
-            "product": "Pack Paletero + Presu."
-          }
-        },
-        "resena-9": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "4",
-            "quote": "Los acabados y el acolchado se ven premium. Para tenis con tres raquetas va justo, con dos perfecto.",
-            "name": "Nuria Prieto",
-            "detail": "A Coruña · Tenis",
-            "product": "Paletero"
-          }
-        }
-      },
-      "block_order": [
-        "resena-1",
-        "resena-2",
-        "resena-3",
-        "resena-4",
-        "resena-5",
-        "resena-6",
-        "resena-7",
-        "resena-8",
-        "resena-9"
+        "p3"
       ]
     },
-    "comprar": {
-      "type": "ehora-buy-bar",
+    "tira-1": {
+      "type": "club-marquee",
       "settings": {
-        "title": "La colección EHORA",
-        "subtitle": "Paleteros y presurizadores",
-        "default_image": "ehora-v2-04.webp",
-        "button_label": "Comprar",
-        "link": "",
-        "offset": 40
-      }
-    },
-    "frases": {
-      "type": "ehora-flip",
+        "label": "EHORA en la pista",
+        "speed": 60,
+        "reverse": false
+      },
       "blocks": {
-        "f1": {
-          "type": "phrase",
+        "foto-1": {
+          "type": "image",
           "settings": {
-            "text": "Pensado para la <em>pista</em>."
+            "default_image": "ehora-v2-01.webp",
+            "alt": "Paletero EHORA en la pista con pelotas"
           }
         },
-        "f2": {
-          "type": "phrase",
+        "foto-2": {
+          "type": "image",
           "settings": {
-            "text": "Del pádel al <em>tenis</em>."
+            "default_image": "ehora-v2-09.webp",
+            "alt": "Jugadora con el paletero a la espalda"
           }
         },
-        "f3": {
-          "type": "phrase",
+        "foto-3": {
+          "type": "image",
           "settings": {
-            "text": "Cuidado en cada <em>detalle</em>."
+            "default_image": "ehora-v2-06.webp",
+            "alt": "Paletero en una pista de pádel"
+          }
+        },
+        "foto-4": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-foto-11.webp",
+            "alt": "Presurizador EHORA en la pista"
+          }
+        },
+        "foto-5": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-v2-10.webp",
+            "alt": "Paletero al hombro"
+          }
+        },
+        "foto-6": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-v2-07.webp",
+            "alt": "Paletero en una pista de tenis"
+          }
+        },
+        "foto-7": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-v2-02.webp",
+            "alt": "Interior del paletero"
           }
         }
       },
       "block_order": [
-        "f1",
-        "f2",
-        "f3"
-      ],
+        "foto-1",
+        "foto-2",
+        "foto-3",
+        "foto-4",
+        "foto-5",
+        "foto-6",
+        "foto-7"
+      ]
+    },
+    "de-cerca": {
+      "type": "club-products",
       "settings": {
-        "eyebrow": "",
-        "color_scheme": "scheme-2"
+        "heading": "El paletero, de cerca",
+        "columns": 4,
+        "button_label": "Ver todo"
+      },
+      "blocks": {
+        "d1": {
+          "type": "item",
+          "settings": {
+            "title": "Frente",
+            "caption": "Paletero EHORA",
+            "default_image": "ehora-v2-03.webp",
+            "default_image_hover": "ehora-v2-04.webp"
+          }
+        },
+        "d2": {
+          "type": "item",
+          "settings": {
+            "title": "Acolchado",
+            "caption": "Paletero EHORA",
+            "default_image": "ehora-v2-05.webp",
+            "default_image_hover": "ehora-v2-08.webp"
+          }
+        },
+        "d3": {
+          "type": "item",
+          "settings": {
+            "title": "Cremallera",
+            "caption": "Paletero EHORA",
+            "default_image": "ehora-v2-11.webp",
+            "default_image_hover": "ehora-v2-10.webp"
+          }
+        },
+        "d4": {
+          "type": "item",
+          "settings": {
+            "title": "Interior",
+            "caption": "Paletero EHORA",
+            "default_image": "ehora-v2-02.webp",
+            "default_image_hover": "ehora-v2-01.webp"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ]
+    },
+    "tira-2": {
+      "type": "club-marquee",
+      "settings": {
+        "label": "Detalles EHORA",
+        "speed": 55,
+        "reverse": true
+      },
+      "blocks": {
+        "foto-1": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-v2-12.webp",
+            "alt": "Paletero junto a un olivo"
+          }
+        },
+        "foto-2": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-v2-08.webp",
+            "alt": "Asa acolchada con ribete verde"
+          }
+        },
+        "foto-3": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-foto-09.webp",
+            "alt": "Presurizador abierto con una pelota"
+          }
+        },
+        "foto-4": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-v2-05.webp",
+            "alt": "Detalle del acolchado"
+          }
+        },
+        "foto-5": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-v2-11.webp",
+            "alt": "Cremallera del paletero"
+          }
+        },
+        "foto-6": {
+          "type": "image",
+          "settings": {
+            "default_image": "ehora-foto-10.webp",
+            "alt": "Pantalla del presurizador automático"
+          }
+        }
+      },
+      "block_order": [
+        "foto-1",
+        "foto-2",
+        "foto-3",
+        "foto-4",
+        "foto-5",
+        "foto-6"
+      ]
+    },
+    "el-club": {
+      "type": "club-statement",
+      "settings": {
+        "heading": "El club",
+        "text": "<p>EHORA nace en la pista. Piezas para quienes cuidan el juego antes, durante y después del partido: sin ruido, con detalle.</p>",
+        "button_label": "Descubrir la colección"
       }
     }
   },
   "order": [
-    "hero",
+    "portada",
     "coleccion",
-    "frases",
-    "paletero",
-    "colores",
-    "formas",
-    "presurizador",
-    "presion",
-    "comparativa",
-    "testimonios",
-    "comprar"
+    "tira-1",
+    "de-cerca",
+    "tira-2",
+    "el-club"
   ]
 }

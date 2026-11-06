@@ -5,20 +5,20 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#FCFBF7",
+          "background": "#EFEEEA",
           "background_gradient": "",
-          "text": "#202321",
+          "text": "#0A2A1E",
           "button": "#123F2E",
-          "button_label": "#FCFBF7",
+          "button_label": "#F7F5EF",
           "secondary_button_label": "#123F2E",
-          "shadow": "#202321"
+          "shadow": "#0A2A1E"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#F7F5EF",
+          "background": "#EFEEEA",
           "background_gradient": "",
-          "text": "#202321",
+          "text": "#0A2A1E",
           "button": "#123F2E",
           "button_label": "#F7F5EF",
           "secondary_button_label": "#123F2E",
@@ -193,7 +193,7 @@
     "ehora_image_hover": true,
     "ehora_shipping_note": "[Pendiente: plazos y coste de envío]",
     "ehora_returns_note": "[Pendiente: política de devoluciones]",
-    "ehora_loader": true,
+    "ehora_loader": false,
     "ehora_loader_once": true,
     "ehora_loader_pressure": "1.92",
     "ehora_loader_word": "EHORA"
@@ -205,20 +205,20 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#FCFBF7",
+            "background": "#EFEEEA",
             "background_gradient": "",
-            "text": "#202321",
+            "text": "#0A2A1E",
             "button": "#123F2E",
-            "button_label": "#FCFBF7",
+            "button_label": "#F7F5EF",
             "secondary_button_label": "#123F2E",
-            "shadow": "#202321"
+            "shadow": "#0A2A1E"
           }
         },
         "scheme-2": {
           "settings": {
-            "background": "#F7F5EF",
+            "background": "#EFEEEA",
             "background_gradient": "",
-            "text": "#202321",
+            "text": "#0A2A1E",
             "button": "#123F2E",
             "button_label": "#F7F5EF",
             "secondary_button_label": "#123F2E",
@@ -393,7 +393,7 @@
       "ehora_image_hover": true,
       "ehora_shipping_note": "[Pendiente: plazos y coste de envío]",
       "ehora_returns_note": "[Pendiente: política de devoluciones]",
-      "ehora_loader": true,
+      "ehora_loader": false,
       "ehora_loader_once": true,
       "ehora_loader_pressure": "1.92",
       "ehora_loader_word": "EHORA"

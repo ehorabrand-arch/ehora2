@@ -6,12 +6,16 @@
   - alt: {String} texto alternativo para la foto por defecto
   - sizes: {String}
   - eager: {Boolean} carga prioritaria (imagen principal visible al cargar)
+  - no_lazy: {Boolean} carga normal, sin esperar a estar en pantalla (tiras en movimiento)
   - class: {String}
 {%- endcomment -%}
 {%- liquid
   if eager
     assign loading = 'eager'
     assign priority = 'high'
+  elsif no_lazy
+    assign loading = 'eager'
+    assign priority = 'auto'
   else
     assign loading = 'lazy'
     assign priority = 'auto'

@@ -231,9 +231,9 @@
       {%- unless scheme_classes contains 'scheme-5' -%}
         :root,
         .color-scheme-1 {
-          --color-background: 252,251,247;
-          --gradient-background: #FCFBF7;
-          --color-foreground: 32,35,33;
+          --color-background: 239,238,234;
+          --gradient-background: #EFEEEA;
+          --color-foreground: 10,42,30;
           --color-background-contrast: 88,95,89;
           --color-shadow: 32,35,33;
           --color-button: 18,63,46;
@@ -503,6 +503,7 @@
     {%- endif -%}
 
     {{ 'ehora.css' | asset_url | stylesheet_tag }}
+    {{ 'club.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.ehora_editorial_fonts -%}
       {%- unless settings.type_body_font.system? -%}
@@ -538,7 +539,7 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}{% if settings.ehora_image_hover %} ehora-image-hover{% endif %}">
+  <body class="gradient template-{{ template.name | handleize }}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}{% if settings.ehora_image_hover %} ehora-image-hover{% endif %}">
     {%- render 'ehora-glass-filter' -%}
     {%- if settings.ehora_loader and request.design_mode == false -%}
       {%- render 'ehora-loader' -%}

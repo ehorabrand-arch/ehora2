@@ -1,0 +1,43 @@
+{%- comment -%}
+  Tira de fotos que se desplaza sola. La lista se repite una vez (oculta a lectores de pantalla) para que
+  el bucle no tenga corte. Se pausa al pasar el ratón y se detiene con «reducir movimiento».
+{%- endcomment -%}
+{%- capture items -%}
+  {%- for block in section.blocks -%}
+    <li class="club-marquee__item" {{ block.shopify_attributes }}>
+      {%- render 'ehora-image', image: block.settings.image, fallback: block.settings.default_image, alt: block.settings.alt, sizes: '(min-width: 990px) 20vw, 50vw', no_lazy: true -%}
+    </li>
+  {%- endfor -%}
+{%- endcapture -%}
+<section class="club-marquee{% if section.settings.reverse %} club-marquee--reverse{% endif %}" style="--club-speed: {{ section.settings.speed }}s;" aria-label="{{ section.settings.label | escape }}">
+  <div class="club-marquee__track">
+    <ul class="club-marquee__list" role="list">{{ items }}</ul>
+    <ul class="club-marquee__list" role="list" aria-hidden="true">{{ items | replace: 'alt="', 'data-alt="' }}</ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Club · Tira de fotos",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Nombre para lectores de pantalla", "default": "EHORA en la pista" },
+    { "type": "range", "id": "speed", "label": "Duración de una vuelta", "min": 20, "max": 120, "step": 5, "unit": "s", "default": 60 },
+    { "type": "checkbox", "id": "reverse", "label": "Sentido contrario", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Foto",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
+        { "type": "text", "id": "alt", "label": "Texto alternativo" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Club · Tira de fotos", "blocks": [{ "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }] }]
+}
+{% endschema %}
