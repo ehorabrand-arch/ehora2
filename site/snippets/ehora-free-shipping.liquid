@@ -1,0 +1,31 @@
+{%- comment -%}
+  Barra de envío gratis: la pelota cruza la pista según el importe del carrito.
+  Solo se muestra si la tienda indica un umbral real.
+  Accepts:
+  - threshold: {Number} importe en euros a partir del cual el envío es gratis
+{%- endcomment -%}
+{%- if threshold != blank and threshold > 0 and cart != empty -%}
+  {%- liquid
+    assign goal = threshold | times: 100
+    assign total = cart.total_price
+    assign remaining = goal | minus: total
+    assign progress = total | times: 100 | divided_by: goal
+    if progress > 100
+      assign progress = 100
+    endif
+  -%}
+  <div class="ehora-ship{% if remaining <= 0 %} is-done{% endif %}" style="--progress: {{ progress }};">
+    <p class="ehora-ship__text">
+      {%- if remaining > 0 -%}
+        Te faltan <strong>{{ remaining | money }}</strong> para el envío gratis.
+      {%- else -%}
+        Envío gratis conseguido. <strong>Punto para ti.</strong>
+      {%- endif -%}
+    </p>
+    <div class="ehora-ship__court" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progress }}" aria-label="Progreso hacia el envío gratis">
+      <span class="ehora-ship__net" aria-hidden="true"></span>
+      <span class="ehora-ship__fill" aria-hidden="true"></span>
+      <span class="ehora-ship__ball" aria-hidden="true"></span>
+    </div>
+  </div>
+{%- endif -%}

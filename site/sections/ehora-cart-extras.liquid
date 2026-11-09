@@ -1,0 +1,89 @@
+{%- comment -%}
+  «Completa tu juego»: sugerencias bajo el carrito. Con productos elegidos usa sus datos reales y
+  oculta los que ya están en la bolsa; sin productos, muestra las tarjetas de ejemplo del bloque.
+{%- endcomment -%}
+{{ 'ehora-cart.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.show_add_to_cart -%}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- liquid
+  assign in_cart = cart.items | map: 'product_id' | join: ','
+  assign in_cart = ',' | append: in_cart | append: ','
+  assign shown = 0
+-%}
+<section class="ehora-cart-extras color-{{ section.settings.color_scheme }} gradient" aria-labelledby="CartExtras-{{ section.id }}">
+  <div class="page-width">
+    <header class="ehora-cart-extras__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ehora-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="CartExtras-{{ section.id }}" class="ehora-cart-extras__title">{{ section.settings.heading }}</h2>
+    </header>
+
+    <ul class="ehora-cart-extras__grid" role="list">
+      {%- if section.settings.products != blank -%}
+        {%- for product in section.settings.products -%}
+          {%- assign needle = ',' | append: product.id | append: ',' -%}
+          {%- if in_cart contains needle -%}{%- continue -%}{%- endif -%}
+          {%- assign shown = shown | plus: 1 -%}
+          <li class="ehora-cart-extras__card">
+            <a href="{{ product.url }}" class="ehora-cart-extras__media">
+              {%- render 'ehora-image', image: product.featured_media.preview_image, alt: product.title, sizes: '(min-width: 750px) 22vw, 45vw' -%}
+            </a>
+            <div class="ehora-cart-extras__info">
+              <a href="{{ product.url }}" class="ehora-cart-extras__name">{{ product.title | escape }}</a>
+              <span class="ehora-cart-extras__price">{%- if product.price_varies -%}Desde {% endif -%}{{ product.price_min | money }}</span>
+            </div>
+            {%- if section.settings.show_add_to_cart -%}
+              {%- render 'ehora-quick-add', product: product, section_id: section.id, button_class: 'button button--secondary button--full-width' -%}
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- assign shown = shown | plus: 1 -%}
+          <li class="ehora-cart-extras__card" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="ehora-cart-extras__media">
+              {%- render 'ehora-image', image: block.settings.image, fallback: block.settings.default_image, alt: block.settings.title, sizes: '(min-width: 750px) 22vw, 45vw' -%}
+            </a>
+            <div class="ehora-cart-extras__info">
+              <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="ehora-cart-extras__name">{{ block.settings.title | escape }}</a>
+              <span class="ehora-cart-extras__price">{{ block.settings.caption | escape }}</span>
+            </div>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EHORA · Completa tu juego",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Antes de salir a pista" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Completa tu <em>juego</em>." },
+    { "type": "product_list", "id": "products", "label": "Productos sugeridos", "limit": 4, "info": "Se ocultan los que ya están en el carrito. Vacío: se usan los bloques." },
+    { "type": "checkbox", "id": "show_add_to_cart", "label": "Botón de añadir", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Sugerencia de ejemplo",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Nombre", "default": "Presurizador EHORA" },
+        { "type": "text", "id": "caption", "label": "Texto", "default": "Próximamente" },
+        { "type": "url", "id": "link", "label": "Enlace" },
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "EHORA · Completa tu juego" }]
+}
+{% endschema %}

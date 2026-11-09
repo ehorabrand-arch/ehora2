@@ -44,6 +44,8 @@
               {% render block %}
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
+                <p class="ehora-cart__board-label">{{ section.settings.board_label | escape }}</p>
+                {%- render 'ehora-free-shipping', threshold: section.settings.free_shipping_threshold -%}
                 <div>
                   {%- if cart.cart_level_discount_applications.size > 0 -%}
                     <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
@@ -119,6 +121,21 @@
                 </button>
               </div>
 
+              {%- liquid
+                assign ship_note = settings.ehora_shipping_note | strip
+                assign returns_note = settings.ehora_returns_note | strip
+                assign ship_first = ship_note | slice: 0
+                assign returns_first = returns_note | slice: 0
+              -%}
+              <ul class="ehora-cart__trust" role="list">
+                <li>{%- render 'ehora-icon-lock' -%}Pago seguro</li>
+                {%- if ship_note != blank and ship_first != '[' -%}
+                  <li>{{ ship_note | escape }}</li>
+                {%- endif -%}
+                {%- if returns_note != blank and returns_first != '[' -%}
+                  <li>{{ returns_note | escape }}</li>
+                {%- endif -%}
+              </ul>
               {%- if additional_checkout_buttons -%}
                 <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
                   {{ content_for_additional_checkout_buttons }}
@@ -138,6 +155,8 @@
   "name": "t:sections.main-cart-footer.name",
   "class": "cart__footer-wrapper",
   "settings": [
+    { "type": "text", "id": "board_label", "label": "Título del resumen", "default": "Tu marcador" },
+    { "type": "number", "id": "free_shipping_threshold", "label": "Envío gratis desde (€)", "info": "Vacío: no se muestra la barra. Pon solo el importe real de tu tienda." },
     {
       "type": "color_scheme",
       "id": "color_scheme",

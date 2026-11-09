@@ -4,8 +4,13 @@
       "type": "main-cart-items",
       "settings": {
         "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 48,
+        "padding_bottom": 24,
+        "eyebrow": "Tu bolsa",
+        "heading": "Listo para el <em>partido</em>.",
+        "empty_heading": "La pista está <em>vacía</em>.",
+        "empty_text": "Aún no hay nada en tu bolsa. Empieza por el paletero o por un presurizador.",
+        "empty_button": "Ver la colección"
       }
     },
     "cart-footer": {
@@ -13,28 +18,68 @@
       "settings": {
         "color_scheme": "scheme-1",
         "padding_top": 20,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "board_label": "Tu marcador"
       },
       "blocks": {
         "subtotal": {
           "type": "subtotal",
-          "settings": {
-          }
+          "settings": {}
         },
         "buttons": {
           "type": "buttons",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
         "subtotal",
         "buttons"
       ]
+    },
+    "cart-extras": {
+      "type": "ehora-cart-extras",
+      "settings": {
+        "eyebrow": "Antes de salir a pista",
+        "heading": "Completa tu <em>juego</em>.",
+        "show_add_to_cart": true,
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "auto": {
+          "type": "item",
+          "settings": {
+            "title": "Presurizador automático",
+            "caption": "Próximamente",
+            "default_image": "ehora-foto-11.webp"
+          }
+        },
+        "manual": {
+          "type": "item",
+          "settings": {
+            "title": "Presurizador manual",
+            "caption": "Próximamente",
+            "default_image": "ehora-foto-12.webp"
+          }
+        },
+        "paletero": {
+          "type": "item",
+          "settings": {
+            "title": "Paletero EHORA",
+            "caption": "Próximamente",
+            "default_image": "ehora-v2-04.webp"
+          }
+        }
+      },
+      "block_order": [
+        "auto",
+        "manual",
+        "paletero"
+      ]
     }
   },
   "order": [
     "cart-items",
-    "cart-footer"
+    "cart-footer",
+    "cart-extras"
   ]
 }
