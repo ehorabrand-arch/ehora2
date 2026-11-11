@@ -1,0 +1,42 @@
+<section class="em-duo em-section color-{{ section.settings.color_scheme }} gradient" aria-labelledby="EmDuo-{{ section.id }}">
+  <div class="em-wrap">
+    <header class="em-duo__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="em-label">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="EmDuo-{{ section.id }}" class="em-title">{{ section.settings.heading }}</h2>
+    </header>
+    <div class="em-duo__grid">
+      {%- for block in section.blocks -%}
+        <figure class="em-duo__item" {{ block.shopify_attributes }}>
+          <div class="em-arch">
+            {%- render 'ehora-image', image: block.settings.image, fallback: block.settings.default_image, alt: block.settings.alt, sizes: '(min-width: 990px) 30vw, 46vw' -%}
+          </div>
+          <figcaption><span class="em-duo__name">{{ block.settings.name | escape }}</span><span class="em-duo__detail">{{ block.settings.detail | escape }}</span></figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Maestra · Pádel o tenis",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 2,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Para los dos" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Pádel o tenis. Un mismo <em>club</em>." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Deporte", "settings": [
+      { "type": "text", "id": "name", "label": "Nombre", "default": "Pádel" },
+      { "type": "text", "id": "detail", "label": "Detalle" },
+      { "type": "image_picker", "id": "image", "label": "Imagen" },
+      { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
+      { "type": "text", "id": "alt", "label": "Texto alternativo" }
+    ] }
+  ],
+  "presets": [{ "name": "Maestra · Pádel o tenis", "blocks": [{ "type": "item" }, { "type": "item" }] }]
+}
+{% endschema %}

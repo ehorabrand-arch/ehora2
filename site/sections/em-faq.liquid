@@ -1,0 +1,54 @@
+{%- capture items -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign a = block.settings.answer | strip
+      assign first = a | slice: 0
+      assign pending = false
+      if first == '['
+        assign pending = true
+      endif
+    -%}
+    {%- if a != blank -%}
+      {%- if pending == false or request.design_mode -%}
+        <details class="em-faq__item{% if pending %} is-pending{% endif %}" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question | escape }}<span class="em-faq__icon" aria-hidden="true"></span></summary>
+          <p>{{ a | escape }}</p>
+        </details>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign items_clean = items | strip -%}
+{%- if items_clean != blank -%}
+  <section id="{{ section.settings.anchor | handleize }}" class="em-faq em-section color-{{ section.settings.color_scheme }} gradient" aria-labelledby="EmFaq-{{ section.id }}">
+    <div class="em-wrap em-faq__grid">
+      <header>
+        {%- if section.settings.eyebrow != blank -%}<p class="em-label">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="EmFaq-{{ section.id }}" class="em-title">{{ section.settings.heading }}</h2>
+      </header>
+      <div class="em-faq__list">{{ items }}</div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Maestra · Preguntas",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "preguntas" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Antes de comprar" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Preguntas <em>frecuentes</em>." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    { "type": "question", "name": "Pregunta", "settings": [
+      { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cuánto tarda el envío?" },
+      { "type": "textarea", "id": "answer", "label": "Respuesta", "info": "Si empieza por «[» se considera pendiente y no se muestra en la tienda." }
+    ] }
+  ],
+  "presets": [{ "name": "Maestra · Preguntas" }]
+}
+{% endschema %}

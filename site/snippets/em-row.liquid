@@ -1,0 +1,18 @@
+{%- comment -%}
+  Fila de dato (etiqueta + valor). Los valores que empiezan por «[» son huecos pendientes:
+  solo se ven en el editor de temas, nunca en la tienda.
+  Accepts: label {String}, value {String}
+{%- endcomment -%}
+{%- liquid
+  assign v = value | strip
+  assign first = v | slice: 0
+  assign pending = false
+  if first == '['
+    assign pending = true
+  endif
+-%}
+{%- if v != blank -%}
+  {%- if pending == false or request.design_mode -%}
+    <div class="em-spec{% if pending %} is-pending{% endif %}"><dt>{{ label | escape }}</dt><dd>{{ v | escape }}</dd></div>
+  {%- endif -%}
+{%- endif -%}

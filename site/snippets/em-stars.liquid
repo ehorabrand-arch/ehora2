@@ -1,0 +1,6 @@
+{%- comment -%} Estrellas. Accepts: rating {Number 1–5} {%- endcomment -%}
+<span class="em-stars" role="img" aria-label="{{ rating }} de 5">
+  {%- for i in (1..5) -%}
+    <svg viewBox="0 0 20 20" aria-hidden="true" class="{% if i > rating %}is-off{% endif %}"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.600 7.700l5.800-.8z"/></svg>
+  {%- endfor -%}
+</span>

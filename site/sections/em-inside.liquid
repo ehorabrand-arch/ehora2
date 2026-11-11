@@ -1,0 +1,81 @@
+<script src="{{ 'maestra.js' | asset_url }}" defer="defer"></script>
+{%- capture specs -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'spec' -%}{%- render 'em-row', label: block.settings.label, value: block.settings.value -%}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<section id="{{ section.settings.anchor | handleize }}" class="em-inside em-section color-{{ section.settings.color_scheme }} gradient" aria-labelledby="EmInside-{{ section.id }}">
+  <div class="em-wrap em-inside__grid">
+    <em-gallery class="em-gallery">
+      <div class="em-gallery__stage">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'photo' -%}
+            <div class="em-gallery__img{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+              {%- render 'ehora-image', image: block.settings.image, fallback: block.settings.default_image, alt: block.settings.alt, sizes: '(min-width: 990px) 44vw, 92vw', no_lazy: true -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="em-gallery__thumbs" role="group" aria-label="Fotos del paletero">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'photo' -%}
+            <button type="button" class="em-gallery__thumb" data-index="{{ forloop.index0 }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+              {%- render 'ehora-image', image: block.settings.image, fallback: block.settings.default_image, alt: '', sizes: '96px', no_lazy: true -%}
+              <span class="em-gallery__name">{{ block.settings.name | escape }}</span>
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </em-gallery>
+
+    <div class="em-inside__copy">
+      {%- if section.settings.eyebrow != blank -%}<p class="em-label">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="EmInside-{{ section.id }}" class="em-title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p class="em-lede">{{ section.settings.text | escape }}</p>{%- endif -%}
+      <ul class="em-points" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'point' -%}<li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- assign specs_clean = specs | strip -%}
+      {%- if specs_clean != blank -%}<dl class="em-specs">{{ specs }}</dl>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="button">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Maestra · El paletero",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "paletero" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "El paletero" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Blanco acolchado, ribete <em>verde</em>." },
+    { "type": "textarea", "id": "text", "label": "Texto" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Ver el paletero" },
+    { "type": "url", "id": "button_link", "label": "Enlace del botón" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    { "type": "photo", "name": "Foto", "limit": 5, "settings": [
+      { "type": "text", "id": "name", "label": "Nombre corto", "default": "Frente" },
+      { "type": "image_picker", "id": "image", "label": "Imagen" },
+      { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" },
+      { "type": "text", "id": "alt", "label": "Texto alternativo" }
+    ] },
+    { "type": "point", "name": "Ventaja", "limit": 5, "settings": [
+      { "type": "text", "id": "text", "label": "Texto", "default": "Bolsillos laterales" }
+    ] },
+    { "type": "spec", "name": "Dato", "limit": 6, "settings": [
+      { "type": "text", "id": "label", "label": "Etiqueta", "default": "Medidas" },
+      { "type": "text", "id": "value", "label": "Valor", "info": "Si empieza por «[» se considera pendiente y no se muestra en la tienda." }
+    ] }
+  ],
+  "presets": [{ "name": "Maestra · El paletero" }]
+}
+{% endschema %}

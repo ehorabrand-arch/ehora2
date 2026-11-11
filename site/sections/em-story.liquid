@@ -1,0 +1,44 @@
+{%- liquid
+  assign text = section.settings.text | strip
+  assign first = text | slice: 0
+  assign pending = false
+  if first == '['
+    assign pending = true
+  endif
+-%}
+{%- if pending == false or request.design_mode -%}
+  <section class="em-story em-section color-{{ section.settings.color_scheme }} gradient" aria-labelledby="EmStory-{{ section.id }}">
+    <div class="em-wrap em-story__grid">
+      <div class="em-story__media">
+        {%- render 'ehora-image', image: section.settings.image, fallback: section.settings.default_image, alt: section.settings.image_alt, sizes: '(min-width: 990px) 40vw, 92vw' -%}
+      </div>
+      <div class="em-story__copy">
+        {%- if section.settings.eyebrow != blank -%}<p class="em-label">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="EmStory-{{ section.id }}" class="em-title">{{ section.settings.heading }}</h2>
+        <p class="em-lede{% if pending %} is-pending{% endif %}">{{ text | escape }}</p>
+        {%- if settings.social_instagram_link != blank -%}
+          <a href="{{ settings.social_instagram_link }}" class="ehora-link" target="_blank" rel="noopener">{{ section.settings.instagram_label | escape }}{%- render 'ehora-icon-arrow' -%}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Maestra · La marca",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "La marca" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Quién está <em>detrás</em>." },
+    { "type": "textarea", "id": "text", "label": "Texto", "info": "Historia real de la marca. Si empieza por «[» se considera pendiente y la sección no se muestra en la tienda." },
+    { "type": "text", "id": "instagram_label", "label": "Enlace a Instagram", "default": "Síguenos en Instagram", "info": "Se muestra si hay Instagram en los ajustes del tema." },
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-v2-10.webp" },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "presets": [{ "name": "Maestra · La marca" }]
+}
+{% endschema %}

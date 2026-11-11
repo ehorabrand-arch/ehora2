@@ -1,0 +1,98 @@
+{%- liquid
+  assign collection_url = routes.all_products_collection_url
+  if section.settings.collection != blank
+    assign collection_url = section.settings.collection.url
+  endif
+-%}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<section id="{{ section.settings.anchor | handleize }}" class="em-collection em-section color-{{ section.settings.color_scheme }} gradient" data-hide-buy-bar aria-labelledby="EmCollection-{{ section.id }}">
+  <div class="em-wrap">
+    <header class="em-head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="em-label">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="EmCollection-{{ section.id }}" class="em-title">{{ section.settings.heading }}</h2>
+      </div>
+      <a href="{{ collection_url }}" class="ehora-link">{{ section.settings.link_label | escape }}{%- render 'ehora-icon-arrow' -%}</a>
+    </header>
+    <ul class="em-cards" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign product = block.settings.product
+          assign link = block.settings.link | default: collection_url
+          assign title = block.settings.title
+          assign image = block.settings.image
+          if product != blank
+            assign link = product.url
+            assign title = product.title
+            if image == blank
+              assign image = product.featured_media.preview_image
+            endif
+          endif
+        -%}
+        <li class="em-card" {{ block.shopify_attributes }}>
+          <a href="{{ link }}" class="em-card__media" tabindex="-1" aria-hidden="true">
+            {%- render 'ehora-image', image: image, fallback: block.settings.default_image, alt: '', sizes: '(min-width: 990px) 30vw, 40vw' -%}
+            {%- if block.settings.badge != blank -%}<span class="em-card__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+          </a>
+          <div class="em-card__body">
+            {%- if block.settings.kind != blank -%}<p class="em-card__kind">{{ block.settings.kind | escape }}</p>{%- endif -%}
+            <h3 class="em-card__title"><a href="{{ link }}">{{ title | escape }}</a></h3>
+            {%- if block.settings.benefit != blank -%}<p class="em-card__benefit">{{ block.settings.benefit | escape }}</p>{%- endif -%}
+            <p class="em-card__price">
+              {%- if product != blank -%}
+                {%- if product.price_varies -%}Desde {% endif -%}{{ product.price_min | money }}
+              {%- else -%}
+                {{ section.settings.no_price_label | escape }}
+              {%- endif -%}
+            </p>
+          </div>
+          <div class="em-card__cta">
+            {%- if product != blank -%}
+              {%- render 'ehora-quick-add', product: product, section_id: section.id -%}
+            {%- else -%}
+              <a href="{{ link }}" class="button button--secondary button--full-width">{{ section.settings.fallback_button | escape }}<span class="visually-hidden">: {{ title | escape }}</span></a>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Maestra · Colección",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "coleccion" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "La colección" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Elige tu <em>EHORA</em>." },
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "text", "id": "link_label", "label": "Enlace", "default": "Ver todo" },
+    { "type": "text", "id": "no_price_label", "label": "Texto sin producto asignado", "default": "Próximamente" },
+    { "type": "text", "id": "fallback_button", "label": "Botón sin producto asignado", "default": "Descubrir" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Producto",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto", "info": "Usa su foto, nombre y precio reales, con botón de añadir." },
+        { "type": "text", "id": "kind", "label": "Tipo", "default": "Paletero" },
+        { "type": "text", "id": "benefit", "label": "Beneficio en una línea" },
+        { "type": "text", "id": "badge", "label": "Etiqueta" },
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "header", "content": "Sin producto asignado" },
+        { "type": "text", "id": "title", "label": "Nombre", "default": "Paletero EHORA" },
+        { "type": "url", "id": "link", "label": "Enlace" },
+        { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Maestra · Colección", "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }] }]
+}
+{% endschema %}

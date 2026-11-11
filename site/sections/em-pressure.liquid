@@ -1,0 +1,138 @@
+<script src="{{ 'maestra.js' | asset_url }}" defer="defer"></script>
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign product_a = section.settings.product_a
+  assign product_b = section.settings.product_b
+-%}
+<section id="{{ section.settings.anchor | handleize }}" class="em-pressure em-section color-{{ section.settings.color_scheme }} gradient" data-hide-buy-bar aria-labelledby="EmPressure-{{ section.id }}">
+  <div class="em-wrap">
+    <div class="em-pressure__grid">
+      <div class="em-pressure__copy">
+        {%- if section.settings.eyebrow != blank -%}<p class="em-label">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="EmPressure-{{ section.id }}" class="em-title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.intro != blank -%}<p class="em-lede">{{ section.settings.intro | escape }}</p>{%- endif -%}
+        <ol class="em-steps" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'step' -%}
+              <li {{ block.shopify_attributes }}><span class="em-steps__n" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><span><strong>{{ block.settings.title | escape }}</strong>{{ block.settings.text | escape }}</span></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ol>
+      </div>
+      <figure class="em-chart" data-em-reveal>
+        <svg viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+          <line class="em-chart__grid" x1="40" y1="70" x2="580" y2="70" />
+          <line class="em-chart__grid" x1="40" y1="200" x2="580" y2="200" />
+          <line class="em-chart__grid" x1="40" y1="330" x2="580" y2="330" />
+          <line class="em-chart__axis" x1="40" y1="30" x2="40" y2="370" />
+          <line class="em-chart__axis" x1="40" y1="370" x2="580" y2="370" />
+          <path class="em-chart__area" d="M40,70 C220,70 300,300 560,330 L560,370 L40,370 Z" />
+          <path class="em-chart__line em-chart__line--drop" pathLength="1" d="M40,70 C220,70 300,300 560,330" />
+          <path class="em-chart__line em-chart__line--kept" pathLength="1" d="M40,70 C220,70 400,78 560,86" />
+          <circle class="em-chart__dot em-chart__dot--drop" cx="560" cy="330" r="6" />
+          <circle class="em-chart__dot em-chart__dot--kept" cx="560" cy="86" r="8" />
+        </svg>
+        <span class="em-chart__tag em-chart__tag--kept">{{ section.settings.label_kept | escape }}</span>
+        <span class="em-chart__tag em-chart__tag--drop">{{ section.settings.label_drop | escape }}</span>
+        <figcaption class="em-chart__axes">
+          <span>↑ {{ section.settings.y_label | escape }}</span><span>{{ section.settings.x_label | escape }} →</span>
+          <span class="visually-hidden">{{ section.settings.chart_summary | escape }}</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="em-compare">
+      <h3 class="em-compare__title">{{ section.settings.compare_heading }}</h3>
+      <div class="em-compare__grid">
+        {%- for side in (1..2) -%}
+          {%- liquid
+            if side == 1
+              assign product = product_a
+              assign label = section.settings.label_a
+              assign fallback = section.settings.default_image_a
+              assign who = section.settings.who_a
+            else
+              assign product = product_b
+              assign label = section.settings.label_b
+              assign fallback = section.settings.default_image_b
+              assign who = section.settings.who_b
+            endif
+          -%}
+          <article class="em-compare__card">
+            <div class="em-compare__media">
+              {%- render 'ehora-image', image: product.featured_media.preview_image, fallback: fallback, alt: label, sizes: '(min-width: 990px) 20vw, 40vw' -%}
+            </div>
+            <div class="em-compare__body">
+              <h4 class="em-compare__name">{{ label | escape }}</h4>
+              {%- assign who_first = who | slice: 0 -%}
+              {%- if who != blank -%}
+                {%- if who_first != '[' or request.design_mode -%}<p class="em-compare__who{% if who_first == '[' %} is-pending{% endif %}">{{ who | escape }}</p>{%- endif -%}
+              {%- endif -%}
+              <dl class="em-specs">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'row' -%}
+                    {%- if side == 1 -%}{%- render 'em-row', label: block.settings.label, value: block.settings.value_a -%}{%- else -%}{%- render 'em-row', label: block.settings.label, value: block.settings.value_b -%}{%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </dl>
+              <p class="em-compare__price">
+                {%- if product != blank -%}{{ product.price_min | money }}{%- else -%}{{ section.settings.no_price_label | escape }}{%- endif -%}
+              </p>
+              {%- if product != blank -%}
+                {%- render 'ehora-quick-add', product: product, section_id: section.id -%}
+              {%- else -%}
+                <a href="{{ routes.all_products_collection_url }}" class="button button--secondary button--full-width">{{ section.settings.fallback_button | escape }}<span class="visually-hidden">: {{ label | escape }}</span></a>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Maestra · Presurizadores",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancla", "default": "presion" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "La pelota" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "Por qué <em>presurizar</em> tus pelotas." },
+    { "type": "textarea", "id": "intro", "label": "Entradilla" },
+    { "type": "text", "id": "label_kept", "label": "Etiqueta: línea que se mantiene", "default": "Con presurizador" },
+    { "type": "text", "id": "label_drop", "label": "Etiqueta: línea que cae", "default": "Bote abierto" },
+    { "type": "text", "id": "y_label", "label": "Eje vertical", "default": "Presión" },
+    { "type": "text", "id": "x_label", "label": "Eje horizontal", "default": "Tiempo con el bote abierto" },
+    { "type": "text", "id": "chart_summary", "label": "Descripción de la curva (lectores de pantalla)", "default": "Curva orientativa: la presión de una pelota baja con el tiempo una vez abierto el bote, y se mantiene cuando se guarda en el presurizador." },
+    { "type": "header", "content": "Comparativa" },
+    { "type": "inline_richtext", "id": "compare_heading", "label": "Titular", "default": "Manual o <em>automático</em>." },
+    { "type": "product", "id": "product_a", "label": "Producto A" },
+    { "type": "text", "id": "label_a", "label": "Nombre A", "default": "Presurizador manual" },
+    { "type": "text", "id": "who_a", "label": "Para quién es A" },
+    { "type": "text", "id": "default_image_a", "label": "Imagen A por defecto (archivo del theme)", "default": "ehora-foto-12.webp" },
+    { "type": "product", "id": "product_b", "label": "Producto B" },
+    { "type": "text", "id": "label_b", "label": "Nombre B", "default": "Presurizador automático" },
+    { "type": "text", "id": "who_b", "label": "Para quién es B" },
+    { "type": "text", "id": "default_image_b", "label": "Imagen B por defecto (archivo del theme)", "default": "ehora-foto-11.webp" },
+    { "type": "text", "id": "no_price_label", "label": "Texto sin producto asignado", "default": "Próximamente" },
+    { "type": "text", "id": "fallback_button", "label": "Botón sin producto asignado", "default": "Descubrir" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-3" }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Paso", "limit": 4, "settings": [
+      { "type": "text", "id": "title", "label": "Título", "default": "Pelotas nuevas" },
+      { "type": "text", "id": "text", "label": "Texto" }
+    ] },
+    { "type": "row", "name": "Fila de comparativa", "limit": 6, "settings": [
+      { "type": "text", "id": "label", "label": "Etiqueta", "default": "Capacidad" },
+      { "type": "text", "id": "value_a", "label": "Valor A", "info": "Si empieza por «[» se considera pendiente y no se muestra en la tienda." },
+      { "type": "text", "id": "value_b", "label": "Valor B" }
+    ] }
+  ],
+  "presets": [{ "name": "Maestra · Presurizadores" }]
+}
+{% endschema %}

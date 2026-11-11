@@ -1,0 +1,66 @@
+{%- liquid
+  assign ship = settings.ehora_shipping_note | strip
+  assign ship_first = ship | slice: 0
+  assign ret = settings.ehora_returns_note | strip
+  assign ret_first = ret | slice: 0
+-%}
+<section class="em-hero color-{{ section.settings.color_scheme }} gradient" aria-labelledby="EmHero-{{ section.id }}">
+  <div class="em-wrap em-hero__grid">
+    <div class="em-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="em-label">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 id="EmHero-{{ section.id }}" class="em-hero__title">{{ section.settings.heading }}</h1>
+      {%- if section.settings.text != blank -%}
+        <p class="em-hero__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      <div class="em-hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#coleccion' }}" class="button">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.link_label != blank -%}
+          <a href="{{ section.settings.link_url | default: '#presion' }}" class="ehora-link">{{ section.settings.link_label | escape }}{%- render 'ehora-icon-arrow' -%}</a>
+        {%- endif -%}
+      </div>
+      <ul class="em-trust" role="list">
+        <li>Pago seguro</li>
+        {%- if ship != blank and ship_first != '[' -%}<li>{{ ship | escape }}</li>{%- endif -%}
+        {%- if ret != blank and ret_first != '[' -%}<li>{{ ret | escape }}</li>{%- endif -%}
+        {%- if section.settings.trust_extra != blank -%}<li>{{ section.settings.trust_extra | escape }}</li>{%- endif -%}
+      </ul>
+    </div>
+    <div class="em-hero__media">
+      <div class="em-arch em-hero__main">
+        {%- render 'ehora-image', image: section.settings.image, fallback: section.settings.default_image, alt: section.settings.image_alt, sizes: '(min-width: 990px) 46vw, 92vw', eager: true -%}
+      </div>
+      <div class="em-hero__inset">
+        {%- render 'ehora-image', image: section.settings.image_detail, fallback: section.settings.default_image_detail, alt: '', sizes: '(min-width: 990px) 16vw, 34vw', no_lazy: true -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Maestra · Portada",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Pádel y tenis" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titular", "default": "El juego, cuidado al <em>detalle</em>." },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Paleteros y presurizadores para quienes cuidan el juego antes, durante y después del partido." },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Ver la colección" },
+    { "type": "url", "id": "button_link", "label": "Enlace del botón" },
+    { "type": "text", "id": "link_label", "label": "Enlace secundario", "default": "Por qué presurizar" },
+    { "type": "url", "id": "link_url", "label": "Destino del enlace secundario" },
+    { "type": "text", "id": "trust_extra", "label": "Dato de confianza extra", "info": "Opcional. Solo datos reales." },
+    { "type": "image_picker", "id": "image", "label": "Imagen principal" },
+    { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-v2-09.webp" },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo", "default": "Jugadora con el paletero EHORA a la espalda" },
+    { "type": "image_picker", "id": "image_detail", "label": "Imagen de detalle" },
+    { "type": "text", "id": "default_image_detail", "label": "Detalle por defecto (archivo del theme)", "default": "ehora-v2-11.webp" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "Maestra · Portada" }]
+}
+{% endschema %}
