@@ -152,8 +152,10 @@ if (!customElements.get('ehora-3d')) {
         if (!viewer || !viewer.model) return;
         const color = this.current;
         viewer.model.materials.forEach((material) => {
+          if (!material.isLoaded) return;
           const name = material.name.replace(/[._]\d+$/, '');
-          if (E3D_RECOLOR.includes(name)) material.pbrMetallicRoughness.setBaseColorFactor(color.hex);
+          if (name === 'Floor') material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 0]);
+          else if (E3D_RECOLOR.includes(name)) material.pbrMetallicRoughness.setBaseColorFactor(color.hex);
           else if (name === 'Trim') material.pbrMetallicRoughness.setBaseColorFactor(color.trim);
         });
       }
@@ -176,14 +178,14 @@ if (!customElements.get('ehora-3d')) {
             viewer.setAttribute('src', this.dataset.model);
             viewer.setAttribute('alt', 'Paletero EHORA en 3D');
             viewer.setAttribute('camera-controls', '');
-            viewer.setAttribute('camera-orbit', '25deg 78deg 2.6m');
-            viewer.setAttribute('min-camera-orbit', 'auto 20deg 1.6m');
-            viewer.setAttribute('max-camera-orbit', 'auto 95deg 4.2m');
+            viewer.setAttribute('camera-orbit', '155deg 76deg 1.7m');
+            viewer.setAttribute('min-camera-orbit', 'auto 15deg 0.7m');
+            viewer.setAttribute('max-camera-orbit', 'auto 100deg 3.2m');
             viewer.setAttribute('field-of-view', '28deg');
             viewer.setAttribute('environment-image', 'neutral');
-            viewer.setAttribute('exposure', '1.05');
-            viewer.setAttribute('shadow-intensity', '0.6');
-            viewer.setAttribute('shadow-softness', '1');
+            viewer.setAttribute('exposure', '1.1');
+            viewer.setAttribute('shadow-intensity', '0.9');
+            viewer.setAttribute('shadow-softness', '0.8');
             viewer.setAttribute('interaction-prompt', 'auto');
             if (!reduced) {
               viewer.setAttribute('auto-rotate', '');

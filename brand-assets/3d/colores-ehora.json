@@ -1,0 +1,41 @@
+{
+  "nota": "Materiales del GLB (paletero-ehora.glb) que se recolorean por nombre: Exterior, Handle, Lining. Trim (ribete) fijo salvo que se decida cambiarlo. Tape/Leather/Metal/Dark no cambian.",
+  "materiales": {
+    "exterior": [
+      "Exterior"
+    ],
+    "mango": [
+      "Handle"
+    ],
+    "interior": [
+      "Lining"
+    ],
+    "ribete": [
+      "Trim"
+    ]
+  },
+  "colores": {
+    "blanco": {
+      "nombre": "Blanco",
+      "hex": "#EFEBE2"
+    },
+    "beige": {
+      "nombre": "Beige",
+      "hex": "#D6C3A3"
+    },
+    "verde": {
+      "nombre": "Verde",
+      "hex": "#1F4B33"
+    },
+    "marino": {
+      "nombre": "Azul marino",
+      "hex": "#1C2B4B"
+    },
+    "negro": {
+      "nombre": "Negro",
+      "hex": "#18181B"
+    }
+  },
+  "ribete_verde_por_defecto": "#0B4A25",
+  "ribete_blanco_sobre_oscuros": "#EFEBE2"
+}
