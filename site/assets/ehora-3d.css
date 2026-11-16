@@ -1,0 +1,143 @@
+/* EHORA · Ver en 3D */
+
+.e3d { display: block; margin-top: var(--space-s); }
+
+.e3d__open { gap: var(--space-s); }
+.e3d__cube { width: 2rem; height: 2rem; flex: none; }
+
+.e3d__editor-note { margin: var(--space-s) 0 0; padding: var(--space-s); border: 1px dashed currentColor; border-radius: 4px; font-size: 1.3rem; }
+
+html.e3d-lock { overflow: hidden; }
+
+.e3d__dialog {
+  width: min(112rem, 100vw);
+  max-width: 100vw;
+  height: min(78rem, 100dvh);
+  max-height: 100dvh;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #f3ebdd;
+  color: #0a2a1e;
+  overflow: hidden;
+}
+
+.e3d__dialog::backdrop { background: rgba(10, 42, 30, 0.6); }
+
+@media screen and (max-width: 749px) {
+  .e3d__dialog { width: 100vw; height: 100dvh; border-radius: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .e3d__dialog[open] { animation: e3dIn 280ms var(--ease-out); }
+  .e3d__dialog[open]::backdrop { animation: e3dFade 280ms var(--ease-out); }
+}
+
+@keyframes e3dIn { from { opacity: 0; transform: translateY(1.2rem) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes e3dFade { from { opacity: 0; } to { opacity: 1; } }
+
+.e3d__panel { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+
+.e3d__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-m); padding: var(--space-m) var(--space-l); }
+
+.e3d__title { margin: 0; font-family: var(--font-heading-family); font-size: var(--step-2); font-weight: 300; letter-spacing: 0.01em; color: #0a2a1e; }
+
+.e3d__close {
+  display: grid;
+  place-items: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(10, 42, 30, 0.08);
+  color: #0a2a1e;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), transform 140ms var(--ease-out);
+}
+
+.e3d__close:active { transform: scale(0.95); }
+.e3d__close svg { width: 1.8rem; height: 1.8rem; }
+
+@media (hover: hover) and (pointer: fine) {
+  .e3d__close:hover { background: rgba(10, 42, 30, 0.16); }
+}
+
+.e3d__stage {
+  position: relative;
+  min-height: 0;
+  background: radial-gradient(ellipse at 50% 35%, #f3ebdd 0%, #e8dcc8 60%, #dccdb4 100%);
+}
+
+.e3d__viewer { width: 100%; height: 100%; --poster-color: transparent; background: transparent; }
+
+.e3d__status {
+  position: absolute;
+  inset: 50% 0 auto;
+  z-index: 1;
+  margin: 0;
+  padding-inline: var(--space-l);
+  text-align: center;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  translate: 0 -2rem;
+}
+
+.e3d__bar { position: absolute; left: 50%; top: calc(50% + 1.2rem); width: min(24rem, 60%); height: 2px; background: rgba(10, 42, 30, 0.15); translate: -50% 0; overflow: hidden; }
+.e3d__bar span { display: block; height: 100%; background: #123f2e; transform-origin: 0 50%; transform: scaleX(0); transition: transform 200ms var(--ease-out); }
+
+.e3d__foot {
+  display: grid;
+  gap: var(--space-m);
+  align-items: center;
+  padding: var(--space-m) var(--space-l) var(--space-l);
+  border-top: 1px solid rgba(10, 42, 30, 0.12);
+}
+
+.e3d__label { margin: 0 0 var(--space-xs); font-size: 1.2rem; font-weight: 500; letter-spacing: var(--tracking-label); text-transform: uppercase; }
+.e3d__label strong { margin-left: var(--space-xs); font-weight: 500; opacity: 0.7; }
+
+.e3d__swatches { display: flex; flex-wrap: wrap; gap: var(--space-s); }
+
+.e3d__swatch {
+  position: relative;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 1px solid rgba(10, 42, 30, 0.25);
+  border-radius: 50%;
+  background: var(--sw);
+  cursor: pointer;
+  transition: transform 140ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+
+.e3d__swatch::after { content: ''; position: absolute; inset: -0.5rem; border: 1.5px solid transparent; border-radius: 50%; transition: border-color 200ms var(--ease-out); }
+.e3d__swatch[aria-pressed='true']::after { border-color: #123f2e; }
+.e3d__swatch:active { transform: scale(0.94); }
+.e3d__swatch.is-soldout { opacity: 0.45; }
+
+.e3d__swatch.is-soldout::before {
+  content: '';
+  position: absolute;
+  inset: 50% -2px auto;
+  height: 1px;
+  background: #0a2a1e;
+  transform: rotate(-45deg);
+}
+
+.e3d__note { margin: var(--space-s) 0 0; font-size: 1.2rem; opacity: 0.75; }
+.e3d__hint { margin: 0; font-size: 1.2rem; letter-spacing: 0.04em; opacity: 0.7; }
+
+.e3d__done { border-radius: 99rem; background: #123f2e; color: #f7f5ef; }
+
+@media screen and (min-width: 750px) {
+  .e3d__foot { grid-template-columns: auto 1fr auto; gap: var(--space-xl); }
+  .e3d__hint { text-align: center; }
+}
+
+.e3d__done::before,
+.e3d__done::after { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .e3d__done:hover { background: #0a2a1e; }
+}

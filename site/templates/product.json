@@ -41,6 +41,17 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "ver_3d": {
+          "type": "ehora_3d",
+          "settings": {
+            "show": false,
+            "model_url": "",
+            "color_option": "Color",
+            "button_label": "Ver en 3D",
+            "title": "Tu paletero, en 3D",
+            "done_label": "Volver a la ficha"
+          }
         }
       },
       "block_order": [
@@ -50,6 +61,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "ver_3d",
         "description",
         "share"
       ],

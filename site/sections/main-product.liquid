@@ -470,6 +470,8 @@
                       {{ block.settings.text | default: block.settings.page.title | escape }}
                     </button>
                   </modal-opener>
+                {%- when 'ehora_3d' -%}
+                  {%- render 'ehora-3d', block: block -%}
                 {%- when 'share' -%}
                   {% liquid
                     assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
@@ -920,6 +922,19 @@
           ],
           "default": "circle"
         }
+      ]
+    },
+    {
+      "type": "ehora_3d",
+      "name": "EHORA · Ver en 3D",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show", "label": "Mostrar el botón", "default": false, "info": "Actívalo cuando hayas subido el modelo 3D." },
+        { "type": "text", "id": "model_url", "label": "URL del modelo (.glb)", "info": "Sube el archivo en Contenido › Archivos y pega aquí su enlace." },
+        { "type": "text", "id": "color_option", "label": "Nombre de la opción de color", "default": "Color", "info": "Tal como se llama en el producto." },
+        { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Ver en 3D" },
+        { "type": "text", "id": "title", "label": "Título de la ventana", "default": "Tu paletero, en 3D" },
+        { "type": "text", "id": "done_label", "label": "Botón de cerrar", "default": "Volver a la ficha" }
       ]
     },
     {
