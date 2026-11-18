@@ -1,0 +1,58 @@
+{%- comment -%}
+  Contenido de las páginas de EHORA según su identificador (handle).
+  Crea la página en Contenido › Páginas con ese handle y este contenido aparece solo.
+  Los datos que faltan se muestran solo en el editor del tema, nunca a los clientes.
+{%- endcomment -%}
+{%- assign h = page.handle -%}
+{%- if h == 'nosotros' or h == 'sobre-nosotros' or h == 'about' or h == 'about-us' -%}
+  <div class="ehora-page__grid">
+    <section class="ehora-page__card">
+      <h2>Qué hacemos</h2>
+      <p>EHORA son accesorios de pádel y tenis para quienes cuidan el juego: un paletero acolchado que ordena el partido y presurizadores que conservan las pelotas.</p>
+    </section>
+    <section class="ehora-page__card">
+      <h2>La colección</h2>
+      <p><a href="{{ routes.all_products_collection_url }}">Paletero, presurizador manual y presurizador automático.</a> Tres piezas pensadas para llevarlas juntas a la pista.</p>
+    </section>
+    {%- if request.design_mode -%}
+      <section class="ehora-page__card ehora-page__todo">
+        <h2>Quién está detrás de EHORA</h2>
+        <p>[Pendiente: escribe aquí quién hay detrás de la marca, cuándo nació y por qué. Esta tarjeta solo se ve en el editor.]</p>
+      </section>
+    {%- endif -%}
+  </div>
+{%- elsif h == 'preguntas-frecuentes' or h == 'preguntas' or h == 'faq' -%}
+  <div class="ehora-page__faq">
+    <details open><summary>¿Cuántas palas o raquetas caben en el paletero?</summary><p>Caben 2 palas de pádel o pickleball, o 2 raquetas de tenis.</p></details>
+    <details><summary>¿Se puede lavar el paletero?</summary><p>Sí. Es fácil de limpiar y lavable: las manchas se quitan sin complicaciones.</p></details>
+    <details><summary>¿Qué colores hay del paletero?</summary><p>Negro, Blanco, Beige, Verde, Azul marino y Blanco con ribete azul. Puedes ver cada uno en 3D desde su ficha.</p></details>
+    <details><summary>¿Qué hace un presurizador?</summary><p>Devuelve la presión a las pelotas y ayuda a que la pelota conserve su respuesta entre partido y partido.</p></details>
+    <details><summary>¿Cuántas pelotas caben en el presurizador?</summary><p>Los dos presurizadores tienen capacidad para 3 pelotas, un bote completo de una vez.</p></details>
+    <details><summary>¿Qué diferencia hay entre el manual y el automático?</summary><p>El manual funciona sin batería ni cables y tiene una escala en PSI. El automático tiene pantalla digital (en BAR), controles táctiles y batería recargable por USB-C.</p></details>
+    {%- if shop.shipping_policy.body != blank -%}
+      <details><summary>¿Cómo es el envío?</summary><p>Lo explicamos en la <a href="{{ shop.shipping_policy.url }}">política de envío</a>.</p></details>
+    {%- endif -%}
+    {%- if shop.refund_policy.body != blank -%}
+      <details><summary>¿Puedo devolver mi pedido?</summary><p>Consulta la <a href="{{ shop.refund_policy.url }}">política de devoluciones</a>.</p></details>
+    {%- endif -%}
+    {%- if request.design_mode -%}
+      <details class="ehora-page__todo"><summary>Envío y devoluciones</summary><p>[Pendiente: aparecerán solos cuando rellenes las políticas en Configuración › Políticas.]</p></details>
+    {%- endif -%}
+  </div>
+{%- elsif h == 'envios-y-devoluciones' or h == 'envios' or h == 'shipping' -%}
+  <div class="ehora-page__policies">
+    {%- if shop.shipping_policy.body != blank -%}
+      <section class="ehora-page__card"><h2>Envíos</h2><div class="rte">{{ shop.shipping_policy.body }}</div></section>
+    {%- endif -%}
+    {%- if shop.refund_policy.body != blank -%}
+      <section class="ehora-page__card"><h2>Devoluciones</h2><div class="rte">{{ shop.refund_policy.body }}</div></section>
+    {%- endif -%}
+    {%- if shop.shipping_policy.body == blank and shop.refund_policy.body == blank -%}
+      {%- if request.design_mode -%}
+        <section class="ehora-page__card ehora-page__todo"><h2>Plazos y condiciones</h2><p>[Pendiente: rellena Configuración › Políticas (envío y reembolso) y se mostrarán aquí.]</p></section>
+      {%- else -%}
+        <section class="ehora-page__card"><h2>¿Dudas con tu pedido?</h2><p>Escríbenos y te lo explicamos.</p></section>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

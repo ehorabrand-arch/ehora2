@@ -13,17 +13,17 @@
           }
         },
         "coleccion": {
-          "type": "text",
+          "type": "ehora_links",
           "settings": {
-            "heading": "Colección",
-            "subtext": "<p><a href=\"/collections/all\">Toda la colección</a></p><p><a href=\"/search\">Buscar</a></p>"
+            "heading": "Tienda",
+            "kind": "tienda"
           }
         },
         "ayuda": {
-          "type": "text",
+          "type": "ehora_links",
           "settings": {
             "heading": "Ayuda",
-            "subtext": "<p><a href=\"/cart\">Carrito</a></p><p><a href=\"/account\">Mi cuenta</a></p>"
+            "kind": "ayuda"
           }
         }
       },

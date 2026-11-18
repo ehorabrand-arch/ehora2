@@ -1,0 +1,60 @@
+{%- comment -%}
+  Galería por color. Muestra solo las fotos del color elegido.
+  Las fotos se asignan por posición con el ajuste «Fotos por color» de la ficha de producto.
+  Accepts: product, map (texto), color_option (nombre de la opción), section_id.
+{%- endcomment -%}
+{%- assign eg_media = product.media | where: 'media_type', 'image' -%}
+{%- assign eg_alt = product.title | escape -%}
+<ehora-gallery
+  class="eg"
+  id="EhoraGallery-{{ section_id }}"
+  data-map="{{ map | escape }}"
+  data-option="{{ color_option | default: 'Color' | escape }}"
+  data-section="{{ section_id }}"
+  role="region"
+  aria-label="Fotos del producto"
+>
+  <div class="eg__stage">
+    <ul class="eg__track list-unstyled" role="list" tabindex="0" aria-label="Fotos del producto">
+      {%- for media in eg_media -%}
+        <li class="eg__slide" data-pos="{{ media.position }}" data-index="{{ forloop.index0 }}">
+          {{
+            media
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '480, 720, 960, 1200',
+              sizes: '(min-width: 990px) 48vw, 100vw',
+              alt: eg_alt,
+              class: 'eg__img'
+          }}
+        </li>
+      {%- endfor -%}
+    </ul>
+    <button type="button" class="eg__nav eg__nav--prev" aria-label="Foto anterior" data-eg-prev>
+      <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button type="button" class="eg__nav eg__nav--next" aria-label="Foto siguiente" data-eg-next>
+      <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m7.5 4 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="eg__count" aria-live="polite"><span data-eg-current>1</span> / <span data-eg-total>{{ eg_media.size }}</span></p>
+  </div>
+  <p class="eg__note" data-eg-note hidden>Aún no tenemos fotos de este color. Te mostramos el modelo en blanco como referencia; el color real lo ves en 3D.</p>
+  <ul class="eg__thumbs list-unstyled" role="list" data-eg-thumbs>
+    {%- for media in eg_media -%}
+      <li class="eg__thumb-item" data-pos="{{ media.position }}">
+        <button type="button" class="eg__thumb" data-eg-go="{{ forloop.index0 }}" aria-label="Ver foto {{ forloop.index }}">
+          {{
+            media
+            | image_url: width: 200
+            | image_tag:
+              loading: 'lazy',
+              widths: '100, 160, 200',
+              sizes: '80px',
+              alt: ''
+          }}
+        </button>
+      </li>
+    {%- endfor -%}
+  </ul>
+</ehora-gallery>

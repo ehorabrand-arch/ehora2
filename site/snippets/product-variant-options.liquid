@@ -95,8 +95,34 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
-      {{ value -}}
+    {%- liquid
+      assign dot = null
+      assign dot_ring = null
+      if option.name == 'Color' or option.name == 'Colour' or option.name == 'color'
+        assign value_key = value | downcase
+        case value_key
+          when 'negro'
+            assign dot = '#18181B'
+          when 'blanco'
+            assign dot = '#F4F1EA'
+            assign dot_ring = '#0B4A25'
+          when 'beige'
+            assign dot = '#D6C3A3'
+          when 'verde'
+            assign dot = '#1F4B33'
+          when 'azul marino'
+            assign dot = '#1C2B4B'
+          when 'blanco ribete azul'
+            assign dot = '#F4F1EA'
+            assign dot_ring = '#1E3FBF'
+        endcase
+      endif
+    -%}
+    <label for="{{ input_id }}"{% if dot %} class="ehora-swatch"{% endif %}>
+      {%- if dot -%}
+        <span class="ehora-swatch__dot" style="--dot: {{ dot }};{% if dot_ring %} --ring: {{ dot_ring }};{% endif %}" aria-hidden="true"></span>
+      {%- endif -%}
+      <span class="ehora-swatch__text">{{ value }}</span>
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}

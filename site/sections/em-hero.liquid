@@ -29,7 +29,23 @@
         {%- if section.settings.trust_extra != blank -%}<li>{{ section.settings.trust_extra | escape }}</li>{%- endif -%}
       </ul>
     </div>
-    <div class="em-hero__media">
+    <div class="em-hero__media{% if section.settings.video_url != blank %} has-video{% endif %}">
+      {%- if section.settings.video_url != blank -%}
+        <div class="em-hero__video-wrap">
+          <video
+            class="em-hero__video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-hidden="true"
+            {% if section.settings.video_poster != blank %}poster="{{ section.settings.video_poster }}"{% endif %}
+          >
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+          </video>
+        </div>
+      {%- endif -%}
       <div class="em-arch em-hero__main">
         {%- render 'ehora-image', image: section.settings.image, fallback: section.settings.default_image, alt: section.settings.image_alt, sizes: '(min-width: 990px) 46vw, 92vw', eager: true -%}
       </div>
@@ -54,12 +70,14 @@
     { "type": "text", "id": "link_label", "label": "Enlace secundario", "default": "Por qué presurizar" },
     { "type": "url", "id": "link_url", "label": "Destino del enlace secundario" },
     { "type": "text", "id": "trust_extra", "label": "Dato de confianza extra", "info": "Opcional. Solo datos reales." },
+    { "type": "text", "id": "video_url", "label": "Vídeo para móvil (.mp4)", "info": "Se muestra en lugar de la imagen principal en pantallas pequeñas. Déjalo vacío para no usarlo." },
+    { "type": "text", "id": "video_poster", "label": "Imagen previa del vídeo (URL)" },
     { "type": "image_picker", "id": "image", "label": "Imagen principal" },
     { "type": "text", "id": "default_image", "label": "Imagen por defecto (archivo del theme)", "default": "ehora-v2-09.webp" },
     { "type": "text", "id": "image_alt", "label": "Texto alternativo", "default": "Jugadora con el paletero EHORA a la espalda" },
     { "type": "image_picker", "id": "image_detail", "label": "Imagen de detalle" },
     { "type": "text", "id": "default_image_detail", "label": "Detalle por defecto (archivo del theme)", "default": "ehora-v2-11.webp" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+    { "type": "select", "id": "color_scheme", "options": [   { "value": "scheme-1", "label": "Crema" },   { "value": "scheme-2", "label": "Crema suave" },   { "value": "scheme-3", "label": "Arena" },   { "value": "scheme-4", "label": "Verde profundo" },   { "value": "scheme-5", "label": "Verde club" } ],  "label": "Esquema de color", "default": "scheme-1" }
   ],
   "presets": [{ "name": "Maestra · Portada" }]
 }

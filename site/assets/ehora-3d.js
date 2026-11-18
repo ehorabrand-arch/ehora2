@@ -8,6 +8,7 @@
 
 const E3D_COLORS = [
   { id: 'blanco', name: 'Blanco', hex: '#EFEBE2', trim: '#0B4A25', aliases: ['blanco', 'white', 'crema'] },
+  { id: 'blanco-azul', name: 'Blanco ribete azul', hex: '#EFEBE2', trim: '#1E3FBF', aliases: ['blanco ribete azul'] },
   { id: 'beige', name: 'Beige', hex: '#D6C3A3', trim: '#0B4A25', aliases: ['beige', 'arena'] },
   { id: 'verde', name: 'Verde', hex: '#1F4B33', trim: '#EFEBE2', aliases: ['verde', 'green'] },
   { id: 'marino', name: 'Azul marino', hex: '#1C2B4B', trim: '#EFEBE2', aliases: ['azul marino', 'marino', 'navy', 'azul'] },

@@ -25,6 +25,27 @@
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- if section.settings.ehora_nav -%}
+{%- capture ehora_nav_raw -%}Colección|{{ routes.all_products_collection_url }}
+{%- if pages['nosotros'] != blank -%};Nosotros|{{ pages['nosotros'].url }}{%- endif -%}
+{%- if pages['preguntas-frecuentes'] != blank -%};Preguntas|{{ pages['preguntas-frecuentes'].url }}{%- endif -%}
+{%- assign contact_page = pages['contacto'] | default: pages['contact'] -%}
+{%- if contact_page != blank -%};Contacto|{{ contact_page.url }}{%- endif -%}
+{%- endcapture -%}
+{%- assign ehora_nav_items = ehora_nav_raw | strip | split: ';' -%}
+              {%- for item in ehora_nav_items -%}
+                {%- assign parts = item | split: '|' -%}
+                <li>
+                  <a
+                    href="{{ parts[1] }}"
+                    class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if request.path == parts[1] %} menu-drawer__menu-item--active{% endif %}"
+                    {% if request.path == parts[1] %}aria-current="page"{% endif %}
+                  >
+                    {{ parts[0] }}
+                  </a>
+                </li>
+              {%- endfor -%}
+              {%- else -%}
               {%- for link in section.settings.menu.links -%}
                 <li>
                   {%- if link.links != blank -%}
@@ -137,6 +158,7 @@
                   {%- endif -%}
                 </li>
               {%- endfor -%}
+              {%- endif -%}
             </ul>
           </nav>
           <div class="menu-drawer__utility-links">

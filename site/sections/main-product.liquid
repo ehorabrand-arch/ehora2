@@ -77,7 +77,17 @@
     <div class="page-width">
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
-          {% render 'product-media-gallery', variant_images: variant_images %}
+          {%- if section.settings.ehora_gallery_map != blank and product.media.size > 1 -%}
+            {% render 'ehora-gallery-colors',
+              product: product,
+              map: section.settings.ehora_gallery_map,
+              color_option: section.settings.ehora_gallery_option,
+              section_id: section.id
+            %}
+            <script src="{{ 'ehora-gallery.js' | asset_url }}" defer="defer"></script>
+          {%- else -%}
+            {% render 'product-media-gallery', variant_images: variant_images %}
+          {%- endif -%}
         </div>
         <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section
@@ -932,6 +942,7 @@
         { "type": "checkbox", "id": "show", "label": "Mostrar el botón", "default": false, "info": "Actívalo cuando hayas subido el modelo 3D." },
         { "type": "text", "id": "model_url", "label": "URL del modelo (.glb)", "info": "Sube el archivo en Contenido › Archivos y pega aquí su enlace." },
         { "type": "text", "id": "color_option", "label": "Nombre de la opción de color", "default": "Color", "info": "Tal como se llama en el producto." },
+        { "type": "text", "id": "only_tag", "label": "Solo en productos con la etiqueta", "default": "paletero", "info": "Déjalo vacío para mostrarlo en todos los productos." },
         { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Ver en 3D" },
         { "type": "text", "id": "title", "label": "Título de la ventana", "default": "Tu paletero, en 3D" },
         { "type": "text", "id": "done_label", "label": "Botón de cerrar", "default": "Volver a la ficha" }
@@ -2169,8 +2180,16 @@
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
     },
     {
-      "type": "color_scheme",
+      "type": "select",
       "id": "color_scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Crema" },
+        { "value": "scheme-2", "label": "Crema suave" },
+        { "value": "scheme-3", "label": "Arena" },
+        { "value": "scheme-4", "label": "Verde profundo" },
+        { "value": "scheme-5", "label": "Verde club" }
+      ],
+      
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
@@ -2219,6 +2238,18 @@
       ],
       "default": "contain",
       "label": "t:sections.main-product.settings.media_fit.label"
+    },
+    {
+      "type": "textarea",
+      "id": "ehora_gallery_map",
+      "label": "Fotos por color",
+      "info": "Una línea por color: «Nombre del color: posiciones». Ej.: Blanco: 1-10. La línea «*:» marca las fotos que se enseñan a los colores sin fotos. Déjalo vacío para la galería normal."
+    },
+    {
+      "type": "text",
+      "id": "ehora_gallery_option",
+      "label": "Nombre de la opción de color",
+      "default": "Color"
     },
     {
       "type": "select",

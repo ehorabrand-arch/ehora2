@@ -580,3 +580,248 @@
   .em-card .button:not(.button--secondary):not([disabled]):hover,
   .em-compare__card .button:not(.button--secondary):not([disabled]):hover { background: #0a2a1e; }
 }
+
+/* ==========================================================================
+   Ronda de arreglos: cabecera, móvil, esquemas de color
+   ========================================================================== */
+
+html, body { max-width: 100%; overflow-x: clip; }
+
+/* Cabecera verde profundo, texto crema, línea fina dorada */
+.header-wrapper {
+  background: #0A2A1E;
+  color: #F7F5EF;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.35);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+}
+.header-wrapper .header__icon,
+.header-wrapper .header__heading-link,
+.header-wrapper .header__heading-link .h2,
+.header-wrapper .header__menu-item,
+.header-wrapper .list-menu__item { color: #F7F5EF; }
+.header-wrapper .header__heading-link:hover .h2 { color: #fff; }
+.header-wrapper .header__heading-logo { filter: brightness(0) invert(1); max-width: 14rem; }
+.header-wrapper .header__menu-item span { background-image: linear-gradient(#C9A96E, #C9A96E); }
+.header-wrapper .cart-count-bubble { background: #F7F5EF; color: #0A2A1E; }
+.header-wrapper .header__icon:focus-visible,
+.header-wrapper .header__menu-item:focus-visible { outline: 2px solid #C9A96E; outline-offset: 2px; }
+
+.header__inline-menu .list-menu--inline { gap: 0.4rem 1rem; }
+.header__inline-menu .header__menu-item { padding: 1rem 1.4rem; font-size: 1.25rem; letter-spacing: 0.16em; }
+
+/* Menú móvil: panel opaco, mismo verde */
+.menu-drawer { background-color: #0A2A1E !important; color: #F7F5EF; }
+.menu-drawer .menu-drawer__menu-item,
+.menu-drawer a { color: #F7F5EF; }
+.menu-drawer__menu-item {
+  font-family: var(--font-heading-family);
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  padding: 1.8rem 3rem;
+  border-bottom: 1px solid rgba(247, 245, 239, 0.12);
+}
+.menu-drawer__menu-item--active { color: #C9A96E !important; }
+.menu-drawer__utility-links { background: transparent; }
+
+@media screen and (max-width: 749px) {
+  .header { column-gap: 0; }
+  .header--has-account.header--has-menu:not(.header--mobile-left):not(.header--has-app) {
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+  }
+  .header__heading-link { padding: 0.4rem; max-width: 100%; }
+  .header__heading-link .h2 {
+    font-size: 1.7rem;
+    letter-spacing: 0.22em;
+    margin-right: -0.22em;
+  }
+  .header-wrapper .header__heading-logo { max-width: 10rem; }
+  .header__icons { padding-right: 0; }
+  .header__icon--cart { margin-right: 0; }
+  .header__icon, .header__icon--cart .icon { width: 4rem; height: 4rem; }
+  .header__icon .svg-wrapper { width: 4rem; height: 4rem; }
+  .header__icons .header__icon--account { display: none; }
+  .header { padding-left: 0.4rem; padding-right: 0.4rem; }
+}
+
+/* Pie verde */
+.footer { background: #0A2A1E; color: #F7F5EF; }
+.footer a, .footer .footer-block__heading { color: #F7F5EF; }
+.footer .footer-block__heading { font-family: var(--font-heading-family); letter-spacing: 0.08em; }
+.footer .list-menu__item--link { opacity: 0.85; padding: 0.4rem 0; }
+.footer .list-menu__item--link:hover { opacity: 1; }
+
+/* ==========================================================================
+   Botones de color (variantes) y galería por color
+   ========================================================================== */
+
+.product-form__input--pill .form__label { font-family: var(--font-heading-family); font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 0.6rem; }
+.product-form__input--pill input[type='radio'] + label.ehora-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0.5rem 0.6rem 0.4rem 0;
+  padding: 0.9rem 1.7rem 0.9rem 1.1rem;
+  min-height: 4.4rem;
+  border: 1px solid rgba(32, 35, 33, 0.22);
+  border-radius: 999px;
+  background: #fff;
+  color: #202321;
+  font-size: 1.4rem;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  transition: border-color 150ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)),
+    background-color 150ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)),
+    transform 120ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+}
+.product-form__input--pill input[type='radio'] + label.ehora-swatch::before { display: none; }
+.ehora-swatch__dot {
+  flex: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: var(--dot, #ccc);
+  border: 0.35rem solid var(--ring, var(--dot, #ccc));
+  box-shadow: 0 0 0 1px rgba(32, 35, 33, 0.22);
+}
+.product-form__input--pill input[type='radio']:checked + label.ehora-swatch {
+  border-color: #0A2A1E;
+  background: #F7F5EF;
+  box-shadow: 0 0 0 1px #0A2A1E;
+  font-weight: 500;
+}
+.product-form__input--pill input[type='radio']:checked + label.ehora-swatch .ehora-swatch__dot { box-shadow: 0 0 0 2px #F7F5EF, 0 0 0 3px #0A2A1E; }
+.product-form__input--pill input[type='radio']:focus-visible + label.ehora-swatch { outline: 2px solid #0A2A1E; outline-offset: 3px; }
+.product-form__input--pill input[type='radio'].disabled + label.ehora-swatch { opacity: 0.5; text-decoration: line-through; }
+.product-form__input--pill input[type='radio'] + label.ehora-swatch:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .product-form__input--pill input[type='radio']:not(:checked) + label.ehora-swatch:hover { border-color: #0A2A1E; }
+}
+
+/* Galería por color */
+.eg { display: grid; gap: 1.2rem; min-width: 0; max-width: 100%; contain: inline-size; }
+.eg__stage { position: relative; border-radius: 4px; overflow: hidden; background: #EFEBE2; }
+.eg__track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.eg__track::-webkit-scrollbar { display: none; }
+.eg__slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 4 / 5; min-width: 0; }
+.eg__slide[hidden], .eg__thumb-item[hidden] { display: none; }
+.eg__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.eg.is-switching .eg__track { animation: eg-in 360ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)); }
+@keyframes eg-in { from { opacity: 0; transform: scale(0.985); } to { opacity: 1; transform: none; } }
+.eg__nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 4.4rem;
+  height: 4.4rem;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(247, 245, 239, 0.92);
+  color: #0A2A1E;
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), background-color 150ms;
+}
+.eg__nav[hidden] { display: none; }
+.eg__nav svg { width: 2rem; height: 2rem; }
+.eg__nav--prev { left: 1rem; }
+.eg__nav--next { right: 1rem; }
+.eg__nav:active { transform: scale(0.95); }
+.eg__count {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  margin: 0;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: rgba(10, 42, 30, 0.78);
+  color: #F7F5EF;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+}
+.eg__note { margin: 0; padding: 1rem 1.4rem; background: #F1ECE0; border-left: 3px solid #C9A96E; font-size: 1.3rem; line-height: 1.5; }
+.eg__thumbs { display: flex; gap: 0.8rem; margin: 0; padding: 0 0 0.4rem; overflow-x: auto; scrollbar-width: thin; }
+.eg__thumbs[hidden] { display: none; }
+.eg__thumb-item { flex: 0 0 7.2rem; }
+.eg__thumb { display: block; width: 100%; aspect-ratio: 4 / 5; padding: 0; border: 1px solid transparent; border-radius: 3px; overflow: hidden; background: none; cursor: pointer; opacity: 0.6; transition: opacity 150ms, border-color 150ms; }
+.eg__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.eg__thumb[aria-current='true'] { opacity: 1; border-color: #0A2A1E; }
+@media (hover: hover) and (pointer: fine) { .eg__thumb:hover { opacity: 1; } }
+@media (min-width: 990px) { .eg__thumb-item { flex-basis: 8.4rem; } }
+@media (prefers-reduced-motion: reduce) { .eg.is-switching .eg__track { animation: none; } .eg__track { scroll-behavior: auto; } }
+
+/* ==========================================================================
+   Catálogo
+   ========================================================================== */
+
+.ehora-chead { border-bottom: 1px solid rgba(32, 35, 33, 0.1); }
+.ehora-chead__inner { padding-top: 5.2rem; padding-bottom: 3.6rem; display: grid; gap: 1.4rem; justify-items: start; }
+.ehora-chead__kicker { margin: 0; font-size: 1.2rem; letter-spacing: 0.24em; text-transform: uppercase; color: #123F2E; }
+.ehora-chead__title { margin: 0; font-family: var(--font-heading-family); font-size: clamp(3.6rem, 7vw, 6.4rem); font-weight: 400; line-height: 1.02; letter-spacing: -0.01em; color: #0A2A1E; }
+.ehora-chead__text { max-width: 52rem; font-size: 1.6rem; line-height: 1.6; }
+.ehora-chead__text p { margin: 0; }
+.ehora-chips { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.8rem; }
+.ehora-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 4.4rem;
+  padding: 0 2rem;
+  border: 1px solid rgba(10, 42, 30, 0.35);
+  border-radius: 999px;
+  color: #0A2A1E;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 150ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), color 150ms, transform 120ms;
+}
+.ehora-chip:active { transform: scale(0.97); }
+.ehora-chip.is-active { background: #0A2A1E; color: #F7F5EF; border-color: #0A2A1E; }
+@media (hover: hover) and (pointer: fine) { .ehora-chip:not(.is-active):hover { background: rgba(10, 42, 30, 0.08); } }
+
+.template-collection .product-grid-container { padding-top: 1rem; }
+.template-collection .card-wrapper .card--standard .card__inner { border-radius: 3px; background: #EFEBE2; }
+.template-collection .card__heading { font-family: var(--font-heading-family); font-size: 2.2rem; font-weight: 400; letter-spacing: 0; }
+.template-collection .card-information { display: grid; gap: 0.5rem; margin-top: 0.4rem; }
+.template-collection .price { font-size: 1.7rem; letter-spacing: 0.02em; }
+.ehora-card__line { font-size: 1.35rem; line-height: 1.45; color: rgba(32, 35, 33, 0.78); }
+.ehora-card__dots { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0.2rem 0; }
+.ehora-card__dots i { width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--dot); border: 0.28rem solid var(--ring, var(--dot)); box-shadow: 0 0 0 1px rgba(32, 35, 33, 0.22); }
+.ehora-card__dots-text { margin-left: 0.5rem; font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(32, 35, 33, 0.7); }
+.template-collection .quick-add__submit { min-height: 4.4rem; }
+@media (min-width: 750px) { .template-collection .grid--3-col-desktop { column-gap: 3rem; row-gap: 4.4rem; } }
+
+/* Portada: vídeo en móvil */
+.em-hero__video-wrap { display: none; }
+@media (max-width: 749px) {
+  .em-hero__media.has-video .em-hero__video-wrap { display: block; border-radius: 4px; overflow: hidden; aspect-ratio: 4 / 5; background: #EFEBE2; }
+  .em-hero__media.has-video::before { display: none; }
+  .em-hero__media.has-video .em-hero__main,
+  .em-hero__media.has-video .em-hero__inset { display: none; }
+  .em-hero__video { display: block; width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* Páginas de contenido */
+.main-page-title { font-family: var(--font-heading-family); font-weight: 400; color: #0A2A1E; }
+.ehora-page__grid { display: grid; gap: 1.6rem; margin-top: 2.4rem; }
+@media (min-width: 750px) { .ehora-page__grid { grid-template-columns: 1fr 1fr; } }
+.ehora-page__card { padding: 2.4rem; background: #F1ECE0; border-radius: 3px; }
+.ehora-page__card h2 { margin: 0 0 1rem; font-size: 2.2rem; font-weight: 400; }
+.ehora-page__card p { margin: 0; line-height: 1.6; }
+.ehora-page__todo { outline: 2px dashed #C9A96E; }
+.ehora-page__faq { margin-top: 2.4rem; border-top: 1px solid rgba(32, 35, 33, 0.15); }
+.ehora-page__faq details { border-bottom: 1px solid rgba(32, 35, 33, 0.15); }
+.ehora-page__faq summary { display: flex; justify-content: space-between; gap: 1.6rem; padding: 1.8rem 0; min-height: 4.4rem; font-family: var(--font-heading-family); font-size: 1.9rem; cursor: pointer; list-style: none; }
+.ehora-page__faq summary::-webkit-details-marker { display: none; }
+.ehora-page__faq summary::after { content: '+'; font-size: 2.4rem; line-height: 1; transition: transform 200ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)); }
+.ehora-page__faq details[open] summary::after { transform: rotate(45deg); }
+.ehora-page__faq p { margin: 0 0 1.8rem; line-height: 1.65; max-width: 62ch; }
+.ehora-page__policies { display: grid; gap: 1.6rem; margin-top: 2.4rem; }

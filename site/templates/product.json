@@ -39,18 +39,19 @@
         "share": {
           "type": "share",
           "settings": {
-            "share_label": "Share"
+            "share_label": "Compartir"
           }
         },
         "ver_3d": {
           "type": "ehora_3d",
           "settings": {
-            "show": false,
-            "model_url": "",
+            "show": true,
+            "model_url": "https://cdn.shopify.com/3d/models/o/5b076ef3f4d4cbd9/paletero-ehora-corregido.glb",
             "color_option": "Color",
             "button_label": "Ver en 3D",
             "title": "Tu paletero, en 3D",
-            "done_label": "Volver a la ficha"
+            "done_label": "Volver a la ficha",
+            "only_tag": "paletero"
           }
         }
       },
@@ -78,7 +79,9 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
-        "padding_bottom": 12
+        "padding_bottom": 12,
+        "ehora_gallery_map": "Blanco: 1-10\nAzul marino: 11-13, 23-25\nBlanco ribete azul: 15-22\n*: 2, 8, 9, 7",
+        "ehora_gallery_option": "Color"
       }
     },
     "disclosures": {
@@ -91,7 +94,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "Completa tu juego",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,

@@ -11,7 +11,9 @@
         "default_image": "ehora-v2-09.webp",
         "image_alt": "Jugadora con el paletero EHORA a la espalda",
         "default_image_detail": "ehora-v2-11.webp",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "video_url": "https://ehorabrand.myshopify.com/cdn/shop/videos/c/vp/599de72a998e496da3de52dda732e588/599de72a998e496da3de52dda732e588.HD-1080p-2.5Mbps-101587533.mp4?v=0",
+        "video_poster": "https://ehorabrand.myshopify.com/cdn/shop/files/preview_images/599de72a998e496da3de52dda732e588.thumbnail.0000000000_1100x.jpg?v=1794851687"
       }
     },
     "coleccion": {
@@ -21,7 +23,7 @@
         "eyebrow": "La colección",
         "heading": "Elige tu <em>EHORA</em>.",
         "link_label": "Ver todo",
-        "no_price_label": "Próximamente",
+        "no_price_label": "Ver",
         "fallback_button": "Descubrir",
         "color_scheme": "scheme-1"
       },
@@ -31,8 +33,9 @@
           "settings": {
             "kind": "Paletero",
             "title": "Paletero EHORA",
-            "benefit": "Blanco acolchado con ribete verde. A mano, al hombro o a la espalda.",
-            "default_image": "ehora-v2-04.webp"
+            "benefit": "Acolchado con ribete. Caben 2 palas o 2 raquetas, y hasta el portátil.",
+            "default_image": "ehora-v2-04.webp",
+            "product": "paletero-ehora"
           }
         },
         "auto": {
@@ -40,8 +43,9 @@
           "settings": {
             "kind": "Presurizador",
             "title": "Presurizador automático",
-            "benefit": "Pantalla digital y carga USB-C.",
-            "default_image": "ehora-foto-11.webp"
+            "benefit": "Pantalla digital, batería USB-C y capacidad para 3 pelotas.",
+            "default_image": "ehora-foto-11.webp",
+            "product": "presurizador-automatico-ehora"
           }
         },
         "manual": {
@@ -49,8 +53,9 @@
           "settings": {
             "kind": "Presurizador",
             "title": "Presurizador manual",
-            "benefit": "Presión a mano, con escala en PSI.",
-            "default_image": "ehora-foto-12.webp"
+            "benefit": "Sin batería ni cables. Escala en PSI y capacidad para 3 pelotas.",
+            "default_image": "ehora-foto-12.webp",
+            "product": "presurizador-manual-ehora"
           }
         }
       },
@@ -133,7 +138,7 @@
           "type": "spec",
           "settings": {
             "label": "Capacidad",
-            "value": "[Pendiente: cuántas palas o raquetas caben]"
+            "value": "2 palas de pádel o pickleball, o 2 raquetas de tenis"
           }
         },
         "s2": {
@@ -154,7 +159,7 @@
           "type": "spec",
           "settings": {
             "label": "Cuidado",
-            "value": "[Pendiente: cómo se limpia el blanco]"
+            "value": "Fácil de limpiar y lavable: las manchas se quitan sin complicaciones"
           }
         }
       },
@@ -216,9 +221,9 @@
         "label_drop": "Bote abierto",
         "compare_heading": "Manual o <em>automático</em>.",
         "label_a": "Presurizador manual",
-        "who_a": "[Pendiente: para quién es]",
+        "who_a": "Para quien prefiere lo sencillo: sin batería ni cables.",
         "label_b": "Presurizador automático",
-        "who_b": "[Pendiente: para quién es]",
+        "who_b": "Para quien juega a menudo y quiere devolverle presión a las pelotas sin esfuerzo.",
         "default_image_a": "ehora-foto-12.webp",
         "default_image_b": "ehora-foto-11.webp",
         "color_scheme": "scheme-3",
@@ -277,7 +282,7 @@
           "type": "row",
           "settings": {
             "label": "Alimentación",
-            "value_a": "[Pendiente: confirmar que no lleva batería]",
+            "value_a": "Sin batería ni cables",
             "value_b": "Batería recargable USB-C"
           }
         },
@@ -285,16 +290,16 @@
           "type": "row",
           "settings": {
             "label": "Capacidad",
-            "value_a": "[Pendiente: cuántas pelotas]",
-            "value_b": "[Pendiente: cuántas pelotas]"
+            "value_a": "3 pelotas (un bote)",
+            "value_b": "3 pelotas (un bote)"
           }
         },
         "fila-5": {
           "type": "row",
           "settings": {
-            "label": "Autonomía",
-            "value_a": "",
-            "value_b": "[Pendiente: duración de la carga]"
+            "label": "Carga",
+            "value_a": "No necesita carga",
+            "value_b": "Recargable por USB-C, con indicador de carga"
           }
         }
       },

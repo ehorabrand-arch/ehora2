@@ -5,6 +5,31 @@
   {% render 'header-dropdown-menu' %}
 {% endcomment %}
 
+{%- if section.settings.ehora_nav -%}
+{%- capture ehora_nav_raw -%}Colección|{{ routes.all_products_collection_url }}
+{%- if pages['nosotros'] != blank -%};Nosotros|{{ pages['nosotros'].url }}{%- endif -%}
+{%- if pages['preguntas-frecuentes'] != blank -%};Preguntas|{{ pages['preguntas-frecuentes'].url }}{%- endif -%}
+{%- assign contact_page = pages['contacto'] | default: pages['contact'] -%}
+{%- if contact_page != blank -%};Contacto|{{ contact_page.url }}{%- endif -%}
+{%- endcapture -%}
+{%- assign ehora_nav_items = ehora_nav_raw | strip | split: ';' -%}
+<nav class="header__inline-menu">
+  <ul class="list-menu list-menu--inline" role="list">
+    {%- for item in ehora_nav_items -%}
+      {%- assign parts = item | split: '|' -%}
+      <li>
+        <a
+          href="{{ parts[1] }}"
+          class="header__menu-item list-menu__item link link--text focus-inset"
+          {% if request.path == parts[1] %}aria-current="page"{% endif %}
+        >
+          <span{% if request.path == parts[1] %} class="header__active-menu-item"{% endif %}>{{ parts[0] }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
+{%- else -%}
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
@@ -101,3 +126,5 @@
     {%- endfor -%}
   </ul>
 </nav>
+
+{%- endif -%}

@@ -9,39 +9,28 @@
   }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
-      </h1>
-
-      {%- if section.settings.show_collection_description -%}
+<div class="collection-hero ehora-chead color-{{ section.settings.color_scheme }} gradient">
+  <div class="collection-hero__inner page-width ehora-chead__inner">
+    <p class="ehora-chead__kicker">EHORA · Colección</p>
+    <h1 class="collection-hero__title ehora-chead__title">
+      {%- if collection.handle == 'all' -%}Todo EHORA{%- else -%}{{ collection.title | escape }}{%- endif -%}
+    </h1>
+    <div class="ehora-chead__text">
+      {%- if section.settings.show_collection_description and collection.description != blank -%}
         <div class="collection-hero__description rte">{{ collection.description }}</div>
+      {%- else -%}
+        <p>Paleteros y presurizadores para pádel y tenis. Piezas sobrias, pensadas para el club.</p>
       {%- endif -%}
     </div>
-
-    {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media gradient">
-        <img
-          srcset="
-            {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
-            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
-            {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
-            {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
-            {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
-            {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
-            {{ collection.image | image_url }} {{ collection.image.width }}w
-          "
-          src="{{ collection.image | image_url: width: 750 }}"
-          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
-          alt="{{ collection.image.alt | escape }}"
-          width="{{ collection.image.width }}"
-          height="{{ collection.image.height }}"
-        >
-      </div>
-    {%- endif -%}
+    <nav class="ehora-chips" aria-label="Categorías">
+      <a class="ehora-chip{% if collection.handle == 'all' %} is-active{% endif %}" href="{{ routes.all_products_collection_url }}"{% if collection.handle == 'all' %} aria-current="page"{% endif %}>Todo</a>
+      {%- if collections['paleteros'] != blank -%}
+        <a class="ehora-chip{% if collection.handle == 'paleteros' %} is-active{% endif %}" href="{{ collections['paleteros'].url }}"{% if collection.handle == 'paleteros' %} aria-current="page"{% endif %}>Paleteros</a>
+      {%- endif -%}
+      {%- if collections['presurizadores'] != blank -%}
+        <a class="ehora-chip{% if collection.handle == 'presurizadores' %} is-active{% endif %}" href="{{ collections['presurizadores'].url }}"{% if collection.handle == 'presurizadores' %} aria-current="page"{% endif %}>Presurizadores</a>
+      {%- endif -%}
+    </nav>
   </div>
 </div>
 
@@ -67,8 +56,16 @@
       "label": "t:sections.main-collection-banner.settings.show_collection_image.label"
     },
     {
-      "type": "color_scheme",
+      "type": "select",
       "id": "color_scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Crema" },
+        { "value": "scheme-2", "label": "Crema suave" },
+        { "value": "scheme-3", "label": "Arena" },
+        { "value": "scheme-4", "label": "Verde profundo" },
+        { "value": "scheme-5", "label": "Verde club" }
+      ],
+      
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     }

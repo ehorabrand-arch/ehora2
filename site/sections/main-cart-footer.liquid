@@ -158,8 +158,16 @@
     { "type": "text", "id": "board_label", "label": "Título del resumen", "default": "Tu marcador" },
     { "type": "number", "id": "free_shipping_threshold", "label": "Envío gratis desde (€)", "info": "Vacío: no se muestra la barra. Pon solo el importe real de tu tienda." },
     {
-      "type": "color_scheme",
+      "type": "select",
       "id": "color_scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Crema" },
+        { "value": "scheme-2", "label": "Crema suave" },
+        { "value": "scheme-3", "label": "Arena" },
+        { "value": "scheme-4", "label": "Verde profundo" },
+        { "value": "scheme-5", "label": "Verde club" }
+      ],
+      
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },

@@ -21,6 +21,7 @@
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     {{ page.content }}
   </div>
+  {% render 'ehora-page-extra', page: page %}
 </div>
 
 {% schema %}

@@ -89,6 +89,43 @@
                     <div class="footer-block__details-content rte">
                       {{ block.settings.subtext }}
                     </div>
+                  {%- when 'ehora_links' -%}
+                    <ul class="footer-block__details-content list-unstyled">
+                      {%- if block.settings.kind == 'tienda' -%}
+                        <li><a href="{{ routes.all_products_collection_url }}" class="link link--text list-menu__item list-menu__item--link">Toda la colección</a></li>
+                        <li><a href="{{ routes.search_url }}" class="link link--text list-menu__item list-menu__item--link">Buscar</a></li>
+                        <li><a href="{{ routes.cart_url }}" class="link link--text list-menu__item list-menu__item--link">Carrito</a></li>
+                        {%- if shop.customer_accounts_enabled -%}
+                          <li><a href="{{ routes.account_url }}" class="link link--text list-menu__item list-menu__item--link">Mi cuenta</a></li>
+                        {%- endif -%}
+                      {%- else -%}
+                        {%- if pages['nosotros'] != blank -%}
+                          <li><a href="{{ pages['nosotros'].url }}" class="link link--text list-menu__item list-menu__item--link">Sobre EHORA</a></li>
+                        {%- endif -%}
+                        {%- if pages['preguntas-frecuentes'] != blank -%}
+                          <li><a href="{{ pages['preguntas-frecuentes'].url }}" class="link link--text list-menu__item list-menu__item--link">Preguntas frecuentes</a></li>
+                        {%- endif -%}
+                        {%- if pages['envios-y-devoluciones'] != blank -%}
+                          <li><a href="{{ pages['envios-y-devoluciones'].url }}" class="link link--text list-menu__item list-menu__item--link">Envíos y devoluciones</a></li>
+                        {%- endif -%}
+                        {%- assign contact_page = pages['contacto'] | default: pages['contact'] -%}
+                        {%- if contact_page != blank -%}
+                          <li><a href="{{ contact_page.url }}" class="link link--text list-menu__item list-menu__item--link">Contacto</a></li>
+                        {%- endif -%}
+                        {%- if shop.shipping_policy.body != blank -%}
+                          <li><a href="{{ shop.shipping_policy.url }}" class="link link--text list-menu__item list-menu__item--link">Política de envío</a></li>
+                        {%- endif -%}
+                        {%- if shop.refund_policy.body != blank -%}
+                          <li><a href="{{ shop.refund_policy.url }}" class="link link--text list-menu__item list-menu__item--link">Política de devoluciones</a></li>
+                        {%- endif -%}
+                        {%- if shop.privacy_policy.body != blank -%}
+                          <li><a href="{{ shop.privacy_policy.url }}" class="link link--text list-menu__item list-menu__item--link">Privacidad</a></li>
+                        {%- endif -%}
+                        {%- if shop.terms_of_service.body != blank -%}
+                          <li><a href="{{ shop.terms_of_service.url }}" class="link link--text list-menu__item list-menu__item--link">Términos del servicio</a></li>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </ul>
                   {%- when 'link_list' -%}
                     {%- if block.settings.menu != blank -%}
                       <ul class="footer-block__details-content list-unstyled">
@@ -388,6 +425,29 @@
       ]
     },
     {
+      "type": "ehora_links",
+      "name": "Enlaces de EHORA",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Ayuda",
+          "label": "Título"
+        },
+        {
+          "type": "select",
+          "id": "kind",
+          "label": "Contenido",
+          "options": [
+            { "value": "tienda", "label": "Tienda (colección, buscar, carrito)" },
+            { "value": "ayuda", "label": "Ayuda (páginas y políticas que existan)" }
+          ],
+          "default": "ayuda"
+        }
+      ]
+    },
+    {
       "type": "image",
       "name": "Image",
       "settings": [
@@ -431,8 +491,16 @@
   ],
   "settings": [
     {
-      "type": "color_scheme",
+      "type": "select",
       "id": "color_scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Crema" },
+        { "value": "scheme-2", "label": "Crema suave" },
+        { "value": "scheme-3", "label": "Arena" },
+        { "value": "scheme-4", "label": "Verde profundo" },
+        { "value": "scheme-5", "label": "Verde club" }
+      ],
+      
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },

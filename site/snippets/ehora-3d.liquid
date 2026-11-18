@@ -8,7 +8,10 @@
   assign model_url = block.settings.model_url | strip
   assign color_option = block.settings.color_option | default: 'Color'
 -%}
-{%- if block.settings.show and model_url != blank -%}
+{%- assign only_tag = block.settings.only_tag | strip -%}
+{%- assign tag_ok = true -%}
+{%- if only_tag != blank and product.tags contains only_tag -%}{%- assign tag_ok = true -%}{%- elsif only_tag != blank -%}{%- assign tag_ok = false -%}{%- endif -%}
+{%- if block.settings.show and model_url != blank and tag_ok -%}
   {{ 'ehora-3d.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'ehora-3d.js' | asset_url }}" defer="defer"></script>
   <ehora-3d

@@ -206,6 +206,31 @@
                 </p>
               {%- endif -%}
 
+              {%- liquid
+                assign ptype = card_product.type | downcase
+                assign color_option_card = card_product.options_with_values | where: 'name', 'Color' | first
+              -%}
+              {%- if ptype == 'paleteros' -%}
+                <span class="ehora-card__line">Acolchado, con bolsillo para la pala.</span>
+              {%- elsif ptype == 'presurizadores' -%}
+                <span class="ehora-card__line">Pelotas con presión, partido tras partido.</span>
+              {%- endif -%}
+              {%- if color_option_card and color_option_card.values.size > 1 -%}
+                <span class="ehora-card__dots" role="img" aria-label="{{ color_option_card.values.size }} colores: {{ color_option_card.values | join: ', ' }}">
+                  {%- for cv in color_option_card.values -%}
+                    {%- assign cvk = cv | downcase -%}
+                    {%- case cvk -%}
+                      {%- when 'negro' -%}<i style="--dot:#18181B"></i>
+                      {%- when 'blanco' -%}<i style="--dot:#F4F1EA;--ring:#0B4A25"></i>
+                      {%- when 'beige' -%}<i style="--dot:#D6C3A3"></i>
+                      {%- when 'verde' -%}<i style="--dot:#1F4B33"></i>
+                      {%- when 'azul marino' -%}<i style="--dot:#1C2B4B"></i>
+                      {%- when 'blanco ribete azul' -%}<i style="--dot:#F4F1EA;--ring:#1E3FBF"></i>
+                    {%- endcase -%}
+                  {%- endfor -%}
+                  <span class="ehora-card__dots-text">{{ color_option_card.values.size }} colores</span>
+                </span>
+              {%- endif -%}
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
