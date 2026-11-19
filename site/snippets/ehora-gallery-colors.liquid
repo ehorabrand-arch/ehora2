@@ -30,6 +30,20 @@
           }}
         </li>
       {%- endfor -%}
+      {%- assign extra_lines = extra | split: '\n' -%}
+      {%- for line in extra_lines -%}
+        {%- assign parts = line | split: ':' -%}
+        {%- if parts.size > 1 -%}
+          {%- assign extra_color = parts[0] | strip | downcase -%}
+          {%- assign extra_files = parts[1] | split: ',' -%}
+          {%- for file in extra_files -%}
+            {%- assign file_name = file | strip -%}
+            <li class="eg__slide" data-extra-color="{{ extra_color | escape }}">
+              <img src="{{ file_name | asset_url }}" alt="{{ product.title | escape }} {{ parts[0] | strip | escape }}" class="eg__img" width="1122" height="1402" loading="lazy">
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
     </ul>
     <button type="button" class="eg__nav eg__nav--prev" aria-label="Foto anterior" data-eg-prev>
       <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -46,6 +60,21 @@
     <button type="button" class="button button--secondary" data-eg-open3d hidden>Ver en 3D</button>
   </div>
   <ul class="eg__thumbs list-unstyled" role="list" data-eg-thumbs>
+    {%- for line in extra_lines -%}
+      {%- assign parts = line | split: ':' -%}
+      {%- if parts.size > 1 -%}
+        {%- assign extra_color = parts[0] | strip | downcase -%}
+        {%- assign extra_files = parts[1] | split: ',' -%}
+        {%- for file in extra_files -%}
+          {%- assign file_name = file | strip -%}
+          <li class="eg__thumb-item" data-extra-color="{{ extra_color | escape }}">
+            <button type="button" class="eg__thumb" aria-label="Ver foto de {{ parts[0] | strip | escape }}">
+              <img src="{{ file_name | asset_url }}" alt="" width="200" height="250" loading="lazy">
+            </button>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
     {%- for media in eg_media -%}
       <li class="eg__thumb-item" data-pos="{{ media.position }}">
         <button type="button" class="eg__thumb" data-eg-go="{{ forloop.index0 }}" aria-label="Ver foto {{ forloop.index }}">

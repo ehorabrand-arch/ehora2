@@ -48,9 +48,10 @@
 
       this.querySelector('[data-eg-prev]').addEventListener('click', () => this.step(-1));
       this.querySelector('[data-eg-next]').addEventListener('click', () => this.step(1));
-      this.querySelectorAll('[data-eg-go]').forEach((button) =>
-        button.addEventListener('click', () => this.goTo(this.visibleSlides().indexOf(this.slides[Number(button.dataset.egGo)])))
-      );
+      this.thumbItems.forEach((item, i) => {
+        const button = item.querySelector('.eg__thumb');
+        if (button) button.addEventListener('click', () => this.goTo(this.visibleSlides().indexOf(this.slides[i])));
+      });
       this.track.addEventListener('scroll', () => {
         window.cancelAnimationFrame(this.raf);
         this.raf = window.requestAnimationFrame(() => this.syncCounter());
@@ -88,8 +89,10 @@
     apply(color, animate) {
       const key = norm(color);
       let list = this.map[key];
+      const extras = this.slides.filter((slide) => slide.dataset.extraColor && norm(slide.dataset.extraColor) === key);
       let showEmpty = false;
-      if (!list || !list.length) {
+      if ((!list || !list.length) && extras.length) list = [];
+      if (!list || !list.length && !extras.length) {
         if (key && Object.keys(this.map).length) {
           list = [];
           showEmpty = true;
@@ -98,14 +101,14 @@
         }
       }
       this.slides.forEach((slide, i) => {
-        const show = !list || list.includes(Number(slide.dataset.pos));
+        const show = !list || (slide.dataset.extraColor ? extras.includes(slide) : list.includes(Number(slide.dataset.pos)));
         slide.hidden = !show;
         this.thumbItems[i].hidden = !show;
       });
       if (list) {
         // respeta el orden indicado en el ajuste
         const ordered = list.map((p) => this.slides.find((s) => Number(s.dataset.pos) === p)).filter(Boolean);
-        ordered.forEach((slide) => {
+        ordered.concat(extras).forEach((slide) => {
           this.track.appendChild(slide);
           const thumb = this.thumbItems[this.slides.indexOf(slide)];
           thumb.parentNode.appendChild(thumb);

@@ -81,6 +81,7 @@
             {% render 'ehora-gallery-colors',
               product: product,
               map: section.settings.ehora_gallery_map,
+              extra: section.settings.ehora_gallery_extra,
               color_option: section.settings.ehora_gallery_option,
               section_id: section.id
             %}
@@ -2244,6 +2245,12 @@
       "id": "ehora_gallery_map",
       "label": "Fotos por color",
       "info": "Una línea por color: «Nombre del color: posiciones». Ej.: Blanco: 1-10. La línea «*:» marca las fotos que se enseñan a los colores sin fotos. Déjalo vacío para la galería normal."
+    },
+    {
+      "type": "textarea",
+      "id": "ehora_gallery_extra",
+      "label": "Fotos del tema por color",
+      "info": "Para colores cuyas fotos no están en el producto. Una línea por color: «Negro: ehora-negro-1.webp, ehora-negro-2.webp». Los archivos están en el tema."
     },
     {
       "type": "text",
