@@ -29,7 +29,8 @@
       this.track = this.querySelector('.eg__track');
       this.slides = Array.from(this.querySelectorAll('.eg__slide'));
       this.thumbItems = Array.from(this.querySelectorAll('.eg__thumb-item'));
-      this.note = this.querySelector('[data-eg-note]');
+      this.empty = this.querySelector('[data-eg-empty]');
+      this.stage = this.querySelector('.eg__stage');
       this.currentEl = this.querySelector('[data-eg-current]');
       this.totalEl = this.querySelector('[data-eg-total]');
       this.map = {};
@@ -87,11 +88,11 @@
     apply(color, animate) {
       const key = norm(color);
       let list = this.map[key];
-      let useFallback = false;
+      let showEmpty = false;
       if (!list || !list.length) {
-        if (this.fallback && this.fallback.length) {
-          list = this.fallback;
-          useFallback = !!key;
+        if (key && Object.keys(this.map).length) {
+          list = [];
+          showEmpty = true;
         } else {
           list = null;
         }
@@ -110,12 +111,27 @@
           thumb.parentNode.appendChild(thumb);
         });
       }
-      if (this.note) this.note.hidden = !useFallback;
+      this.stage.hidden = showEmpty;
+      this.querySelector('.eg__thumbs').hidden = showEmpty;
+      if (this.empty) {
+        this.empty.hidden = !showEmpty;
+        if (showEmpty) {
+          this.empty.querySelector('[data-eg-empty-name]').textContent = color;
+          const radio = Array.from(document.querySelectorAll('input[type="radio"][data-option-name]')).find((i) => i.value === color);
+          const dot = radio && radio.nextElementSibling && radio.nextElementSibling.querySelector('.ehora-swatch__dot');
+          const swatch = this.empty.querySelector('[data-eg-empty-dot]');
+          if (dot) swatch.style.cssText = dot.getAttribute('style');
+          const open3d = document.querySelector('[data-e3d-open]');
+          const btn = this.empty.querySelector('[data-eg-open3d]');
+          btn.hidden = !open3d;
+          btn.onclick = () => open3d && open3d.click();
+        }
+      }
       const visible = this.visibleSlides();
       if (this.totalEl) this.totalEl.textContent = visible.length;
       this.track.scrollTo({ left: 0, behavior: 'auto' });
       this.querySelector('.eg__nav--prev').hidden = this.querySelector('.eg__nav--next').hidden = visible.length < 2;
-      this.querySelector('.eg__thumbs').hidden = visible.length < 2;
+      if (!showEmpty) this.querySelector('.eg__thumbs').hidden = visible.length < 2;
       this.syncCounter();
       if (animate) {
         this.classList.remove('is-switching');

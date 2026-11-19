@@ -80,7 +80,7 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12,
-        "ehora_gallery_map": "Blanco: 1-10\nAzul marino: 11-13, 23-25\nBlanco ribete azul: 15-22\n*: 2, 8, 9, 7",
+        "ehora_gallery_map": "Blanco: 1-10\nAzul marino: 11-13, 23-25\nBlanco ribete azul: 15-22",
         "ehora_gallery_option": "Color"
       }
     },

@@ -825,3 +825,10 @@ html, body { max-width: 100%; overflow-x: clip; }
 .ehora-page__faq details[open] summary::after { transform: rotate(45deg); }
 .ehora-page__faq p { margin: 0 0 1.8rem; line-height: 1.65; max-width: 62ch; }
 .ehora-page__policies { display: grid; gap: 1.6rem; margin-top: 2.4rem; }
+
+/* Color sin fotos */
+.eg__empty { display: grid; justify-items: center; align-content: center; gap: 1rem; aspect-ratio: 4 / 5; padding: 3rem; text-align: center; background: #F1ECE0; border-radius: 4px; }
+.eg__empty[hidden], .eg__stage[hidden] { display: none; }
+.eg__empty-dot { width: 7rem; height: 7rem; border-radius: 50%; background: var(--dot, #ccc); border: 0.8rem solid var(--ring, var(--dot, #ccc)); box-shadow: 0 0 0 1px rgba(32, 35, 33, 0.22); }
+.eg__empty-title { margin: 0; font-family: var(--font-heading-family); font-size: 2.4rem; color: #0A2A1E; }
+.eg__empty-text { margin: 0 0 1rem; max-width: 30ch; line-height: 1.5; }
